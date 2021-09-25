@@ -1,23 +1,22 @@
-# --- Typing Imports ---
-from typing import Final
 # --- Constants ---
-PLAYSTATUS: Final[str] = "account.playstatus"
-SLEEPILY_BITLIST: Final[str] = "sleepily.bitlist"
-SAVEDATA_GETBW: Final[str] = "savedata.getbw"
-SAVEDATA_DOWNLOAD: Final[str] = "savedata.download"
-WORLDBATTLE_DOWNLOAD: Final[str] = "worldbattle.download"
-ACCOUNT_CREATEDATA: Final[str] = "account.createdata"
-ACCOUNT_CREATE_UPLOAD: Final[str] = "account.create.upload"
-SAVEDATA_UPLOAD: Final[str] = "savedata.upload"
-WORLDBATTLE_UPLOAD: Final[str] = "worldbattle.upload"
-SAVEDATA_DOWNLOAD_FINISH: Final[str] = "savedata.download.finish"
+PLAYSTATUS = "account.playstatus"
+SLEEPILY_BITLIST = "sleepily.bitlist"
+SAVEDATA_GETBW = "savedata.getbw"
+SAVEDATA_DOWNLOAD = "savedata.download"
+WORLDBATTLE_DOWNLOAD = "worldbattle.download"
+ACCOUNT_CREATEDATA = "account.createdata"
+ACCOUNT_CREATE_UPLOAD = "account.create.upload"
+SAVEDATA_UPLOAD = "savedata.upload"
+WORLDBATTLE_UPLOAD = "worldbattle.upload"
+SAVEDATA_DOWNLOAD_FINISH = "savedata.download.finish"
 # --- Imports ---
 from flask import Flask, request, jsonify
 # --- Key Definitions ---
 app = Flask(__name__)
 # --- Routes ---
+@app.route("/")
 @app.route("/<route>", methods=["GET", "POST"])
-def route(route: str) -> str:
+def route(route: str="test") -> str:
     print(f"Request to {route}")
     print(f"Command: {request.args['p']}")
     try:
