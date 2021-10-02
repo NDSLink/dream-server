@@ -1,14 +1,14 @@
 # --- Constants ---
-PLAYSTATUS = "account.playstatus"
-SLEEPILY_BITLIST = "sleepily.bitlist"
-SAVEDATA_GETBW = "savedata.getbw"
-SAVEDATA_DOWNLOAD = "savedata.download"
-WORLDBATTLE_DOWNLOAD = "worldbattle.download"
-ACCOUNT_CREATEDATA = "account.createdata"
-ACCOUNT_CREATE_UPLOAD = "account.create.upload"
-SAVEDATA_UPLOAD = "savedata.upload"
-WORLDBATTLE_UPLOAD = "worldbattle.upload"
-SAVEDATA_DOWNLOAD_FINISH = "savedata.download.finish"
+PLAYSTATUS = "account.playstatus" # Likely checking if you can play dreamworld at the moment
+SLEEPILY_BITLIST = "sleepily.bitlist" # ???
+SAVEDATA_GETBW = "savedata.getbw" # Likely checking if it's Black or White
+SAVEDATA_DOWNLOAD = "savedata.download" # self-explanatory
+WORLDBATTLE_DOWNLOAD = "worldbattle.download" # ???
+ACCOUNT_CREATEDATA = "account.createdata" # Likely what happens when you pick "Game Sync Settings" on title screen
+ACCOUNT_CREATE_UPLOAD = "account.create.upload" # ???
+SAVEDATA_UPLOAD = "savedata.upload" # self-explanatory
+WORLDBATTLE_UPLOAD = "worldbattle.upload" # ???
+SAVEDATA_DOWNLOAD_FINISH = "savedata.download.finish" # likely telling the server that savedata download is done
 # --- Imports ---
 from flask import Flask, request, jsonify
 # --- Key Definitions ---
