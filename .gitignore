@@ -4,3 +4,4 @@
 !models.py
 !Pipfile*
 !migrations
+!migrations/*
