@@ -10,18 +10,21 @@ SAVEDATA_UPLOAD = "savedata.upload"
 WORLDBATTLE_UPLOAD = "worldbattle.upload"
 SAVEDATA_DOWNLOAD_FINISH = "savedata.download.finish"
 DREAMING_POKEMON_RESPONSE = b"\x00" * 0x40
+UNKNOWN_RESPONSE_1 = b"\x01" * 0x40
+WAKE_UP_AND_DOWNLOAD = b"\0x3" * 0x40
 WAKE_UP_RESPONSE = b"\x04" * 0x40
+UNKNOWN_RESPONSE_2 = b"\x09" * 0x40
 # --- Imports ---
 from flask import Flask, request, jsonify
 # --- Key Definitions ---
 app = Flask(__name__)
 # --- Routes ---
-@app.route("/dsio/gw")
+@app.route("/dsio/gw", methods=["GET", "POST"])
 def gw():
     if request.args["p"] == PLAYSTATUS:
-        return DREAMING_POKEMON_RESPONSE
+        return b"\x05"
     else:
-        return WAKE_UP_RESPONSE
+        return DREAMING_POKEMON_RESPONSE
 
 
 # --- Main Block ---
