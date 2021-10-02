@@ -19,6 +19,8 @@ WAKE_UP_RESPONSE = b"\x04" * 0x40
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from datetime import datetime
+from uuid import uuid1
 # --- Key Definitions ---
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///victini.db' # The DB is named "Victini" after the Pokemon and for pretty much no reason
@@ -31,6 +33,11 @@ import models
 def gw():
     if request.args["p"] == PLAYSTATUS:
         return b"\x05"
+    elif request.args["p"] == SAVEDATA_UPLOAD:
+        # Dump
+        with open(f"pdw-{uuid1}-{datetime.strftime('%m-%d-%y-%H-M-%S')}", "wb") as f:
+            f.write(request.get_data())
+        return DREAMING_POKEMON_RESPONSE
     else:
         return DREAMING_POKEMON_RESPONSE
 
