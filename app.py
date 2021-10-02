@@ -13,11 +13,19 @@ DREAMING_POKEMON_RESPONSE = b"\x00" * 0x40
 UNKNOWN_RESPONSE_1 = b"\x01" * 0x40
 WAKE_UP_AND_DOWNLOAD = b"\0x3" * 0x40
 WAKE_UP_RESPONSE = b"\x04" * 0x40
-UNKNOWN_RESPONSE_2 = b"\x09" * 0x40
+#UNKNOWN_RESPONSE_2 = b"\x09" * 0x40 Just a test, the DS will error if it recives this
+
 # --- Imports ---
 from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 # --- Key Definitions ---
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///victini.db' # The DB is named "Victini" after the Pokemon and for pretty much no reason
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+# --- Model Imports ---
+import models
 # --- Routes ---
 @app.route("/dsio/gw", methods=["GET", "POST"])
 def gw():
