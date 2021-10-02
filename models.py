@@ -2,6 +2,7 @@ from app import db
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean
 from sqlalchemy.orm import relationship
 class GSUser(db.Model):
+    __tablename__ = 'gsuser'
     id = Column(String, primary_key=True) # TODO: create a frontend where you can see GS related info, and download your save, and maybe even edit it
     # NOTE: this should be pretty easy to implement
     sleeping_pokemon = relationship("Pokemon")
@@ -41,6 +42,6 @@ class Pokemon(db.Model):
     # NOTE:
     # pkapiified_str = 'whatever string'.lower().replace(' ', '-')
     # should work?
-    
+
 
 
