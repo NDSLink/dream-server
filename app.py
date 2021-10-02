@@ -14,15 +14,11 @@ from flask import Flask, request, jsonify
 # --- Key Definitions ---
 app = Flask(__name__)
 # --- Routes ---
-@app.route("/")
-@app.route("/<route>", methods=["GET", "POST"])
-def route(route: str="test") -> str:
-    print(f"Request to {route}")
-    print(f"Command: {request.args['p']}")
-    try:
-        print(f"JSON: {request.get_json()}")
-    except:
-        print("No JSON")
+@app.route("/dsio/gw")
+def gw():
+    return b"\x00" * 0x40
+
+
 # --- Main Block ---
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
