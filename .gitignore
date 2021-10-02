@@ -1,7 +1,6 @@
 *
-!app.py
+!*.py
 !.gitignore
-!models.py
 !Pipfile*
 !migrations
 !migrations/*
