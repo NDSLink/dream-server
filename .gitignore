@@ -3,3 +3,4 @@
 !.gitignore
 !models.py
 !Pipfile*
+!migrations
