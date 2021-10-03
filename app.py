@@ -32,7 +32,7 @@ import models
 @app.route("/dsio/gw", methods=["GET", "POST"])
 def gw():
     if request.args["p"] == PLAYSTATUS:
-        return b"\x05"
+        return DREAMING_POKEMON_RESPONSE
     elif request.args["p"] == SAVEDATA_UPLOAD:
         # Dump
         with open(f"pdw-{uuid1}-{datetime.strftime('%m-%d-%y-%H-M-%S')}", "wb") as f:
