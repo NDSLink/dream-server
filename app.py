@@ -13,6 +13,8 @@ DREAMING_POKEMON_RESPONSE = b"\x00" * 0x40
 UNKNOWN_RESPONSE_1 = b"\x01" * 0x40
 WAKE_UP_AND_DOWNLOAD = b"\0x3" * 0x40
 WAKE_UP_RESPONSE = b"\x04" * 0x40
+CREATE_ACCOUNT = b"\x08" * 0x40
+BASE_RESPONSE = b"\x00" * 0x7c + b"\x00" * 4 + b"\x03" + b"\x00" * 0x3
 #UNKNOWN_RESPONSE_2 = b"\x09" * 0x40 Just a test, the DS will error if it recives this
 
 # --- Imports ---
@@ -32,10 +34,16 @@ import models
 @app.route("/dsio/gw", methods=["GET", "POST"])
 def gw():
     if request.args["p"] == PLAYSTATUS:
-        return DREAMING_POKEMON_RESPONSE
+        with open(f"pdw-{uuid1()}-{datetime.now().strftime('%m-%d-%y-%H-M-%S')}-PLAYSTATUS", "wb") as f:
+            f.write(request.get_data())
+        return b"\x08"
     elif request.args["p"] == SAVEDATA_UPLOAD:
         # Dump
-        with open(f"pdw-{uuid1}-{datetime.strftime('%m-%d-%y-%H-M-%S')}", "wb") as f:
+        with open(f"pdw-{uuid1()}-{datetime.now().strftime('%m-%d-%y-%H-M-%S')}-SAVEDATA-UPLOAD", "wb") as f:
+            f.write(request.get_data())
+        return DREAMING_POKEMON_RESPONSE
+    elif request.args["p"] == ACCOUNT_CREATE_UPLOAD:
+        with open(f"savdata-{request.args['gsid']}.sav", "wb") as f:
             f.write(request.get_data())
         return DREAMING_POKEMON_RESPONSE
     else:
