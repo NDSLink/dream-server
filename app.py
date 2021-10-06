@@ -13,6 +13,7 @@ DREAMING_POKEMON_RESPONSE = b"\x00" * 0x40
 UNKNOWN_RESPONSE_1 = b"\x01" * 0x40
 WAKE_UP_AND_DOWNLOAD = b"\x03" * 0x40
 WAKE_UP_RESPONSE = b"\x04" * 0x40
+PUT_POKE_TO_SLEEP_RESPONSE = b"\x00\x00\x00\x00" + (b"\x00" * 0x7c) + b"\x05" * 4 + b"\xFF" * 0x40
 CREATE_ACCOUNT = b"\x08" * 0x40
 BASE_RESPONSE = b"\x00" * 0x7c + b"\x00" * 4 + b"\x03" + b"\x00" * 0x3
 #UNKNOWN_RESPONSE_2 = b"\x09" * 0x40 Just a test, the DS will error if it recives this
@@ -38,9 +39,9 @@ def gw():
         if exists(f"savdata-{request.args['gsid']}.sav"): # Check if trainer has registered with the server
             return b"\x00\x00\x00\x00" + (b"\x00" * 0x7c) + b"\x05" * 4 + b"\xFF" * 0x40
         return b"\x08"
-    elif request.args["p"] == SAVEDATA_UPLOAD: # TODO: What leads to this?
+    elif request.args["p"] == SAVEDATA_UPLOAD: # Triggered by putting a Pokemon to sleep.
         # Dump
-        with open(f"pdw-{uuid1()}-{datetime.now().strftime('%m-%d-%y-%H-M-%S')}-SAVEDATA-UPLOAD", "wb") as f:
+        with open(f"savdata-{request.args['gsid']}.sav", "wb") as f:
             f.write(request.get_data())
         return DREAMING_POKEMON_RESPONSE
     elif request.args["p"] == ACCOUNT_CREATE_UPLOAD:
