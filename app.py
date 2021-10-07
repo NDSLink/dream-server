@@ -1,4 +1,6 @@
 # --- Constants ---
+BASE_RESPONSE = b"\x00\x00\x00\x00" + (b"\x00" * 0x7c)
+END_RESPOSNE = b"\xFF" * 0x40
 PLAYSTATUS = "account.playstatus" # Likely checking if you can play dreamworld at the moment
 SLEEPILY_BITLIST = "sleepily.bitlist" # ???
 SAVEDATA_GETBW = "savedata.getbw" # Likely checking if it's Black or White
@@ -9,13 +11,15 @@ ACCOUNT_CREATE_UPLOAD = "account.create.upload" # ???
 SAVEDATA_UPLOAD = "savedata.upload" # self-explanatory
 WORLDBATTLE_UPLOAD = "worldbattle.upload" # ???
 SAVEDATA_DOWNLOAD_FINISH = "savedata.download.finish" # likely telling the server that savedata download is done
-DREAMING_POKEMON_RESPONSE = b"\x00" * 0x40
-UNKNOWN_RESPONSE_1 = b"\x01" * 0x40
-WAKE_UP_AND_DOWNLOAD = b"\x03" * 0x40
-WAKE_UP_RESPONSE = b"\x04" * 0x40
-PUT_POKE_TO_SLEEP_RESPONSE = b"\x00\x00\x00\x00" + (b"\x00" * 0x7c) + b"\x05" * 4 + b"\xFF" * 0x40
-CREATE_ACCOUNT = b"\x08" * 0x40
-BASE_RESPONSE = b"\x00" * 0x7c + b"\x00" * 4 + b"\x03" + b"\x00" * 0x3
+DREAMING_POKEMON_RESPONSE = b"\x00" * 0x4
+UNKNOWN_RESPONSE_1 = b"\x01" * 0x4
+WAKE_UP_AND_DOWNLOAD = b"\x03" * 0x4
+WAKE_UP_RESPONSE = b"\x04" * 0x4 # 0x40 will work too, as long as you remove the BASE_RESPONSE and END_RESPONSE
+OLD_WAKE_UP_RESPONSE = b"\x04" * 0x40 # Either seems to work?
+PUT_POKE_TO_SLEEP_RESPONSE = BASE_RESPONSE + b"\x05" * 4 + END_RESPOSNE
+CREATE_ACCOUNT = BASE_RESPONSE + b"\x08" * 0x4 + END_RESPOSNE
+OLD_CREATE_ACCOUNT = b"\x08" * 0x40
+
 #UNKNOWN_RESPONSE_2 = b"\x09" * 0x40 Just a test, the DS will error if it recives this
 
 # --- Imports ---
@@ -37,7 +41,7 @@ import models
 def gw():
     if request.args["p"] == PLAYSTATUS:
         if exists(f"savdata-{request.args['gsid']}.sav"): # Check if trainer has registered with the server
-            return b"\x00\x00\x00\x00" + (b"\x00" * 0x7c) + b"\x05" * 4 + b"\xFF" * 0x40
+            return PUT_POKE_TO_SLEEP_RESPONSE
         return b"\x08"
     elif request.args["p"] == SAVEDATA_UPLOAD: # Triggered by putting a Pokemon to sleep.
         # Dump
@@ -50,12 +54,16 @@ def gw():
         return DREAMING_POKEMON_RESPONSE # Success response
     elif request.args["p"] == WORLDBATTLE_DOWNLOAD: # Live competition
         if exists(f"savdata-{request.args['gsid']}.sav"):
-            return Response("no", status=403) # The server is undergoing maintaince
+            return Response("no", status=502)
         return DREAMING_POKEMON_RESPONSE # A.k.a "Please use Game Sync Settings"
-    else:
+    elif request.args["p"] == SAVEDATA_DOWNLOAD or request.args["p"] == SAVEDATA_DOWNLOAD_FINISH:
         return DREAMING_POKEMON_RESPONSE
+    else:
+        return Response("no", status=502)
 
-
+@app.route("/")
+def index():
+    return "Hello there! This page is under construction! Why not check out <a href=\"https://web.archive.org/web/20110715101524id_/http://www.pokemon-gl.com/languages/\">what remains of PGL</a> while you wait?"
 # --- Main Block ---
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
