@@ -3,7 +3,7 @@ class Gen5Save:
     def __init__(self, data):
         if isinstance(data, BufferedReader):
             data.seek(0x19404)
-            tname = data.read(16) # TODO: is this actually the proper trainer name length
+            tname = data.read(7)
             # Now we need to do some post processing
             tname = tname.strip(b"\x00") # Strip \x00
             tname = tname.strip(b"\xff") # Strip \xff
