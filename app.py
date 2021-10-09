@@ -12,6 +12,7 @@ SAVEDATA_UPLOAD = "savedata.upload" # self-explanatory
 WORLDBATTLE_UPLOAD = "worldbattle.upload" # ???
 SAVEDATA_DOWNLOAD_FINISH = "savedata.download.finish" # likely telling the server that savedata download is done
 DREAMING_POKEMON_RESPONSE = b"\x00" * 0x4
+SLEEPILY_NONE_SLEEPY = "0x02" * 0x40
 UNKNOWN_RESPONSE_1 = b"\x01" * 0x4
 WAKE_UP_AND_DOWNLOAD = b"\x03" * 0x4
 WAKE_UP_RESPONSE = b"\x04" * 0x4 # 0x40 will work too, as long as you remove the BASE_RESPONSE and END_RESPONSE
@@ -72,13 +73,15 @@ def gw():
         if exists(f"savdata-{request.args['gsid']}.sav"):
             return Response("no", status=502)
         return DREAMING_POKEMON_RESPONSE # A.k.a "Please use Game Sync Settings"
-    elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH or request.args["p"] == "sleepily.bitlist":
+    elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH:
         # User has finished downloading savedata, they should now have a sleeping pokemon
         user = models.GSUser.query.filter_by(gsid = request.args['gsid']).first() # Find the user
         user.poke_is_sleeping = True
         db.session.add(user)
         db.session.commit()
         return DREAMING_POKEMON_RESPONSE
+    elif request.args["p"] == SLEEPILY_BITLIST:
+        return SLEEPILY_NONE_SLEEPY
     elif request.args["p"] == SAVEDATA_DOWNLOAD:
         if exists(f"savdata-{request.args['gsid']}.sav"):
             with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
