@@ -42,7 +42,7 @@ import models
 def gw():
     if request.args["p"] == PLAYSTATUS:
         if exists(f"savdata-{request.args['gsid']}.sav"): # Check if trainer has registered with the server
-            user = models.GSUser.query().filter_by(gsid = request.args['gsid']) # Find the user
+            user = models.GSUser.query().filter_by(gsid = request.args['gsid']).first() # Find the user
             if user.poke_is_sleeping:
                 return DREAMING_POKEMON_RESPONSE
             else:
@@ -68,7 +68,7 @@ def gw():
         return DREAMING_POKEMON_RESPONSE # A.k.a "Please use Game Sync Settings"
     elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH or request.args["p"] == "sleepily.bitlist":
         # User has finished downloading savedata, they should now have a sleeping pokemon
-        user = models.GSUser.query().filter_by(gsid = request.args['gsid']) # Find the user
+        user = models.GSUser.query().filter_by(gsid = request.args['gsid']).first() # Find the user
         user.poke_is_sleeping = True
         db.session.add(user)
         db.session.commit()

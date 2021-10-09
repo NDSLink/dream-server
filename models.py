@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 class GSUser(db.Model):
     __tablename__ = 'gsuser'
     id = db.Column(db.Integer, primary_key=True) # TODO: create a frontend where you can see GS related info, and download your save, and maybe even edit it
-    gsid = db.Column(db.Integer, primary_key=True)
+    gsid = db.Column(db.Integer, unique=True)
     # NOTE: this should be pretty easy to implement
     sleeping_pokemon = relationship("Pokemon")
     name = db.Column(db.String(7))
