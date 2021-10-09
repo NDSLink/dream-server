@@ -56,8 +56,14 @@ def gw():
         if exists(f"savdata-{request.args['gsid']}.sav"):
             return Response("no", status=502)
         return DREAMING_POKEMON_RESPONSE # A.k.a "Please use Game Sync Settings"
-    elif request.args["p"] == SAVEDATA_DOWNLOAD or request.args["p"] == SAVEDATA_DOWNLOAD_FINISH:
+    elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH or request.args["p"] == "sleepily.bitlist":
         return DREAMING_POKEMON_RESPONSE
+    elif request.args["p"] == SAVEDATA_DOWNLOAD:
+        if exists(f"savdata-{request.args['gsid']}.sav"):
+            with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
+                return f.read()
+        else:
+            return Response("bad gsid", 400)
     else:
         return Response("no", status=502)
 
