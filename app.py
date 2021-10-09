@@ -23,7 +23,7 @@ OLD_CREATE_ACCOUNT = b"\x08" * 0x40
 #UNKNOWN_RESPONSE_2 = b"\x09" * 0x40 Just a test, the DS will error if it recives this
 
 # --- Imports ---
-from flask import Flask, request, Response
+from flask import Flask, request, Response, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
@@ -42,7 +42,13 @@ import models
 def gw():
     if request.args["p"] == PLAYSTATUS:
         if exists(f"savdata-{request.args['gsid']}.sav"): # Check if trainer has registered with the server
-            user = models.GSUser.query().filter_by(gsid = request.args['gsid']).first() # Find the user
+            user = models.GSUser.query.filter_by(gsid = request.args['gsid']).first() # Find the user
+            if user == None:
+                with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
+                    g5s = helper.Gen5Save(f)
+                    user = models.GSUser(id=g5s.tid, name=g5s.trainer_name, poke_is_sleeping=False, gsid=request.args['gsid']) # There should be no pokemon sleeping
+                    db.session.add(user)
+                    db.session.commit()
             if user.poke_is_sleeping:
                 return DREAMING_POKEMON_RESPONSE
             else:
@@ -68,7 +74,7 @@ def gw():
         return DREAMING_POKEMON_RESPONSE # A.k.a "Please use Game Sync Settings"
     elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH or request.args["p"] == "sleepily.bitlist":
         # User has finished downloading savedata, they should now have a sleeping pokemon
-        user = models.GSUser.query().filter_by(gsid = request.args['gsid']).first() # Find the user
+        user = models.GSUser.query.filter_by(gsid = request.args['gsid']).first() # Find the user
         user.poke_is_sleeping = True
         db.session.add(user)
         db.session.commit()
@@ -85,6 +91,10 @@ def gw():
 @app.route("/")
 def index():
     return "Hello there! This page is under construction! Why not check out <a href=\"https://web.archive.org/web/20110715101524id_/http://www.pokemon-gl.com/languages/\">what remains of PGL</a> while you wait?"
+@app.route("/savedata/<trainerid>")
+def get_savedata(trainerid):
+    u = models.GSUser.query.filter_by(id=trainerid).first()
+    return send_from_directory(".", f"savdata-{u.gsid}.sav")
 # --- Main Block ---
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
