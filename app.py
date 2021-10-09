@@ -29,6 +29,7 @@ from flask_migrate import Migrate
 from datetime import datetime
 from uuid import uuid1
 from os.path import exists
+import helper
 # --- Key Definitions ---
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///victini.db' # The DB is named "Victini" after the Pokemon and for pretty much no reason
@@ -41,7 +42,11 @@ import models
 def gw():
     if request.args["p"] == PLAYSTATUS:
         if exists(f"savdata-{request.args['gsid']}.sav"): # Check if trainer has registered with the server
-            return PUT_POKE_TO_SLEEP_RESPONSE
+            user = models.GSUser.query().filter_by(gsid = request.args['gsid']) # Find the user
+            if user.poke_is_sleeping:
+                return DREAMING_POKEMON_RESPONSE
+            else:
+                return PUT_POKE_TO_SLEEP_RESPONSE
         return b"\x08"
     elif request.args["p"] == SAVEDATA_UPLOAD: # Triggered by putting a Pokemon to sleep.
         # Dump
@@ -50,13 +55,23 @@ def gw():
         return DREAMING_POKEMON_RESPONSE
     elif request.args["p"] == ACCOUNT_CREATE_UPLOAD:
         with open(f"savdata-{request.args['gsid']}.sav", "wb") as f:
-            f.write(request.get_data())
+            data = request.get_data()
+            f.write(data)
+            g5s = helper.Gen5Save(data)
+            u = models.GSUser(id=g5s.tid, name=g5s.trainer_name, poke_is_sleeping=False, gsid=request.args['gsid']) # There should be no pokemon sleeping
+            db.session.add(u)
+            db.session.commit()
         return DREAMING_POKEMON_RESPONSE # Success response
     elif request.args["p"] == WORLDBATTLE_DOWNLOAD: # Live competition
         if exists(f"savdata-{request.args['gsid']}.sav"):
             return Response("no", status=502)
         return DREAMING_POKEMON_RESPONSE # A.k.a "Please use Game Sync Settings"
     elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH or request.args["p"] == "sleepily.bitlist":
+        # User has finished downloading savedata, they should now have a sleeping pokemon
+        user = models.GSUser.query().filter_by(gsid = request.args['gsid']) # Find the user
+        user.poke_is_sleeping = True
+        db.session.add(user)
+        db.session.commit()
         return DREAMING_POKEMON_RESPONSE
     elif request.args["p"] == SAVEDATA_DOWNLOAD:
         if exists(f"savdata-{request.args['gsid']}.sav"):
