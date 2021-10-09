@@ -14,9 +14,14 @@ class Gen5Save:
                     outstring = outstring + byte
             # Now we make it a string.
             tname = str(outstring)[2:-1] # The [2:-1] part strips the annoying b"" things from the string
+            data.seek(19414)
+            tid = data.read(2) # TID is a 32-bit integer
+            self.tid = int.from_bytes(tid, 'little', False)
             self.trainer_name = tname
         elif isinstance(data, bytes):
             self._data = data
+            raise NotImplementedError
         elif isinstance(data, bytearray):
             self._data = data
+            raise NotImplementedError
         
