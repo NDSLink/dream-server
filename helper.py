@@ -5,6 +5,7 @@ class Gen5Save:
             self._data = data.read()
             data.seek(0x19404)
             tname = data.read(14)
+            tname.strip(b"\xff")
             # Now we need to do some post processing
             outstring = b""
             for b in tname: # Strip the \x00s inbetween letters

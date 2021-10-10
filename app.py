@@ -3,7 +3,7 @@ BASE_RESPONSE = b"\x00\x00\x00\x00" + (b"\x00" * 0x7c)
 END_RESPOSNE = b"\xFF" * 0x40
 PLAYSTATUS = "account.playstatus" # Likely checking if you can play dreamworld at the moment
 SLEEPILY_BITLIST = "sleepily.bitlist" # ???
-SAVEDATA_GETBW = "savedata.getbw" # Likely checking if it's Black or White
+SAVEDATA_GETBW = "savedata.getbw" # B2W2 Memory Link
 SAVEDATA_DOWNLOAD = "savedata.download" # self-explanatory
 WORLDBATTLE_DOWNLOAD = "worldbattle.download" # Click Battle Competition>Wi-Fi Competition>Participate
 ACCOUNT_CREATEDATA = "account.createdata" # Likely what happens when you pick "Game Sync Settings" on title screen
@@ -12,9 +12,11 @@ SAVEDATA_UPLOAD = "savedata.upload" # self-explanatory
 WORLDBATTLE_UPLOAD = "worldbattle.upload" # ???
 SAVEDATA_DOWNLOAD_FINISH = "savedata.download.finish" # likely telling the server that savedata download is done
 DREAMING_POKEMON_RESPONSE = b"\x00" * 0x4
-SLEEPILY_NONE_SLEEPY = "0x02" * 0x40
+SLEEPILY_INTERNAL_SERVER_ERROR = b"\xf0\xff\x00\x00"
+SLEEPILY_HIGH_TRAFFIC_VOLUMES = b"\xf1\xff\x00\x00"
+SLEEPILY_UNDERGOING_MAINTAINCE = b"\xf2\xff\x00\x00"
 UNKNOWN_RESPONSE_1 = b"\x01" * 0x4
-WAKE_UP_AND_DOWNLOAD = b"\x03" * 0x4
+WAKE_UP_AND_DOWNLOAD = BASE_RESPONSE + b"\x03" * 0x4 + END_RESPOSNE
 WAKE_UP_RESPONSE = b"\x04" * 0x4 # 0x40 will work too, as long as you remove the BASE_RESPONSE and END_RESPONSE
 OLD_WAKE_UP_RESPONSE = b"\x04" * 0x40 # Either seems to work?
 PUT_POKE_TO_SLEEP_RESPONSE = BASE_RESPONSE + b"\x05" * 4 + END_RESPOSNE
@@ -51,7 +53,7 @@ def gw():
                     db.session.add(user)
                     db.session.commit()
             if user.poke_is_sleeping:
-                return DREAMING_POKEMON_RESPONSE
+                return WAKE_UP_AND_DOWNLOAD
             else:
                 return PUT_POKE_TO_SLEEP_RESPONSE
         return b"\x08"
@@ -64,10 +66,13 @@ def gw():
         with open(f"savdata-{request.args['gsid']}.sav", "wb") as f:
             data = request.get_data()
             f.write(data)
-            g5s = helper.Gen5Save(data)
-            u = models.GSUser(id=g5s.tid, name=g5s.trainer_name, poke_is_sleeping=False, gsid=request.args['gsid']) # There should be no pokemon sleeping
-            db.session.add(u)
-            db.session.commit()
+            try:
+                g5s = helper.Gen5Save(data)
+                u = models.GSUser(id=g5s.tid, name=g5s.trainer_name, poke_is_sleeping=False, gsid=request.args['gsid']) # There should be no pokemon sleeping
+                db.session.add(u)
+                db.session.commit()
+            except:
+                pass # It's an alt save.
         return DREAMING_POKEMON_RESPONSE # Success response
     elif request.args["p"] == WORLDBATTLE_DOWNLOAD: # Live competition
         if exists(f"savdata-{request.args['gsid']}.sav"):
@@ -75,17 +80,42 @@ def gw():
         return DREAMING_POKEMON_RESPONSE # A.k.a "Please use Game Sync Settings"
     elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH:
         # User has finished downloading savedata, they should now have a sleeping pokemon
+        return DREAMING_POKEMON_RESPONSE
+    elif request.args["p"] == SLEEPILY_BITLIST:
         user = models.GSUser.query.filter_by(gsid = request.args['gsid']).first() # Find the user
         user.poke_is_sleeping = True
         db.session.add(user)
         db.session.commit()
-        return DREAMING_POKEMON_RESPONSE
-    elif request.args["p"] == SLEEPILY_BITLIST:
-        return SLEEPILY_NONE_SLEEPY
+        return b"\x00\x00\x00\x00" + (b"\x00" * 0x7c) + (b"\xff" * 0x80)
     elif request.args["p"] == SAVEDATA_DOWNLOAD:
         if exists(f"savdata-{request.args['gsid']}.sav"):
-            with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
-                return f.read()
+            # it runs the following math function 10 times, increasing x each time:  f[x] = (x * 0x08) + 0x04, each time it runs that function, it checks the 2 bytes at that location in the response, if those are \x00\x00 then break the loop, otherwise if d <= 0x1ed where D is the data just pulled, then do something(!)
+            # According to mm201, it's reading 8 bytes from that location???
+            # ret = [0] * 0x5a
+            ret = [0] * 0x5a
+            #for i in range(0, 80, 8):
+                # 4 shorts for species number (0x1ed = 493 = arceus natdex number)
+            #    ret[i - 8] = 255
+            #    ret[i - 7] = 13
+            #    ret[i - 6] = 0x00
+            #    ret[i - 5] = 0x00
+            #    # Move
+            #    ret[i - 4] = 1
+            #    # Gender
+            #    ret[i - 3] = 0x00
+            #    # Animation
+            #    ret[i - 2] = 0x00
+                # Area
+            #    ret[i - 1] = 0x00
+            # 3 flags: 0x58, 0x57, 0x59
+            ret[0x58] = 0xff
+            ret[0x57] = 0xff
+            ret[0x59] = 0xff
+            # Now the data has been built.
+            # Enjoy understanding this.
+            # NOTE: None of the above works.
+            return DREAMING_POKEMON_RESPONSE
+
         else:
             return Response("bad gsid", 400)
     else:

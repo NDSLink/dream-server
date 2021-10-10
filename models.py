@@ -6,7 +6,7 @@ class GSUser(db.Model):
     gsid = db.Column(db.Integer, unique=True)
     # NOTE: this should be pretty easy to implement
     sleeping_pokemon = relationship("Pokemon")
-    name = db.Column(db.String(7))
+    name = db.Column(db.String(14))
     poke_is_sleeping = db.Column(db.Boolean())
     tid = db.Column(db.Integer)
     # TODO: What else?
