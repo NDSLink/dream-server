@@ -4,10 +4,8 @@ class Gen5Save:
         if isinstance(data, BufferedReader):
             self._data = data.read()
             data.seek(0x19404)
-            tname = data.read(7)
+            tname = data.read(14)
             # Now we need to do some post processing
-            tname = tname.strip(b"\x00") # Strip \x00
-            tname = tname.strip(b"\xff") # Strip \xff
             outstring = b""
             for b in tname: # Strip the \x00s inbetween letters
                 byte = b.to_bytes(1, 'little')
