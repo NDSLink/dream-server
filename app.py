@@ -129,14 +129,14 @@ def gw():
             ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7c)
             ret = ret + b"\x00\x00\x00\x00"
             ret = ret + b"\x00" * 0x57
-            ret = ret + b"\x00\x00\x00"
-            ret = ret + b"\xFF\x01\xC7\xFF\x00\x01\xFF\xFF"
-            ret = bytearray(ret)
-            ret[0xa6] = 0xff # Download C-GEAR skins (additionally, it'll put GS into "mode 2")
+            ret = ret + b"\xFF\x00\x00"
+            ret = ret + b"\x01\x01\x01\x01\x01\x01\x01" * 10
+            #ret = bytearray(ret)
+            #ret[0xa6] = 0xff # Download C-GEAR skins (additionally, it'll put GS into "mode 2")
             # The last byte is the number of item
             # Each item is a set of 4 bytes
             # The first 2 bytes are a 16-bit int containing the item ID
-            return bytes(ret)
+            return ret
         else:
             return Response("bad gsid", 400)
     else:
