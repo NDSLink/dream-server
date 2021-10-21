@@ -76,7 +76,7 @@ def gw():
         return DREAMING_POKEMON_RESPONSE # Success response
     elif request.args["p"] == WORLDBATTLE_DOWNLOAD: # Live competition
         if exists(f"savdata-{request.args['gsid']}.sav"):
-            return Response("no", status=502)
+            return b"\x01" * 0xFF # garbage data
         return DREAMING_POKEMON_RESPONSE # A.k.a "Please use Game Sync Settings"
     elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH:
         # User has finished downloading savedata, they should now have a sleeping pokemon
@@ -130,13 +130,9 @@ def gw():
             ret = ret + b"\x00\x00\x00\x00"
             ret = ret + b"\x00" * 0x57
             ret = ret + b"\x00\x00\x00"
-            ret = ret + b"\x00\x01\xFF\xFF"
-            for i in range(0, 76):
-                ret = ret + b"\x00" # padding that is only needed if we want to add pokemon to the response
-            ret = ret + b"\xFF\x00\x00\x00\x01\x00\x01\x00" # Hopefully this should give us a pokemon.
+            ret = ret + b"\xFF\x01\xC7\xFF\x00\x01\xFF\xFF"
             ret = bytearray(ret)
             ret[0xa6] = 0xff # Download C-GEAR skins (additionally, it'll put GS into "mode 2")
-            # Unfourtunately, DLS1 has multiple skins with CGEAR_E on them, so nothing happens.
             # The last byte is the number of item
             # Each item is a set of 4 bytes
             # The first 2 bytes are a 16-bit int containing the item ID
