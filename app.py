@@ -6,7 +6,7 @@ SLEEPILY_BITLIST = "sleepily.bitlist" # ???
 SAVEDATA_GETBW = "savedata.getbw" # B2W2 Memory Link
 SAVEDATA_DOWNLOAD = "savedata.download" # self-explanatory
 WORLDBATTLE_DOWNLOAD = "worldbattle.download" # Click Battle Competition>Wi-Fi Competition>Participate
-ACCOUNT_CREATEDATA = "account.createdata" # Likely what happens when you pick "Game Sync Settings" on title screen
+ACCOUNT_CREATEDATA = "account.createdata" # Unused
 ACCOUNT_CREATE_UPLOAD = "account.create.upload" # ???
 SAVEDATA_UPLOAD = "savedata.upload" # self-explanatory
 WORLDBATTLE_UPLOAD = "worldbattle.upload" # ???
@@ -92,7 +92,8 @@ def gw():
             # it runs the following math function 10 times, increasing x each time:  f[x] = (x * 0x08) + 0x04, each time it runs that function, it checks the 2 bytes at that location in the response, if those are \x00\x00 then break the loop, otherwise if d <= 0x1ed where D is the data just pulled, then do something(!)
             # According to mm201, it's reading 8 bytes from that location???
             # ret = [0] * 0x5a
-            ret = [0] * 0x5a
+            #ret = [0] * 0x5a
+            ret = b""
             #for i in range(0, 80, 8):
                 # 4 shorts for species number (0x1ed = 493 = arceus natdex number)
             #    ret[i - 8] = 255
@@ -108,14 +109,38 @@ def gw():
                 # Area
             #    ret[i - 1] = 0x00
             # 3 flags: 0x58, 0x57, 0x59
-            ret[0x58] = 0xff
-            ret[0x57] = 0xff
-            ret[0x59] = 0xff
+            #ret[0x58] = 0xff
+            #ret[0x57] = 0xff
+            #ret[0x59] = 0xff
+            # Attempt 2!
+            #for i in range(0, 80, 8):
+            #    ret[i] = 0x89
+            #    ret[i + 1] = 0x00
+            #    ret[i + 2] = 0x67
+            #    ret[i + 3] = 0x00
+            #    ret[i + 4] = 0x86
+            #    ret[i + 5] = 0xB9
+            #    ret[i + 6] = 0x7D
+            #    ret[i + 7] = 0x34
+
             # Now the data has been built.
             # Enjoy understanding this.
             # NOTE: None of the above works.
-            return DREAMING_POKEMON_RESPONSE
-
+            ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7c)
+            ret = ret + b"\x00\x00\x00\x00"
+            ret = ret + b"\x00" * 0x57
+            ret = ret + b"\x00\x00\x00"
+            ret = ret + b"\x00\x01\xFF\xFF"
+            for i in range(0, 76):
+                ret = ret + b"\x00" # padding that is only needed if we want to add pokemon to the response
+            ret = ret + b"\xFF\x00\x00\x00\x01\x00\x01\x00" # Hopefully this should give us a pokemon.
+            ret = bytearray(ret)
+            ret[0xa6] = 0xff # Download C-GEAR skins (additionally, it'll put GS into "mode 2")
+            # Unfourtunately, DLS1 has multiple skins with CGEAR_E on them, so nothing happens.
+            # The last byte is the number of item
+            # Each item is a set of 4 bytes
+            # The first 2 bytes are a 16-bit int containing the item ID
+            return bytes(ret)
         else:
             return Response("bad gsid", 400)
     else:
