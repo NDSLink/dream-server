@@ -33,6 +33,7 @@ from datetime import datetime
 from uuid import uuid1
 from os.path import exists
 import helper
+    
 # --- Key Definitions ---
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///victini.db' # The DB is named "Victini" after the Pokemon and for pretty much no reason
@@ -130,7 +131,7 @@ def gw():
             ret = ret + b"\x00\x00\x00\x00"
             ret = ret + b"\x00" * 0x57
             ret = ret + b"\xFF\x00\x00"
-            ret = ret + b"\x01\x01\x01\x01\x01\x01\x01" * 10
+            ret = ret + b"\x02\x4F"
             #ret = bytearray(ret)
             #ret[0xa6] = 0xff # Download C-GEAR skins (additionally, it'll put GS into "mode 2")
             # The last byte is the number of item
