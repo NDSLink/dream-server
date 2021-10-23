@@ -60,6 +60,10 @@ def gw():
         return b"\x08"
     elif request.args["p"] == SAVEDATA_UPLOAD: # Triggered by putting a Pokemon to sleep.
         # Dump
+        user = models.GSUser.query.filter_by(gsid = request.args['gsid']).first() # Find the user
+        user.poke_is_sleeping = True
+        db.session.add(user)
+        db.session.commit()
         with open(f"savdata-{request.args['gsid']}.sav", "wb") as f:
             f.write(request.get_data())
         return DREAMING_POKEMON_RESPONSE
@@ -83,10 +87,6 @@ def gw():
         # User has finished downloading savedata, they should now have a sleeping pokemon
         return DREAMING_POKEMON_RESPONSE
     elif request.args["p"] == SLEEPILY_BITLIST:
-        user = models.GSUser.query.filter_by(gsid = request.args['gsid']).first() # Find the user
-        user.poke_is_sleeping = True
-        db.session.add(user)
-        db.session.commit()
         return b"\x00\x00\x00\x00" + (b"\x00" * 0x7c) + (b"\xff" * 0x80)
     elif request.args["p"] == SAVEDATA_DOWNLOAD:
         if exists(f"savdata-{request.args['gsid']}.sav"):
