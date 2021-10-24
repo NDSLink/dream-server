@@ -36,7 +36,7 @@ class Gen5Save:
             B = 0x28
             C = 0x48
             D = 0x68
-            shift_cols = [C, D, B, D, C, C, B, A, B, A] # location of block C
+            shift_cols = [C, D, B, D, C, C, B, A, B, A, D, A, C, B, D, A, D, A, B, C, B, A, C, A, B] # location of block C
             nick_location = shift_cols[shift]
             nick = str((b"".join(finished)[nick_location:nick_location + 10]))[2:-1]
             self.sleeping_pokemon_nick = nick
