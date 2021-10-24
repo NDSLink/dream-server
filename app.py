@@ -29,8 +29,9 @@ OLD_CREATE_ACCOUNT = b"\x08" * 0x40
 from flask import Flask, request, Response, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from datetime import datetime
-from uuid import uuid1
+# These imports were used to format the dumping filenames, but they are unused currently
+# from datetime import datetime
+# from uuid import uuid1
 from os.path import exists
 import helper
     
