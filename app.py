@@ -47,7 +47,11 @@ import helper
 
 # --- Key Definitions ---
 app = Flask(__name__)
-redis = Redis(host="localhost", port=6379, db=0)
+if app.config["USE_REDIS"]:
+    redis = Redis(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"], db=0)
+else:
+    from redismock import DummyRedis
+    redis = DummyRedis()
 
 app.config.from_object(Config)
 db = SQLAlchemy(app)
@@ -77,7 +81,7 @@ def gw():
                     db.session.add(user)
                     db.session.commit()
                     redis.publish(
-                        "savedesync", f"{request.args['gsid']}"
+                        "savedesync", request.args["gsid"]
                     )  # Save was desynced. Inform any subbed clients to ensure that data is resynced.
 
             if user.poke_is_sleeping:
