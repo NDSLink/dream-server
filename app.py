@@ -37,6 +37,7 @@ from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from redis import Redis
+from config import Config
 
 # These imports were used to format the dumping filenames, but they are unused currently
 # from datetime import datetime
@@ -48,9 +49,7 @@ import helper
 app = Flask(__name__)
 redis = Redis(host="localhost", port=6379, db=0)
 
-app.config[
-    "SQLALCHEMY_DATABASE_URI"
-] = "sqlite:///victini.db"  # The DB is named "Victini" after the Pokemon and for pretty much no reason
+app.config.from_object(Config)  # The DB is named "Victini" after the Pokemon and for pretty much no reason
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 # --- Model Imports ---
