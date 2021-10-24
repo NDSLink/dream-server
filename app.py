@@ -178,18 +178,19 @@ def gw():
             # Now the data has been built.
             # Enjoy understanding this.
             # NOTE: None of the above works.
-            ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
-            ret = ret + b"\x00\x00\x00\x00"
-            ret = ret + b"\x00" * 0x57
-            ret = ret + b"\xFF\x00\x00"
-            ret = ret + b"\x02\x4F"
+            #ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
+            #ret = ret + b"\x00\x00\x00\x00"
+            #ret = ret + b"\x00" * 0x57
+            #ret = ret + b"\xFF\x00\x00"
+            #ret = ret + b"\x02\x4F"
             # ret = bytearray(ret)
             # ret[0xa6] = 0xff # Download C-GEAR skins (additionally, it'll put GS into "mode 2")
             # The last byte is the number of item
             # Each item is a set of 4 bytes
             # The first 2 bytes are a 16-bit int containing the item ID
             redis.publish("dlstart", request.args["gsid"])
-            return ret
+            #return ret
+            return DREAMING_POKEMON_RESPONSE
         else:
             print("Bad GSID! Response dump:")
             print(f"Tok: {request.args['tok']}")
