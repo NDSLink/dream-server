@@ -36,6 +36,7 @@ from flask import Flask, request, Response, send_from_directory
 from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from redis import Redis, PubSub
 
 # These imports were used to format the dumping filenames, but they are unused currently
 # from datetime import datetime
@@ -45,6 +46,8 @@ import helper
 
 # --- Key Definitions ---
 app = Flask(__name__)
+redis = Redis(host="localhost", port=6379, db=0)
+
 app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = "sqlite:///victini.db"  # The DB is named "Victini" after the Pokemon and for pretty much no reason
@@ -74,6 +77,8 @@ def gw():
                     )  # There should be no pokemon sleeping
                     db.session.add(user)
                     db.session.commit()
+                    redis.publish("savedesync", f"{request.args['gsid']}") # Save was desynced. Inform any subbed clients to ensure that data is resynced.
+                
             if user.poke_is_sleeping:
                 return WAKE_UP_AND_DOWNLOAD
             else:
@@ -89,6 +94,7 @@ def gw():
         user.poke_is_sleeping = True
         db.session.add(user)
         db.session.commit()
+        redis.publish("pokemonhotel", request.args["gsid"])
         with open(f"savdata-{request.args['gsid']}.sav", "wb") as f:
             f.write(request.get_data())
         return DREAMING_POKEMON_RESPONSE
@@ -106,6 +112,7 @@ def gw():
                 )  # There should be no pokemon sleeping
                 db.session.add(u)
                 db.session.commit()
+                redis.publish("newacct", request.args["gsid"])
             except:
                 pass  # It's an alt save.
         return DREAMING_POKEMON_RESPONSE  # Success response
@@ -114,7 +121,7 @@ def gw():
             return b"\x01" * 0xFF  # garbage data
         return DREAMING_POKEMON_RESPONSE  # A.k.a "Please use Game Sync Settings"
     elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH:
-        # User has finished downloading savedata, they should now have a sleeping pokemon
+        redis.publish("finishdl", request.args["gsid"])
         return DREAMING_POKEMON_RESPONSE
     elif request.args["p"] == SLEEPILY_BITLIST:
         return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
@@ -167,8 +174,12 @@ def gw():
             # The last byte is the number of item
             # Each item is a set of 4 bytes
             # The first 2 bytes are a 16-bit int containing the item ID
+            redis.publish("dlstart", request.args["gsid"])
             return ret
         else:
+            print("Bad GSID! Response dump:")
+            print(f"Tok: {request.args['tok']}")
+            print(f"GSID: {request.args['gsid']}")
             return Response("bad gsid", 400)
     else:
         return Response("no", status=502)
