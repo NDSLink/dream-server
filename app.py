@@ -53,6 +53,7 @@ if app.config["USE_REDIS"]:
     redis = Redis(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"], db=0)
 else:
     from redismock import DummyRedis
+
     redis = DummyRedis()
 
 db = SQLAlchemy(app)
