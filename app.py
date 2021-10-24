@@ -77,8 +77,10 @@ def gw():
                     )  # There should be no pokemon sleeping
                     db.session.add(user)
                     db.session.commit()
-                    redis.publish("savedesync", f"{request.args['gsid']}") # Save was desynced. Inform any subbed clients to ensure that data is resynced.
-                
+                    redis.publish(
+                        "savedesync", f"{request.args['gsid']}"
+                    )  # Save was desynced. Inform any subbed clients to ensure that data is resynced.
+
             if user.poke_is_sleeping:
                 return WAKE_UP_AND_DOWNLOAD
             else:
