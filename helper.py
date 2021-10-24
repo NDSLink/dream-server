@@ -1,5 +1,6 @@
 from io import BufferedReader
 
+
 class Gen5Save:
     def __init__(self, data):
         if isinstance(data, BufferedReader):
@@ -21,24 +22,50 @@ class Gen5Save:
             tid = data.read(2)  # TID is a 32-bit integer
             self.tid = int.from_bytes(tid, "little")
             self.trainer_name = tname
-            data.seek(0x1D309) # Sleeping Pokemon Data.
+            data.seek(0x1D309)  # Sleeping Pokemon Data.
             pkm = data.read(220)
-            checksum = int.from_bytes(pkm[0x06:0x07], 'little')
+            checksum = int.from_bytes(pkm[0x06:0x07], "little")
             pid = pkm[0x00:0x03]
-            rng = lambda x: 0x41C64E6D * x + 0x6073 
+            rng = lambda x: 0x41C64E6D * x + 0x6073
             finished = [0] * 0x7
             for y in range(0x08, 0x87, 0x2):
-                decrypted = int.to_bytes(pkm[y:y+1] ^ rng(checksum))
+                decrypted = int.to_bytes(pkm[y : y + 1] ^ rng(checksum))
                 finished.append(decrypted[1])
                 finished.append(decrypted[2])
-            shift = ((pid & 0x3e000) >> 0xD) % 24
+            shift = ((pid & 0x3E000) >> 0xD) % 24
             A = 0x08
             B = 0x28
             C = 0x48
             D = 0x68
-            shift_cols = [C, D, B, D, C, C, B, A, B, A, D, A, C, B, D, A, D, A, B, C, B, A, C, A, B] # location of block C
+            shift_cols = [
+                C,
+                D,
+                B,
+                D,
+                C,
+                C,
+                B,
+                A,
+                B,
+                A,
+                D,
+                A,
+                C,
+                B,
+                D,
+                A,
+                D,
+                A,
+                B,
+                C,
+                B,
+                A,
+                C,
+                A,
+                B,
+            ]  # location of block C
             nick_location = shift_cols[shift]
-            nick = str((b"".join(finished)[nick_location:nick_location + 10]))[2:-1]
+            nick = str((b"".join(finished)[nick_location : nick_location + 10]))[2:-1]
             self.sleeping_pokemon_nick = nick
 
         elif isinstance(data, (bytes, bytearray)):
