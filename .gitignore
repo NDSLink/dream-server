@@ -4,3 +4,4 @@
 !Pipfile*
 !migrations
 !migrations/*
+config.py
