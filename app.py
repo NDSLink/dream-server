@@ -36,7 +36,7 @@ from flask import Flask, request, Response, send_from_directory
 from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from redis import Redis, PubSub
+from redis import Redis
 
 # These imports were used to format the dumping filenames, but they are unused currently
 # from datetime import datetime
