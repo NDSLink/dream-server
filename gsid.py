@@ -44,7 +44,7 @@ def gsid_enc(gsid):
 	charset = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789" # Not the entire alphabet, be careful
 	output = ""
 	
-	crc16 = calc_crc16(gsid, 0xffff)
+	crc16 = calc_crc16(gsid)
 	for i in range(0, 10):
 		output += charset[gsid & 0x1f]
 		
