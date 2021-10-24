@@ -49,7 +49,7 @@ import helper
 app = Flask(__name__)
 redis = Redis(host="localhost", port=6379, db=0)
 
-app.config.from_object(Config)  # The DB is named "Victini" after the Pokemon and for pretty much no reason
+app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 # --- Model Imports ---
