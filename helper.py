@@ -12,7 +12,7 @@ class Gen5Save:
             outstring = b""
             for b in tname:  # Strip the \x00s inbetween letters
                 byte = b.to_bytes(1, "little")
-                if byte != b"\x00":
+                if byte != b"\x00" and byte != b"\xff":
                     outstring = outstring + byte
             # Now we make it a string.
             tname = str(outstring)[
