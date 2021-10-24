@@ -47,13 +47,14 @@ import helper
 
 # --- Key Definitions ---
 app = Flask(__name__)
+app.config.from_object(Config)
+
 if app.config["USE_REDIS"]:
     redis = Redis(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"], db=0)
 else:
     from redismock import DummyRedis
     redis = DummyRedis()
 
-app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 # --- Model Imports ---
