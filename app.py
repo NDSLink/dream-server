@@ -121,6 +121,7 @@ def gw():
                 db.session.commit()
                 redis.publish("newacct", request.args["gsid"])
             except:
+                redis.publish("newacct", request.args["gsid"])
                 pass  # It's an alt save.
         return DREAMING_POKEMON_RESPONSE  # Success response
     elif request.args["p"] == WORLDBATTLE_DOWNLOAD:  # Live competition
@@ -129,6 +130,12 @@ def gw():
         return DREAMING_POKEMON_RESPONSE  # A.k.a "Please use Game Sync Settings"
     elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH:
         redis.publish("finishdl", request.args["gsid"])
+        user = models.GSUser.query.filter_by(
+            gsid=request.args["gsid"]
+        ).first()  # Find the user
+        user.poke_is_sleeping = False
+        db.session.add(user)
+        db.session.commit()
         return DREAMING_POKEMON_RESPONSE
     elif request.args["p"] == SLEEPILY_BITLIST:
         return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
