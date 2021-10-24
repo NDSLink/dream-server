@@ -7,6 +7,7 @@ name = "pypi"
 flask = "==2.0.1"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
+redis = "*"
 
 [dev-packages]
 
