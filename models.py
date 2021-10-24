@@ -1,8 +1,12 @@
 from app import db
 from sqlalchemy.orm import relationship
+
+
 class GSUser(db.Model):
-    __tablename__ = 'gsuser'
-    id = db.Column(db.Integer, primary_key=True) # TODO: create a frontend where you can see GS related info, and download your save, and maybe even edit it
+    __tablename__ = "gsuser"
+    id = db.Column(
+        db.Integer, primary_key=True
+    )  # TODO: create a frontend where you can see GS related info, and download your save, and maybe even edit it
     gsid = db.Column(db.Integer, unique=True)
     # NOTE: this should be pretty easy to implement
     sleeping_pokemon = relationship("Pokemon")
@@ -11,7 +15,8 @@ class GSUser(db.Model):
     tid = db.Column(db.Integer)
     # TODO: What else?
     def __repr__(self):
-        return '<GSUser %r>' % self.id
+        return "<GSUser %r>" % self.id
+
 
 class Pokemon(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -38,13 +43,10 @@ class Pokemon(db.Model):
     move2 = db.Column(db.String())
     move3 = db.Column(db.String())
     move4 = db.Column(db.String())
-    gsuser_id = db.Column(db.String(), db.ForeignKey('gsuser.id'))
+    gsuser_id = db.Column(db.String(), db.ForeignKey("gsuser.id"))
     # TODO: Convert moves into valid pokeapi.cc move names
     # i.e., V-Create becomes v-create, Ice Burn becomes ice-burn
     # There are likely special exceptions to that
     # NOTE:
     # pkapiified_str = 'whatever db.String()'.lower().replace(' ', '-')
     # should work?
-
-
-
