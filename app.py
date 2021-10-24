@@ -1,9 +1,7 @@
 # --- Constants ---
 BASE_RESPONSE = b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
 END_RESPOSNE = b"\xFF" * 0x40
-PLAYSTATUS = (
-    "account.playstatus"  # Called when you perform Game Sync
-)
+PLAYSTATUS = "account.playstatus"  # Called when you perform Game Sync
 SLEEPILY_BITLIST = "sleepily.bitlist"  # List of banned species
 SAVEDATA_GETBW = "savedata.getbw"  # B2W2 Memory Link
 SAVEDATA_DOWNLOAD = "savedata.download"  # self-explanatory
@@ -11,7 +9,9 @@ WORLDBATTLE_DOWNLOAD = (
     "worldbattle.download"  # Click Battle Competition>Wi-Fi Competition>Participate
 )
 ACCOUNT_CREATEDATA = "account.createdata"  # Unused
-ACCOUNT_CREATE_UPLOAD = "account.create.upload"  # Upload savedata, alias to savedata.upload
+ACCOUNT_CREATE_UPLOAD = (
+    "account.create.upload"  # Upload savedata, alias to savedata.upload
+)
 SAVEDATA_UPLOAD = "savedata.upload"  # self-explanatory
 WORLDBATTLE_UPLOAD = "worldbattle.upload"  # ???
 SAVEDATA_DOWNLOAD_FINISH = "savedata.download.finish"  # likely telling the server that savedata download is done
@@ -33,6 +33,7 @@ OLD_CREATE_ACCOUNT = b"\x08" * 0x40
 
 # --- Imports ---
 from flask import Flask, request, Response, send_from_directory
+from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -182,6 +183,16 @@ def index():
 def get_savedata(trainerid):
     u = models.GSUser.query.filter_by(id=trainerid).first()
     return send_from_directory(".", f"savdata-{u.gsid}.sav")
+
+
+@app.route("/users")
+def users():
+    return f"Hello! To view user information, go to {url_for('users')}/<your GSID>. For instance, if your GSID is AAAAAAA2EE, go to {url_for('users')}/AAAAAAA2EE. Note: this will have a better look soon!"
+
+
+@app.route("/users/<gsid>")
+def user_gsid():
+    return f"wip!"
 
 
 # --- Main Block ---
