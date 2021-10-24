@@ -1,6 +1,7 @@
 class Config:
     DEBUG = True
     USE_REDIS = True
+    SQLALCHEMY_DATABASE_URI = "sqlite:///victini.db"
     REDIS_HOST = "localhost"
     REDIS_PORT = 6379
     SECRET_KEY = """According to all known laws of aviation, there is no way a bee should be able to fly.
