@@ -38,6 +38,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from redis import Redis
 from config import Config
+from pickle import dumps
 
 # These imports were used to format the dumping filenames, but they are unused currently
 # from datetime import datetime
@@ -140,6 +141,9 @@ def gw():
         return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
     elif request.args["p"] == SAVEDATA_DOWNLOAD:
         if exists(f"savdata-{request.args['gsid']}.sav"):
+            user = models.GSUser.query.filter_by(
+                gsid=request.args["gsid"]
+            ).first()
             # it runs the following math function 10 times, increasing x each time:  f[x] = (x * 0x08) + 0x04, each time it runs that function, it checks the 2 bytes at that location in the response, if those are \x00\x00 then break the loop, otherwise if d <= 0x1ed where D is the data just pulled, then do something(!)
             # According to mm201, it's reading 8 bytes from that location???
             # ret = [0] * 0x5a
@@ -187,7 +191,7 @@ def gw():
             # The last byte is the number of item
             # Each item is a set of 4 bytes
             # The first 2 bytes are a 16-bit int containing the item ID
-            redis.publish("dlstart", request.args["gsid"])
+            redis.publish("dlstart", dumps({"gsid": request.args["gsid"], "name": user.trainer_name}))
             # return ret
             return DREAMING_POKEMON_RESPONSE
         else:
