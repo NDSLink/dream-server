@@ -5,3 +5,4 @@
 !migrations
 !migrations/*
 config.py
+!Dockerfile
