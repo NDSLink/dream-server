@@ -22,6 +22,7 @@ class Gen5Save:
             tid = data.read(2)  # TID is a 32-bit integer
             self.tid = int.from_bytes(tid, "little")
             self.trainer_name = tname
+            '''
             data.seek(0x1D309)  # Sleeping Pokemon Data.
             pkm = data.read(220)
             checksum = int.from_bytes(pkm[0x06:0x07], "little")
@@ -29,7 +30,8 @@ class Gen5Save:
             rng = lambda x: 0x41C64E6D * x + 0x6073
             finished = [0] * 0x7
             for y in range(0x08, 0x87, 0x2):
-                decrypted = int.to_bytes(pkm[y : y + 1] ^ rng(checksum))
+                decrypted = (int.from_bytes(pkm[y : y + 1], 'little') ^ rng(checksum))
+                decrypted = decrypted.to_bytes(4, 'little')
                 finished.append(decrypted[1])
                 finished.append(decrypted[2])
             shift = ((pid & 0x3E000) >> 0xD) % 24
@@ -67,6 +69,7 @@ class Gen5Save:
             nick_location = shift_cols[shift]
             nick = str((b"".join(finished)[nick_location : nick_location + 10]))[2:-1]
             self.sleeping_pokemon_nick = nick
+            '''
 
         elif isinstance(data, (bytes, bytearray)):
             self._data = data
