@@ -94,7 +94,6 @@ def gw():
     elif (
         request.args["p"] == SAVEDATA_UPLOAD
     ):  # Triggered by putting a Pokemon to sleep.
-        # Dump
         user = models.GSUser.query.filter_by(
             gsid=request.args["gsid"]
         ).first()  # Find the user
