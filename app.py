@@ -24,12 +24,10 @@ WAKE_UP_AND_DOWNLOAD = BASE_RESPONSE + b"\x03" * 0x4 + END_RESPOSNE
 WAKE_UP_RESPONSE = (
     b"\x04" * 0x4
 )  # 0x40 will work too, as long as you remove the BASE_RESPONSE and END_RESPONSE
-OLD_WAKE_UP_RESPONSE = b"\x04" * 0x40  # Either seems to work?
+OLD_WAKE_UP_RESPONSE = b"\x04" * 0x40
 PUT_POKE_TO_SLEEP_RESPONSE = BASE_RESPONSE + b"\x05" * 4 + END_RESPOSNE
 CREATE_ACCOUNT = BASE_RESPONSE + b"\x08" * 0x4 + END_RESPOSNE
 OLD_CREATE_ACCOUNT = b"\x08" * 0x40
-
-# UNKNOWN_RESPONSE_2 = b"\x09" * 0x40 Just a test, the DS will error if it recives this
 
 # --- Imports ---
 from flask import Flask, request, Response, send_from_directory
@@ -40,9 +38,6 @@ from redis import Redis
 from config import Config
 from pickle import dumps
 
-# These imports were used to format the dumping filenames, but they are unused currently
-# from datetime import datetime
-# from uuid import uuid1
 from os.path import exists
 import helper
 
@@ -80,7 +75,7 @@ def gw():
                         name=g5s.trainer_name,
                         poke_is_sleeping=False,
                         gsid=request.args["gsid"],
-                    )  # There should be no pokemon sleeping
+                    )
                     db.session.add(user)
                     db.session.commit()
                     redis.publish(
@@ -94,7 +89,7 @@ def gw():
         return b"\x08"
     elif (
         request.args["p"] == SAVEDATA_UPLOAD
-    ):  # Triggered by putting a Pokemon to sleep.
+    ):
         user = models.GSUser.query.filter_by(
             gsid=request.args["gsid"]
         ).first()  # Find the user
@@ -116,7 +111,7 @@ def gw():
                     name=g5s.trainer_name,
                     poke_is_sleeping=False,
                     gsid=request.args["gsid"],
-                )  # There should be no pokemon sleeping
+                )
                 db.session.add(u)
                 db.session.commit()
                 redis.publish("newacct", request.args["gsid"])
@@ -126,7 +121,7 @@ def gw():
         return DREAMING_POKEMON_RESPONSE  # Success response
     elif request.args["p"] == WORLDBATTLE_DOWNLOAD:  # Live competition
         if exists(f"savdata-{request.args['gsid']}.sav"):
-            return b"\x01" * 0xFF  # garbage data
+            return Response("worldbattle is unimplemented lol", status=502)
         return DREAMING_POKEMON_RESPONSE  # A.k.a "Please use Game Sync Settings"
     elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH:
         redis.publish("finishdl", request.args["gsid"])
@@ -200,7 +195,7 @@ def gw():
             print(f"GSID: {request.args['gsid']}")
             return Response("bad gsid", 400)
     else:
-        return Response("no", status=502)
+        return Response("no", status=400)
 
 
 @app.route("/")
