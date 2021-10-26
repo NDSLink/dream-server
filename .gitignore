@@ -6,9 +6,9 @@
 !migrations/*
 !static/*
 !static
+!static/bootstrap/*
+!static/bootstrap
+!static/bootstrap
 !*.scss
 !*.css
-!static/bootstrap
-!static/bootstrap/*
-!static/bootstrap/*.scss
 config.py
