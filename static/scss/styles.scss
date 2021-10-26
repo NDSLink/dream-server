@@ -1,0 +1,16 @@
+@import "bootstrap/bootstrap.scss";
+@import "bootstrap/_functions.scss";
+@import "palette.scss";
+
+$body-bg: color-primary;
+$body-color: color-secondary;
+
+@import "bootstrap/_variables.scss";
+
+button {
+    @extend .btn;
+    @extend .btn-primary;
+}
+
+
+
