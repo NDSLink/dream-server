@@ -4,5 +4,5 @@
 !Pipfile*
 !migrations
 !migrations/*
-!static/*.scss
+!static/*
 config.py
