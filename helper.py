@@ -6,7 +6,7 @@ class Gen5Save:
         if mirror:
             loc = 0x23F36
         else:
-            loc = 0x19404 
+            loc = 0x19404
         tname = data[loc : loc + 7]
         # Now we need to do some post processing
         tname = tname.strip(b"\x00")  # Strip \x00
@@ -21,6 +21,7 @@ class Gen5Save:
             2:-1
         ]  # The [2:-1] part strips the annoying b"" things from the string
         return tname
+
     def __init__(self, data):
         if isinstance(data, BufferedReader):
             self._data = data.read()
@@ -41,7 +42,7 @@ class Gen5Save:
             tid = data.read(2)  # TID is a 32-bit integer
             self.tid = int.from_bytes(tid, "little")
             self.trainer_name = tname
-            '''
+            """
             data.seek(0x1D309)  # Sleeping Pokemon Data.
             pkm = data.read(220)
             checksum = int.from_bytes(pkm[0x06:0x07], "little")
@@ -88,7 +89,7 @@ class Gen5Save:
             nick_location = shift_cols[shift]
             nick = str((b"".join(finished)[nick_location : nick_location + 10]))[2:-1]
             self.sleeping_pokemon_nick = nick
-            '''
+            """
 
         elif isinstance(data, (bytes, bytearray)):
             self._data = data
@@ -96,5 +97,5 @@ class Gen5Save:
             self.tid = int.from_bytes(tid, "little")
             tname = self._parse_tname(data)
             if tname == b"":
-                tname = self._parse_tname(data, True) # Obtain data from mirror
+                tname = self._parse_tname(data, True)  # Obtain data from mirror
             self.trainer_name = tname
