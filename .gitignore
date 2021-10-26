@@ -12,3 +12,5 @@ config.py
 !static/scss/bootstrap
 !static/scss/bootstrap/*
 !static/scss/bootstrap/*.scss
+!templates
+!*.jinja2
