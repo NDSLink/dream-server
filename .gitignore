@@ -1,6 +1,4 @@
 *
-!*.scss
-!*.css
 !*.py
 !.gitignore
 !Pipfile*
