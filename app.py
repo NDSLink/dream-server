@@ -38,6 +38,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from redis import Redis
 from config import Config
+from flask_bootstrap import Bootstrap
 
 # These imports were used to format the dumping filenames, but they are unused currently
 # from datetime import datetime
@@ -47,6 +48,7 @@ import helper
 
 # --- Key Definitions ---
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 app.config.from_object(Config)
 
 if app.config["USE_REDIS"]:
