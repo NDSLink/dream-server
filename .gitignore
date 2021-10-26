@@ -5,4 +5,10 @@
 !migrations
 !migrations/*
 !static/*
+!static
+!*.scss
+!*.css
+!static/bootstrap
+!static/bootstrap/*
+!static/bootstrap/*.scss
 config.py
