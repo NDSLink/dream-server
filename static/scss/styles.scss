@@ -1,0 +1,16 @@
+@import "bootstrap/functions.scss";
+@import "palette";
+@import "bootstrap/bootstrap";
+
+button input#submit.btn.btn-default {
+    @extend .btn;
+    @extend .btn-primary;
+}
+
+input#submit.btn.btn-default {
+    @extend .btn;
+    @extend .btn-primary;
+    margin-top: 10px
+}
+
+

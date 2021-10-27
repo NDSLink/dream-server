@@ -1,0 +1,20 @@
+{% extends "base.html.jinja2" %}
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Game Sync</a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item disabled" href="#">Dream Land</a>
+            <a class="dropdown-item disabled" href="#">Global Battle Union</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ url_for('savedata') }}">Save Data</a> <!-- gs_savdownload is completely different from savedata.download. Be careful! -->
+        </ul>
+    </li>
+{% endblock %}
+{% block content %}
+    <h1>Hello!</h1>
+    <p>This page is under construction, but it looks pretty good at the moment!</p>
+    <p>Also nothing on the navbar works right now :P</p>
+{% endblock %}

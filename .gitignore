@@ -5,4 +5,14 @@
 !migrations
 !migrations/*
 config.py
+!static
+!static/*
+!static/scss/*
+!static/scss/*.scss
+!static/scss/bootstrap
+!static/scss/bootstrap/*
+!static/scss/bootstrap/*.scss
+!templates
+!*.jinja2
+static/scss/bootstrap/customvars.scss
 !Dockerfile
