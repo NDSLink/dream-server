@@ -207,8 +207,9 @@ def gw():
 
 @app.route("/")
 def home():
-    #return 'Hello there! This page is under construction! Why not check out <a href="https://web.archive.org/web/20110715101524id_/http://www.pokemon-gl.com/languages/">what remains of PGL</a> while you wait?'
+    # return 'Hello there! This page is under construction! Why not check out <a href="https://web.archive.org/web/20110715101524id_/http://www.pokemon-gl.com/languages/">what remains of PGL</a> while you wait?'
     return render_template("home.html.jinja2", title="Home")
+
 
 @app.route("/savedata", methods=["GET", "POST"])
 def savedata():
@@ -216,6 +217,7 @@ def savedata():
     if form.validate_on_submit():
         return redirect(url_for("get_savedata", trainerid=gsid_dec(form.gsid.data)))
     return render_template("savedata.html.jinja2", form=form, title="Manage Save Data")
+
 
 @app.route("/savedata/<trainerid>")
 def get_savedata(trainerid):
