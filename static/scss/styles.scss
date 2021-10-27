@@ -1,8 +1,8 @@
 @import "palette.scss";
-
 // Default variable overrides
-$body-bg: $color-primary;
-$body-color: $color-secondary;
+
+$primary: $color-primary;
+$secondary: $color-secondary;
 
 @import "bootstrap/bootstrap.scss";
 
