@@ -1,10 +1,6 @@
-@import "palette.scss";
-// Default variable overrides
-
-$primary: $color-primary;
-$secondary: $color-secondary;
-
-@import "bootstrap/bootstrap.scss";
+@import "bootstrap/functions.scss";
+@import "palette";
+@import "bootstrap/bootstrap";
 
 button {
     @extend .btn;

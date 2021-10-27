@@ -14,3 +14,4 @@ config.py
 !static/scss/bootstrap/*.scss
 !templates
 !*.jinja2
+static/scss/bootstrap/customvars.scss
