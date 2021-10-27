@@ -37,8 +37,11 @@ from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from redis import Redis
+from werkzeug.utils import redirect
 from config import Config
 from flask_bootstrap import Bootstrap
+from forms import LinkForm
+from gsid import gsid_dec
 
 # These imports were used to format the dumping filenames, but they are unused currently
 # from datetime import datetime
@@ -207,9 +210,19 @@ def home():
     #return 'Hello there! This page is under construction! Why not check out <a href="https://web.archive.org/web/20110715101524id_/http://www.pokemon-gl.com/languages/">what remains of PGL</a> while you wait?'
     return render_template("home.html.jinja2")
 
+@app.route("/savedata", methods=["GET", "POST"])
+def savedata():
+    form = LinkForm()
+    if form.validate_on_submit():
+        return redirect(url_for("get_savedata", trainerid=gsid_dec(form.gsid.data)))
+    return render_template("savedata.html.jinja2", form=form)
+
 @app.route("/savedata/<trainerid>")
 def get_savedata(trainerid):
     u = models.GSUser.query.filter_by(id=trainerid).first()
+    if u == None:
+        if exists(f"savdata-{trainerid}.sav"):
+            return send_from_directory(".", f"savdata-{trainerid}.sav")
     return send_from_directory(".", f"savdata-{u.gsid}.sav")
 
 
