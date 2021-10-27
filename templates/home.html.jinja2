@@ -1,6 +1,14 @@
 {% extends "base.html.jinja2" %}
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Game Sync</a>
+    </li>
+{% endblock %}
 {% block content %}
     <h1>Hello!</h1>
     <p>This page is under construction, but it looks pretty good at the moment!</p>
-    <button>testing B)</button>
+    <p>Also nothing on the navbar works right now :P</p>
 {% endblock %}
