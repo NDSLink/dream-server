@@ -1,11 +1,10 @@
-@import "bootstrap/bootstrap.scss";
-@import "bootstrap/_functions.scss";
 @import "palette.scss";
 
-$body-bg: color-primary;
-$body-color: color-secondary;
+// Default variable overrides
+$body-bg: $color-primary;
+$body-color: $color-secondary;
 
-@import "bootstrap/_variables.scss";
+@import "bootstrap/bootstrap.scss";
 
 button {
     @extend .btn;

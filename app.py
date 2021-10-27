@@ -32,7 +32,7 @@ OLD_CREATE_ACCOUNT = b"\x08" * 0x40
 # UNKNOWN_RESPONSE_2 = b"\x09" * 0x40 Just a test, the DS will error if it recives this
 
 # --- Imports ---
-from flask import Flask, request, Response, send_from_directory
+from flask import Flask, request, Response, send_from_directory, render_template
 from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -203,9 +203,9 @@ def gw():
 
 
 @app.route("/")
-def index():
-    return 'Hello there! This page is under construction! Why not check out <a href="https://web.archive.org/web/20110715101524id_/http://www.pokemon-gl.com/languages/">what remains of PGL</a> while you wait?'
-
+def home():
+    #return 'Hello there! This page is under construction! Why not check out <a href="https://web.archive.org/web/20110715101524id_/http://www.pokemon-gl.com/languages/">what remains of PGL</a> while you wait?'
+    return render_template("home.html.jinja2")
 
 @app.route("/savedata/<trainerid>")
 def get_savedata(trainerid):
