@@ -2,10 +2,15 @@
 @import "palette";
 @import "bootstrap/bootstrap";
 
-button {
+button input#submit.btn.btn-default {
     @extend .btn;
     @extend .btn-primary;
 }
 
+input#submit.btn.btn-default {
+    @extend .btn;
+    @extend .btn-primary;
+    margin-top: 10px
+}
 
 
