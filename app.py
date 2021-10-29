@@ -99,7 +99,7 @@ def gw():
         user.poke_is_sleeping = True
         db.session.add(user)
         db.session.commit()
-        redis.publish("pokemonhotel", request.args["gsid"])
+        redis.publish("pokemonhotel", dumps({"gsid": request.args["gsid"], "name": user.name}),)
         with open(f"savdata-{request.args['gsid']}.sav", "wb") as f:
             f.write(request.get_data())
         return DREAMING_POKEMON_RESPONSE
@@ -187,11 +187,13 @@ def gw():
             # The last byte is the number of item
             # Each item is a set of 4 bytes
             # The first 2 bytes are a 16-bit int containing the item ID
-            redis.publish(
-                "dlstart",
-                dumps({"gsid": request.args["gsid"], "name": user.trainer_name}),
-            )
+            redis.publish("dlstart", request.args["gsid"])
             # return ret
+            ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
+            ret = ret + b"\x00\x00\x00\x00"
+            ret = ret + b"\x00" * 0x57
+            ret = ret + b"\x01" * 80
+            ret = ret + b"\x01" * 80
             return DREAMING_POKEMON_RESPONSE
         else:
             print("Bad GSID! Response dump:")
