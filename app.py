@@ -99,7 +99,10 @@ def gw():
         user.poke_is_sleeping = True
         db.session.add(user)
         db.session.commit()
-        redis.publish("pokemonhotel", dumps({"gsid": request.args["gsid"], "name": user.name}),)
+        redis.publish(
+            "pokemonhotel",
+            dumps({"gsid": request.args["gsid"], "name": user.name}),
+        )
         with open(f"savdata-{request.args['gsid']}.sav", "wb") as f:
             f.write(request.get_data())
         return DREAMING_POKEMON_RESPONSE
