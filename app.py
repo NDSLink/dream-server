@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from redis import Redis
 from config import Config
 from flask_bootstrap import Bootstrap
+from flask_login import LoginManager
 
 
 from os.path import exists
@@ -12,6 +13,7 @@ from os.path import exists
 # --- Key Definitions ---
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
+login = LoginManager(app)
 app.config.from_object(Config)
 
 if app.config["USE_REDIS"]:
