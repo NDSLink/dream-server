@@ -5,12 +5,21 @@
         <a class="nav-link" aria-current="page" href="{{ url_for('home') }}">Home</a>
     </li>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Game Sync</a>
-        <ul class="dropdown-menu active" aria-labelledby="navbarDropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="nbGsDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Game Sync</a>
+        <ul class="dropdown-menu" aria-labelledby="nbGsDropdown">
             <a class="dropdown-item disabled" href="#">Dream Land</a>
             <a class="dropdown-item disabled" href="#">Global Battle Union</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item active" href="#">Save Data</a> <!-- gs_savdownload is completely different from savedata.download. Be careful! -->
+            <a class="dropdown-item active" href="{{ url_for('savedata') }}">Save Data</a> <!-- gs_savdownload is completely different from savedata.download. Be careful! -->
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="nbLoginDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+        <ul class="dropdown-menu" aria-labelledby="nbGsDropdown">
+            <a class="dropdown-item disabled" href="#">Sign In</a>
+            <a class="dropdown-item disabled" href="#">Link Save Data</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item disabled" href="#">Trainer Info</a> <!-- gs_savdownload is completely different from savedata.download. Be careful! -->
         </ul>
     </li>
 {% endblock %}
