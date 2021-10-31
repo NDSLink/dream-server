@@ -16,3 +16,4 @@ config.py
 !*.jinja2
 static/scss/bootstrap/customvars.scss
 !Dockerfile
+!tests
