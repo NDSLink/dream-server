@@ -15,10 +15,10 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="nbLoginDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
         <ul class="dropdown-menu" aria-labelledby="nbGsDropdown">
-            <a class="dropdown-item" href="{{ url_for('login') }}">{{ _("Sign In") }}</a>
-            <a class="dropdown-item" href="{{ url_for('link') }}">{{ _("Link Save Data") }}</a>
+            <a class="dropdown-item disabled" href="#">{{ _("Sign In") }}</a>
+            <a class="dropdown-item disabled" href="#">{{ _("Link Save Data") }}</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item disabled" href="#">{{ _("Trainer Info") }}</a>
+            <a class="dropdown-item disabled" href="#">{{ _("Trainer Info") }}</a> <!-- gs_savdownload is completely different from savedata.download. Be careful! -->
         </ul>
     </li>
 {% endblock %}

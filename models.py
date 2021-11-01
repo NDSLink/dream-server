@@ -1,7 +1,7 @@
 from app import db
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
 
 class GSUser(UserMixin, db.Model):
     __tablename__ = "gsuser"
@@ -20,8 +20,7 @@ class GSUser(UserMixin, db.Model):
         return "<GSUser %r>" % self.id
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+
 
 class Pokemon(db.Model):
     id = db.Column(db.Integer, primary_key=True)

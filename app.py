@@ -7,6 +7,7 @@ from config import Config
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_babel import Babel, _
+
 from os.path import exists
 
 # --- Key Definitions ---
@@ -25,11 +26,6 @@ else:
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-
-from models import GSUser
-@login.user_loader
-def load_user(id):
-    return GSUser.query.get(int(id))
 
 # --- Routes ---
 import routes

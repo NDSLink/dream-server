@@ -8,7 +8,6 @@ from gsid import gsid_dec
 from os.path import exists
 import redis
 from constants import *
-from flask_login import login_user
 
 @app.route("/dsio/gw", methods=["GET", "POST"])
 def gw():
@@ -176,33 +175,11 @@ def get_savedata(trainerid):
             return send_from_directory(".", f"savdata-{trainerid}.sav")
     return send_from_directory(".", f"savdata-{u.gsid}.sav")
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = models.GSUser.query.filter_by(
-            name=form.username.data,
-            gsid=form.gsid.data
-        ).first()
-        if user is not None:
-            if user.check_password(form.password.data):
-                login_user(user)
-                return redirect(url_for("home"))
-            return redirect(url_for("home")) # todo: have a better way to say invalid password lol
-    return render_template("login.html.jinja2", form=form, title="Login")
 
-@app.route('/link', methods=["GET", "POST"])
-def link():
-    form = LinkPwForm()
-    if form.validate_on_submit():
-        user = models.GSUser.query.filter_by(
-            gsid=form.gsid.data
-        ).first()
-        if user is not None:
-            user.set_password(form.password.data)
-            login_user(user)
-            return redirect(url_for("home"))
-    return render_template("link.html.jinja2", form=form, title="Link")
+@app.route("/users")
+def users():
+    return f"Hello! To view user information, go to {url_for('users')}/<your GSID>. For instance, if your GSID is AAAAAAA2EE, go to {url_for('users')}/AAAAAAA2EE. Note: this will have a better look soon!"
+
 
 @app.route("/users/<gsid>")
 def user_gsid():
