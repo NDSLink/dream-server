@@ -5,7 +5,7 @@ import helper
 from flask import request, send_from_directory, render_template, redirect, url_for, Response
 from pickle import dumps
 from gsid import gsid_dec
-from os import exists
+from os.path import exists
 import redis
 from constants import *
 

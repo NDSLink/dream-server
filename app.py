@@ -13,8 +13,10 @@ from os.path import exists
 # --- Key Definitions ---
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
-login = LoginManager(app)
 babel = Babel(app)
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(['en'])
 app.config.from_object(Config)
 
 if app.config["USE_REDIS"]:
