@@ -10,6 +10,7 @@ flask-migrate = "*"
 redis = "*"
 flask-wtf = "*"
 flask-bootstrap = "*"
+flask-babel = "*"
 
 [dev-packages]
 
