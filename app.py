@@ -6,13 +6,14 @@ from redis import Redis
 from config import Config
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
-
+from flask_babel import Babel, _
 from os.path import exists
 
 # --- Key Definitions ---
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 login = LoginManager(app)
+babel = Babel(app)
 app.config.from_object(Config)
 
 if app.config["USE_REDIS"]:
