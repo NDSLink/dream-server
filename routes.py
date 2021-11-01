@@ -198,7 +198,7 @@ def link():
         user = models.GSUser.query.filter_by(
             gsid=form.gsid.data
         ).first()
-        if user is not None and not user.password:
+        if user is not None:
             user.set_password(form.password.data)
             login_user(user)
             return redirect(url_for("home"))
