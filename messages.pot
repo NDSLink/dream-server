@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-11-01 17:55-0400\n"
+"POT-Creation-Date: 2021-11-02 10:13-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,34 +37,48 @@ msgstr ""
 msgid "Link!"
 msgstr ""
 
-#: templates/home.html.jinja2:9 templates/link.html.jinja2:10
-#: templates/login.html.jinja2:10 templates/savedata.html.jinja2:10
+#: link.html.jinja2:11 templates/home.html.jinja2:9
+#: templates/link.html.jinja2:10 templates/login.html.jinja2:10
+#: templates/savedata.html.jinja2:10
 msgid "Dream Land"
 msgstr ""
 
-#: templates/home.html.jinja2:10 templates/link.html.jinja2:11
-#: templates/login.html.jinja2:11 templates/savedata.html.jinja2:11
+#: link.html.jinja2:12 templates/home.html.jinja2:10
+#: templates/link.html.jinja2:11 templates/login.html.jinja2:11
+#: templates/savedata.html.jinja2:11
 msgid "Global Battle Union"
 msgstr ""
 
-#: templates/home.html.jinja2:12 templates/link.html.jinja2:13
-#: templates/login.html.jinja2:13 templates/savedata.html.jinja2:13
+#: link.html.jinja2:14 templates/home.html.jinja2:12
+#: templates/link.html.jinja2:13 templates/login.html.jinja2:13
+#: templates/savedata.html.jinja2:13
 msgid "Save Data"
 msgstr ""
 
-#: templates/home.html.jinja2:18 templates/link.html.jinja2:19
-#: templates/login.html.jinja2:19 templates/savedata.html.jinja2:19
+#: link.html.jinja2:20 templates/home.html.jinja2:18
+#: templates/link.html.jinja2:19 templates/login.html.jinja2:19
+#: templates/savedata.html.jinja2:19
 msgid "Sign In"
 msgstr ""
 
-#: templates/home.html.jinja2:19 templates/link.html.jinja2:20
-#: templates/login.html.jinja2:20 templates/savedata.html.jinja2:20
+#: link.html.jinja2:21 templates/home.html.jinja2:19
+#: templates/link.html.jinja2:20 templates/login.html.jinja2:20
+#: templates/savedata.html.jinja2:20
 msgid "Link Save Data"
 msgstr ""
 
-#: templates/home.html.jinja2:21 templates/link.html.jinja2:22
-#: templates/login.html.jinja2:22 templates/savedata.html.jinja2:22
+#: link.html.jinja2:23 templates/home.html.jinja2:21
+#: templates/link.html.jinja2:22 templates/login.html.jinja2:22
+#: templates/savedata.html.jinja2:22
 msgid "Trainer Info"
+msgstr ""
+
+#: routes.py:160 templates/savedata.html.jinja2:5
+msgid "Home"
+msgstr ""
+
+#: routes.py:168
+msgid "Manage Save Data"
 msgstr ""
 
 #: templates/home.html.jinja2:26

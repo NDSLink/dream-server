@@ -8,6 +8,7 @@ from gsid import gsid_dec
 from os.path import exists
 import redis
 from constants import *
+from flask_babel import _
 
 @app.route("/dsio/gw", methods=["GET", "POST"])
 def gw():
@@ -156,7 +157,7 @@ def gw():
 @app.route("/")
 def home():
     # return 'Hello there! This page is under construction! Why not check out <a href="https://web.archive.org/web/20110715101524id_/http://www.pokemon-gl.com/languages/">what remains of PGL</a> while you wait?'
-    return render_template("home.html.jinja2", title="Home")
+    return render_template("home.html.jinja2", title=_("Home"))
 
 
 @app.route("/savedata", methods=["GET", "POST"])
@@ -164,7 +165,7 @@ def savedata():
     form = LinkForm()
     if form.validate_on_submit():
         return redirect(url_for("get_savedata", trainerid=gsid_dec(form.gsid.data)))
-    return render_template("savedata.html.jinja2", form=form, title="Manage Save Data")
+    return render_template("savedata.html.jinja2", form=form, title=_("Manage Save Data"))
 
 
 @app.route("/savedata/<trainerid>")
@@ -176,9 +177,9 @@ def get_savedata(trainerid):
     return send_from_directory(".", f"savdata-{u.gsid}.sav")
 
 
-@app.route("/users")
-def users():
-    return f"Hello! To view user information, go to {url_for('users')}/<your GSID>. For instance, if your GSID is AAAAAAA2EE, go to {url_for('users')}/AAAAAAA2EE. Note: this will have a better look soon!"
+#@app.route("/users")
+#def users():
+#    return f"Hello! To view user information, go to {url_for('users')}/<your GSID>. For instance, if your GSID is AAAAAAA2EE, go to {url_for('users')}/AAAAAAA2EE. Note: this will have a better look soon!"
 
 
 @app.route("/users/<gsid>")
