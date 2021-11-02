@@ -18,5 +18,9 @@ static/scss/bootstrap/customvars.scss
 !Dockerfile
 !tests
 !*.pot
-!babel.cfg
 !*.po
+!babel.cfg
+!translations
+!translations/**
+translations/**/*.mo
+
