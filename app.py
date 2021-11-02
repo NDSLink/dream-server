@@ -16,7 +16,7 @@ bootstrap = Bootstrap(app)
 babel = Babel(app)
 @babel.localeselector
 def get_locale():
-    return 'ja'
+    return request.accept_languages.best_match(['ja'])
 app.config.from_object(Config)
 
 if app.config["USE_REDIS"]:
