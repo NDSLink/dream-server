@@ -17,3 +17,6 @@ config.py
 static/scss/bootstrap/customvars.scss
 !Dockerfile
 !tests
+!*.pot
+!babel.cfg
+!*.po
