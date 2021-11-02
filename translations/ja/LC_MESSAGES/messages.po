@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-11-01 17:55-0400\n"
-"PO-Revision-Date: 2021-11-01 21:22-0400\n"
+"POT-Creation-Date: 2021-11-01 21:41-0400\n"
+"PO-Revision-Date: 2021-11-01 21:45-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
 "Language-Team: ja <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #: forms.py:8
 msgid "Password"
-msgstr ""
+msgstr "暗号"
 
 #: forms.py:9
 msgid "Login"
@@ -38,37 +38,51 @@ msgstr ""
 msgid "Link!"
 msgstr ""
 
-#: templates/home.html.jinja2:9 templates/link.html.jinja2:10
-#: templates/login.html.jinja2:10 templates/savedata.html.jinja2:10
+#: link.html.jinja2:11 templates/home.html.jinja2:9
+#: templates/link.html.jinja2:10 templates/login.html.jinja2:10
+#: templates/savedata.html.jinja2:10
 msgid "Dream Land"
 msgstr ""
 
-#: templates/home.html.jinja2:10 templates/link.html.jinja2:11
-#: templates/login.html.jinja2:11 templates/savedata.html.jinja2:11
+#: link.html.jinja2:12 templates/home.html.jinja2:10
+#: templates/link.html.jinja2:11 templates/login.html.jinja2:11
+#: templates/savedata.html.jinja2:11
 msgid "Global Battle Union"
 msgstr ""
 
-#: templates/home.html.jinja2:12 templates/link.html.jinja2:13
-#: templates/login.html.jinja2:13 templates/savedata.html.jinja2:13
+#: link.html.jinja2:14 templates/home.html.jinja2:12
+#: templates/link.html.jinja2:13 templates/login.html.jinja2:13
+#: templates/savedata.html.jinja2:13
 msgid "Save Data"
 msgstr ""
 
-#: templates/home.html.jinja2:18 templates/link.html.jinja2:19
-#: templates/login.html.jinja2:19 templates/savedata.html.jinja2:19
+#: link.html.jinja2:20 templates/home.html.jinja2:18
+#: templates/link.html.jinja2:19 templates/login.html.jinja2:19
+#: templates/savedata.html.jinja2:19
 msgid "Sign In"
 msgstr ""
 
-#: templates/home.html.jinja2:19 templates/link.html.jinja2:20
-#: templates/login.html.jinja2:20 templates/savedata.html.jinja2:20
+#: link.html.jinja2:21 templates/home.html.jinja2:19
+#: templates/link.html.jinja2:20 templates/login.html.jinja2:20
+#: templates/savedata.html.jinja2:20
 msgid "Link Save Data"
 msgstr ""
 
-#: templates/home.html.jinja2:21 templates/link.html.jinja2:22
-#: templates/login.html.jinja2:22 templates/savedata.html.jinja2:22
+#: link.html.jinja2:23 templates/home.html.jinja2:21
+#: templates/link.html.jinja2:22 templates/login.html.jinja2:22
+#: templates/savedata.html.jinja2:22
 msgid "Trainer Info"
 msgstr ""
 
 #: templates/home.html.jinja2:26
 msgid "Hello!"
-msgstr ""
+msgstr "今日わ"
+
+#: templates/home.html.jinja2:27
+msgid "Welcome to DSLink's Game Sync main page!"
+msgstr "ようこそにDSLinkのゲームシンクトプ頁"
+
+#: templates/savedata.html.jinja2:5
+msgid "Home"
+msgstr "家"
 

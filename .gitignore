@@ -22,4 +22,5 @@ static/scss/bootstrap/customvars.scss
 !babel.cfg
 !translations
 !translations/**
+translations/**/*.mo
 
