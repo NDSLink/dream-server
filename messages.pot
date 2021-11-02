@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-11-02 10:13-0400\n"
+"POT-Creation-Date: 2021-11-02 11:16-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,12 +73,18 @@ msgstr ""
 msgid "Trainer Info"
 msgstr ""
 
-#: routes.py:160 templates/savedata.html.jinja2:5
+#: routes.py:160 templates/home.html.jinja2:4 templates/link.html.jinja2:5
+#: templates/savedata.html.jinja2:5
 msgid "Home"
 msgstr ""
 
 #: routes.py:168
 msgid "Manage Save Data"
+msgstr ""
+
+#: templates/home.html.jinja2:7 templates/link.html.jinja2:8
+#: templates/savedata.html.jinja2:8
+msgid "Game Sync"
 msgstr ""
 
 #: templates/home.html.jinja2:26
@@ -87,9 +93,5 @@ msgstr ""
 
 #: templates/home.html.jinja2:27
 msgid "Welcome to DSLink's Game Sync main page!"
-msgstr ""
-
-#: templates/savedata.html.jinja2:5
-msgid "Home"
 msgstr ""
 

@@ -1,10 +1,10 @@
 {% extends "base.html.jinja2" %}
 {% block navbar %}
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link active" aria-current="page" href="#">{{ _('Home') }}</a>
     </li>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="nbGsDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Game Sync</a>
+        <a class="nav-link dropdown-toggle" href="#" id="nbGsDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ _('Game Sync') }}</a>
         <ul class="dropdown-menu" aria-labelledby="nbGsDropdown">
             <a class="dropdown-item disabled" href="#">{{ _('Dream Land') }}</a>
             <a class="dropdown-item disabled" href="#">{{ _('Global Battle Union') }}</a>

@@ -24,7 +24,7 @@ msgstr ""
 
 #: forms.py:7 forms.py:13 forms.py:17
 msgid "Game Sync ID"
-msgstr ""
+msgstr "ゲームシンクＩＤ"
 
 #: forms.py:8
 msgid "Password"
@@ -80,9 +80,13 @@ msgstr "今日わ"
 
 #: templates/home.html.jinja2:27
 msgid "Welcome to DSLink's Game Sync main page!"
-msgstr "ようこそにDSLinkのゲームシンクトプ頁"
+msgstr "ようこそにDSLinkのゲームシンクトップ頁"
 
 #: templates/savedata.html.jinja2:5
 msgid "Home"
-msgstr "家"
+msgstr "トップ頁"
 
+#: templates/home.html.jinja2:7 templates/link.html.jinja2:8
+#: templates/savedata.html.jinja2:8
+msgid "Game Sync"
+msgstr "ゲームシンク"
