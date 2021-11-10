@@ -11,6 +11,7 @@ redis = "*"
 flask-wtf = "*"
 flask-bootstrap = "*"
 flask-babel = "*"
+flask-login = "*"
 
 [dev-packages]
 

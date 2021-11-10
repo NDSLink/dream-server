@@ -16,6 +16,8 @@ bootstrap = Bootstrap(app)
 babel = Babel(app)
 @babel.localeselector
 def get_locale():
+    if request.args.get('lang', None):
+        return request.args['lang']
     return request.accept_languages.best_match(['en', 'ja'])
 app.config.from_object(Config)
 

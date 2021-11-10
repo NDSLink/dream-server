@@ -20,7 +20,7 @@ msgstr ""
 
 #: forms.py:6
 msgid "Trainer Name"
-msgstr ""
+msgstr "トレーナーの名前"
 
 #: forms.py:7 forms.py:13 forms.py:17
 msgid "Game Sync ID"
@@ -32,47 +32,47 @@ msgstr "暗号"
 
 #: forms.py:9
 msgid "Login"
-msgstr ""
+msgstr "ログインをするます"
 
 #: forms.py:14 forms.py:19
 msgid "Link!"
-msgstr ""
+msgstr "リンクを為るます!"
 
 #: link.html.jinja2:11 templates/home.html.jinja2:9
 #: templates/link.html.jinja2:10 templates/login.html.jinja2:10
 #: templates/savedata.html.jinja2:10
 msgid "Dream Land"
-msgstr ""
+msgstr "夢の陸地"
 
 #: link.html.jinja2:12 templates/home.html.jinja2:10
 #: templates/link.html.jinja2:11 templates/login.html.jinja2:11
 #: templates/savedata.html.jinja2:11
 msgid "Global Battle Union"
-msgstr ""
+msgstr "世戦い連合"
 
 #: link.html.jinja2:14 templates/home.html.jinja2:12
 #: templates/link.html.jinja2:13 templates/login.html.jinja2:13
 #: templates/savedata.html.jinja2:13
 msgid "Save Data"
-msgstr ""
+msgstr "セーブデータ"
 
 #: link.html.jinja2:20 templates/home.html.jinja2:18
 #: templates/link.html.jinja2:19 templates/login.html.jinja2:19
 #: templates/savedata.html.jinja2:19
 msgid "Sign In"
-msgstr ""
+msgstr "ログインをするます"
 
 #: link.html.jinja2:21 templates/home.html.jinja2:19
 #: templates/link.html.jinja2:20 templates/login.html.jinja2:20
 #: templates/savedata.html.jinja2:20
 msgid "Link Save Data"
-msgstr ""
+msgstr "セーブデータをリンクを為るます"
 
 #: link.html.jinja2:23 templates/home.html.jinja2:21
 #: templates/link.html.jinja2:22 templates/login.html.jinja2:22
 #: templates/savedata.html.jinja2:22
 msgid "Trainer Info"
-msgstr ""
+msgstr "トレーナーのインフォ"
 
 #: templates/home.html.jinja2:26
 msgid "Hello!"
@@ -90,3 +90,7 @@ msgstr "トップ頁"
 #: templates/savedata.html.jinja2:8
 msgid "Game Sync"
 msgstr "ゲームシンク"
+
+#: templates/home.html.jinja2:16 templates/savedata.html.jinja2:17
+msgid "Account"
+msgstr "口座"
