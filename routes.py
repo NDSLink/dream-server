@@ -1,16 +1,17 @@
-from app import app, db, redis
+from app import db, redis
 import models
 from forms import *
 import helper
-from flask import request, send_from_directory, render_template, redirect, url_for, Response
+from flask import request, send_from_directory, render_template, redirect, url_for, Response, Blueprint
 from pickle import dumps
 from gsid import gsid_dec
 from os.path import exists
-import redis
+#import redis
 from constants import *
 from flask_babel import _
 
-@app.route("/dsio/gw", methods=["GET", "POST"])
+main_routes = Blueprint("main_routes", __name__)
+@main_routes.route("/dsio/gw", methods=["GET", "POST"])
 def gw():
     if request.args["p"] == PLAYSTATUS:
         if exists(
@@ -154,13 +155,13 @@ def gw():
         return Response("no", status=400)
 
 
-@app.route("/")
+@main_routes.route("/")
 def home():
-    # return 'Hello there! This page is under construction! Why not check out <a href="https://web.archive.org/web/20110715101524id_/http://www.pokemon-gl.com/languages/">what remains of PGL</a> while you wait?'
+    #return 'Hello there! This page is under construction! Why not check out <a href="https://web.archive.org/web/20110715101524id_/http://www.pokemon-gl.com/languages/">what remains of PGL</a> while you wait?'
     return render_template("home.html.jinja2", title=_("Home"))
 
 
-@app.route("/savedata", methods=["GET", "POST"])
+@main_routes.route("/savedata", methods=["GET", "POST"])
 def savedata():
     form = LinkForm()
     if form.validate_on_submit():
@@ -168,7 +169,7 @@ def savedata():
     return render_template("savedata.html.jinja2", form=form, title=_("Manage Save Data"))
 
 
-@app.route("/savedata/<trainerid>")
+@main_routes.route("/savedata/<trainerid>")
 def get_savedata(trainerid):
     u = models.GSUser.query.filter_by(id=trainerid).first()
     if u == None:
@@ -176,12 +177,11 @@ def get_savedata(trainerid):
             return send_from_directory(".", f"savdata-{trainerid}.sav")
     return send_from_directory(".", f"savdata-{u.gsid}.sav")
 
-
 #@app.route("/users")
 #def users():
 #    return f"Hello! To view user information, go to {url_for('users')}/<your GSID>. For instance, if your GSID is AAAAAAA2EE, go to {url_for('users')}/AAAAAAA2EE. Note: this will have a better look soon!"
 
 
-@app.route("/users/<gsid>")
+@main_routes.route("/users/<gsid>")
 def user_gsid():
     return f"wip!"
