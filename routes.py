@@ -155,7 +155,7 @@ def gw():
             ret = ret + b"\x00\x00\x00\x00"
             ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
             ret = ret + b"\x01" * 80  # 20 4-byte items (2-bytes index, 2-bytes count)
-            
+
             return ret
         else:
             print("Bad GSID! Response dump:")
@@ -190,6 +190,9 @@ def get_savedata(trainerid):
             return send_from_directory(".", f"savdata-{trainerid}.sav")
     return send_from_directory(".", f"savdata-{u.gsid}.sav")
 
+@main_routes.route("/dreamland/iod")
+def island_of_dreams():
+    return render_template("island_of_dreams.html.jinja2", title=_("Island of Dreams"))
 
 # @app.route("/users")
 # def users():
