@@ -42,11 +42,14 @@ class Gen5Save:
             tid = data.read(2)  # TID is a 32-bit integer
             self.tid = int.from_bytes(tid, "little")
             self.trainer_name = tname
+            data.seek(0x19419)
+            self.gamever = 0 if data.read(1) == 0x44 else 1
 
         elif isinstance(data, (bytes, bytearray)):
             self._data = data
             tid = data[0x19414 : 0x19414 + 2]  # TID is a 32-bit integer
             self.tid = int.from_bytes(tid, "little")
+            self.gamever = 0 if data[0x19419] == 0x44 else 1  # 0 = white, 1 = black
             tname = self._parse_tname(data)
             if tname == b"":
                 tname = self._parse_tname(data, True)  # Obtain data from mirror

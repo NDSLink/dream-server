@@ -7,6 +7,7 @@ from config import Config
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_babel import Babel, _
+
 is_circ_import = False
 
 from os.path import exists
@@ -16,11 +17,14 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 babel = Babel(app)
 
+
 @babel.localeselector
 def get_locale():
-    if request.args.get('lang', None):
-        return request.args['lang']
-    return request.accept_languages.best_match(['en', 'ja'])
+    if request.args.get("lang", None):
+        return request.args["lang"]
+    return request.accept_languages.best_match(["en", "ja"])
+
+
 app.config.from_object(Config)
 
 if app.config["USE_REDIS"]:
@@ -34,6 +38,7 @@ migrate = Migrate(app, db)
 
 # --- Routes ---
 import routes
+
 try:
     app.register_blueprint(routes.main_routes)
 except AttributeError:
