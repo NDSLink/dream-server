@@ -154,16 +154,8 @@ def gw():
             ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
             ret = ret + b"\x00\x00\x00\x00"
             ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10 # 10 8-byte pokemon
-            #ret = ret + b"\x64\x65\x65\x7a\x6e\x75\x74\x73"
-            ret = ret + b"\x01" * 78
-            # ret = ret + bytes(0x000)
-            # ret = ret + bytes(0x000)
-            # ret = ret + bytes(0x0)
-            # ret = ret + bytes(0x0)
-            # ret = ret + bytes(0x0)
-            # ret = ret + bytes(0x0)
+            ret = ret + b"\x01" * 80 # 20 4-byte items (2-bytes index, 2-bytes count)
             return ret
-            return DREAMING_POKEMON_RESPONSE
         else:
             print("Bad GSID! Response dump:")
             print(f"Tok: {request.args['tok']}")
