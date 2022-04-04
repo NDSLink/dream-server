@@ -1,101 +1,143 @@
 # Translations template for PROJECT.
-# Copyright (C) 2021 ORGANIZATION
+# Copyright (C) 2022 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-11-02 11:19-0400\n"
+"POT-Creation-Date: 2022-04-04 18:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
+"Generated-By: Babel 2.9.1\n"
 
-#: forms.py:6
-msgid "Trainer Name"
+#: app.py:41
+msgid "Page Not Found"
 msgstr ""
 
-#: forms.py:7 forms.py:13 forms.py:17
-msgid "Game Sync ID"
-msgstr ""
-
-#: forms.py:8
-msgid "Password"
-msgstr ""
-
-#: forms.py:9
-msgid "Login"
-msgstr ""
-
-#: forms.py:14 forms.py:19
-msgid "Link!"
-msgstr ""
-
-#: link.html.jinja2:11 templates/home.html.jinja2:9
-#: templates/link.html.jinja2:10 templates/login.html.jinja2:10
-#: templates/savedata.html.jinja2:10
-msgid "Dream Land"
-msgstr ""
-
-#: link.html.jinja2:12 templates/home.html.jinja2:10
-#: templates/link.html.jinja2:11 templates/login.html.jinja2:11
-#: templates/savedata.html.jinja2:11
-msgid "Global Battle Union"
-msgstr ""
-
-#: link.html.jinja2:14 templates/home.html.jinja2:12
-#: templates/link.html.jinja2:13 templates/login.html.jinja2:13
-#: templates/savedata.html.jinja2:13
-msgid "Save Data"
-msgstr ""
-
-#: link.html.jinja2:20 templates/home.html.jinja2:18
-#: templates/link.html.jinja2:19 templates/login.html.jinja2:19
-#: templates/savedata.html.jinja2:19
-msgid "Sign In"
-msgstr ""
-
-#: link.html.jinja2:21 templates/home.html.jinja2:19
-#: templates/link.html.jinja2:20 templates/login.html.jinja2:20
-#: templates/savedata.html.jinja2:20
-msgid "Link Save Data"
-msgstr ""
-
-#: link.html.jinja2:23 templates/home.html.jinja2:21
-#: templates/link.html.jinja2:22 templates/login.html.jinja2:22
-#: templates/savedata.html.jinja2:22
-msgid "Trainer Info"
-msgstr ""
-
-#: routes.py:160 templates/home.html.jinja2:4 templates/link.html.jinja2:5
-#: templates/savedata.html.jinja2:5
+#: routes.py:172 templates/404.html.jinja2:4 templates/home.html.jinja2:4
+#: templates/island_of_dreams.html.jinja2:4 templates/link.html.jinja2:5
+#: templates/login.html.jinja2:5 templates/savedata.html.jinja2:5
+#: templates/user.html.jinja2:4
 msgid "Home"
 msgstr ""
 
-#: routes.py:168
+#: routes.py:181
 msgid "Manage Save Data"
 msgstr ""
 
-#: templates/home.html.jinja2:7 templates/link.html.jinja2:8
-#: templates/login.html.jinja2:8 templates/savedata.html.jinja2:8
+#: routes.py:195
+msgid "Island of Dreams"
+msgstr ""
+
+#: routes.py:205
+msgid "User "
+msgstr ""
+
+#: templates/404.html.jinja2:7 templates/home.html.jinja2:7
+#: templates/link.html.jinja2:8 templates/login.html.jinja2:8
+#: templates/savedata.html.jinja2:8 templates/user.html.jinja2:7
 msgid "Game Sync"
 msgstr ""
 
-#: templates/home.html.jinja2:16 templates/savedata.html.jinja2:17
+#: templates/404.html.jinja2:9 templates/home.html.jinja2:9
+#: templates/link.html.jinja2:10 templates/login.html.jinja2:10
+#: templates/savedata.html.jinja2:10 templates/user.html.jinja2:9
+msgid "Dream Land"
+msgstr ""
+
+#: templates/404.html.jinja2:10 templates/home.html.jinja2:10
+#: templates/link.html.jinja2:11 templates/login.html.jinja2:11
+#: templates/savedata.html.jinja2:11 templates/user.html.jinja2:10
+msgid "Global Battle Union"
+msgstr ""
+
+#: templates/404.html.jinja2:12 templates/home.html.jinja2:12
+#: templates/link.html.jinja2:13 templates/login.html.jinja2:13
+#: templates/savedata.html.jinja2:13 templates/user.html.jinja2:12
+msgid "Save Data"
+msgstr ""
+
+#: templates/404.html.jinja2:16 templates/home.html.jinja2:16
+#: templates/savedata.html.jinja2:17 templates/user.html.jinja2:16
 msgid "Account"
 msgstr ""
 
-#: templates/home.html.jinja2:26
+#: templates/404.html.jinja2:18 templates/home.html.jinja2:18
+#: templates/link.html.jinja2:19 templates/login.html.jinja2:19
+#: templates/savedata.html.jinja2:19 templates/user.html.jinja2:18
+msgid "Sign In"
+msgstr ""
+
+#: templates/404.html.jinja2:19 templates/home.html.jinja2:19
+#: templates/link.html.jinja2:20 templates/login.html.jinja2:20
+#: templates/savedata.html.jinja2:20 templates/user.html.jinja2:19
+msgid "Link Save Data"
+msgstr ""
+
+#: templates/404.html.jinja2:21 templates/home.html.jinja2:21
+#: templates/link.html.jinja2:22 templates/login.html.jinja2:22
+#: templates/savedata.html.jinja2:22 templates/user.html.jinja2:21
+msgid "Trainer Info"
+msgstr ""
+
+#: templates/404.html.jinja2:25
+msgid "404: Dubious Disc Not Found"
+msgstr ""
+
+#: templates/404.html.jinja2:26
+msgid ""
+"You seem to have forgotten to get the Old Sea Map! Maybe try heading back"
+" home?"
+msgstr ""
+
+#: templates/404.html.jinja2:27
+msgid "The page you were looking for was not found."
+msgstr ""
+
+#: templates/home.html.jinja2:25
 msgid "Hello!"
 msgstr ""
 
-#: templates/home.html.jinja2:27
+#: templates/home.html.jinja2:26 templates/user.html.jinja2:26
 msgid "Welcome to DSLink's Game Sync main page!"
+msgstr ""
+
+#: templates/island_of_dreams.html.jinja2:7
+msgid "Dream World"
+msgstr ""
+
+#: templates/island_of_dreams.html.jinja2:9
+msgid "Island Of Dreams"
+msgstr ""
+
+#: templates/island_of_dreams.html.jinja2:10
+msgid "Garden"
+msgstr ""
+
+#: templates/island_of_dreams.html.jinja2:15
+msgid "Pardon our Quick Powder"
+msgstr ""
+
+#: templates/island_of_dreams.html.jinja2:16
+msgid "Ditto is busy transforming into HTML. Good things will be here soon!"
+msgstr ""
+
+#: templates/maintance.html.jinja2:3
+msgid "Pardon our Porygon!"
+msgstr ""
+
+#: templates/maintance.html.jinja2:4
+msgid "We're sorry, but we are undergoing maintaince right now!"
+msgstr ""
+
+#: templates/user.html.jinja2:25
+msgid "Trainer"
 msgstr ""
 

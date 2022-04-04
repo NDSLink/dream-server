@@ -12,7 +12,7 @@ from flask import (
     Blueprint,
 )
 from pickle import dumps
-from gsid import gsid_dec
+from gsid import gsid_dec, gsid_enc
 from os.path import exists
 
 # import redis
@@ -200,5 +200,6 @@ def island_of_dreams():
 
 
 @main_routes.route("/users/<gsid>")
-def user_gsid():
-    return f"wip!"
+def user_gsid(gsid):
+    u = models.GSUser.query.filter_by(gsid=gsid_enc(gsid)).first()
+    return render_template("user.html.jinja2", title=_("User ") + u.name, user=u)

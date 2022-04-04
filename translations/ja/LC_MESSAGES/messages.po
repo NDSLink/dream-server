@@ -94,3 +94,17 @@ msgstr "ゲームシンク"
 #: templates/home.html.jinja2:16 templates/savedata.html.jinja2:17
 msgid "Account"
 msgstr "口座"
+
+#: templates/404.html.jinja2:25
+msgid "404: Dubious Disc Not Found"
+msgstr "404: あやしいパッチは未発見おしました"
+
+#: templates/404.html.jinja2:26
+msgid ""
+"You seem to have forgotten to get the Old Sea Map! Maybe try heading back"
+" home?"
+msgstr "あなたがふるびたかいずを忘れ物をしました! 帰宅お試みる?"
+
+
+
+
