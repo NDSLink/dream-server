@@ -139,12 +139,19 @@ def gw():
             # Each item is a set of 4 bytes
             # The first 2 bytes are a 16-bit int containing the item ID
             redis.publish("dlstart", request.args["gsid"])
-            # return ret
-            ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
-            ret = ret + b"\x00\x00\x00\x00"
-            ret = ret + b"\x00" * 0x57
-            ret = ret + b"\x01" * 80
-            ret = ret + b"\x01" * 80
+            #return ret
+            ret = ret + b"\x01\x01\x01\x01" + (b"\x01" * 0x7C)
+            ret = ret + b"\x01\x01\x01\x01"
+            ret = ret + b"\x01" * 0x57
+            ret = ret + b"\x01\x01"
+            ret = ret + b"\x00" * 78
+            ret = ret + bytes(0x000)
+            ret = ret + bytes(0x000)
+            ret = ret + bytes(0x0)
+            ret = ret + bytes(0x0)
+            ret = ret + bytes(0x0)
+            ret = ret + bytes(0x0)
+            return ret
             return DREAMING_POKEMON_RESPONSE
         else:
             print("Bad GSID! Response dump:")
