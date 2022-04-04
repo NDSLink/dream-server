@@ -155,6 +155,7 @@ def gw():
             ret = ret + b"\x00\x00\x00\x00"
             ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
             ret = ret + b"\x01" * 80  # 20 4-byte items (2-bytes index, 2-bytes count)
+            
             return ret
         else:
             print("Bad GSID! Response dump:")
