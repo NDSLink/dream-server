@@ -151,11 +151,11 @@ def gw():
             # The first 2 bytes are a 16-bit int containing the item ID
             redis.publish("dlstart", request.args["gsid"])
             # return ret
-            ret = ret + b"\x01\x01\x01\x01" + (b"\x01" * 0x7C)
-            ret = ret + b"\x01\x01\x01\x01"
+            ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
+            ret = ret + b"\x00\x00\x00\x00"
             ret = ret + b"\x01" * 0x57
-            ret = ret + b"\x01\x01"
-            ret = ret + b"\x01" * 78
+            ret = ret + b"\x64\x65\x65\x7a\x6e\x75\x74\x73"
+            #ret = ret + b"\x01" * 78
             # ret = ret + bytes(0x000)
             # ret = ret + bytes(0x000)
             # ret = ret + bytes(0x0)
