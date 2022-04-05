@@ -28,8 +28,6 @@ app.config.from_object(Config)
 
 db = SQLAlchemy(app)
 
-import models
-
 migrate = Migrate(app, db)
 
 
