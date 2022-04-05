@@ -190,9 +190,11 @@ def get_savedata(trainerid):
             return send_from_directory(".", f"savdata-{trainerid}.sav")
     return send_from_directory(".", f"savdata-{u.gsid}.sav")
 
+
 @main_routes.route("/dreamland/iod")
 def island_of_dreams():
     return render_template("island_of_dreams.html.jinja2", title=_("Island of Dreams"))
+
 
 # @app.route("/users")
 # def users():
@@ -201,5 +203,5 @@ def island_of_dreams():
 
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
-    u = models.GSUser.query.filter_by(gsid=gsid_enc(gsid)).first()
+    u = models.GSUser.query.filter_by(gsid=gsid_dec(gsid)).first()
     return render_template("user.html.jinja2", title=_("User ") + u.name, user=u)

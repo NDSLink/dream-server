@@ -36,9 +36,11 @@ else:
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html.jinja2", title=_("Page Not Found")), 404
+
 
 # --- Routes ---
 import routes
