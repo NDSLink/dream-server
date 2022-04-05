@@ -13,6 +13,8 @@ class GSUser(db.Model):
     name = db.Column(db.String(14))
     poke_is_sleeping = db.Column(db.Boolean())
     tid = db.Column(db.Integer)
+    gender = db.Column(db.Integer, default=0) # 0 = male, 1 = female (I think? Don't know yet so it just defaults to 0)
+    gamever = db.Column(db.Integer) # 20 = white, 21 = black, 22 = white 2, 23 = black 2
     # TODO: What else?
     def __repr__(self):
         return "<GSUser %r>" % self.id

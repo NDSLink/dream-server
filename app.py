@@ -17,7 +17,6 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 babel = Babel(app)
 
-
 @babel.localeselector
 def get_locale():
     if request.args.get("lang", None):
@@ -27,15 +26,19 @@ def get_locale():
 
 app.config.from_object(Config)
 
+db = SQLAlchemy(app)
+
+import models
+
+migrate = Migrate(app, db)
+
+
 if app.config["USE_REDIS"]:
     redis = Redis(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"], db=0)
 else:
     from redismock import DummyRedis
 
     redis = DummyRedis()
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -76,6 +76,7 @@ def gw():
                     name=g5s.trainer_name,
                     poke_is_sleeping=False,
                     gsid=request.args["gsid"],
+                    gamever=request.args["rom"]
                 )
                 db.session.add(u)
                 db.session.commit()
@@ -176,7 +177,7 @@ def home():
 def savedata():
     form = LinkForm()
     if form.validate_on_submit():
-        return redirect(url_for("get_savedata", trainerid=gsid_dec(form.gsid.data)))
+        return redirect(url_for("main_routes.get_savedata", trainerid=gsid_dec(form.gsid.data)))
     return render_template(
         "savedata.html.jinja2", form=form, title=_("Manage Save Data")
     )
