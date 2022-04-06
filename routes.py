@@ -27,21 +27,23 @@ def gw():
     if request.args["p"] == PLAYSTATUS:
         if exists(
             f"savdata-{request.args['gsid']}.sav"
-        ):  # Check if trainer has registered with the server
+        ):
             user = models.GSUser.query.filter_by(
                 gsid=request.args["gsid"]
             ).first()  # Find the user
             if user == None:
                 with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
                     g5s = helper.Gen5Save(f)
-                    user = models.GSUser(
-                        id=g5s.tid,
-                        name=g5s.trainer_name,
-                        poke_is_sleeping=False,
-                        gsid=request.args["gsid"],
-                    )
-                    db.session.add(user)
-                    db.session.commit()
+                    if not models.GSUser.query.filter_by(tid=g5s.tid).first():
+                        user = models.GSUser(
+                            id=request.args["gsid"],
+                            tid=g5s.tid,
+                            name=g5s.trainer_name,
+                            poke_is_sleeping=False,
+                            gamever=request.args["rom"]
+                        )
+                        db.session.add(user)
+                        db.session.commit()
                     redis.publish(
                         "savedesync", request.args["gsid"]
                     )  # Save was desynced. Inform any subbed clients to ensure that data is resynced.
@@ -155,7 +157,7 @@ def gw():
             ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
             ret = ret + b"\x00\x00\x00\x00"
             ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
-            ret = ret + b"\x01" * 80  # 20 4-byte items (2-bytes index, 2-bytes count)
+            ret = ret + b"\x00\x01\x01\x01"  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
 
             return ret
         else:
