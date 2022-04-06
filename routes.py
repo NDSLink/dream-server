@@ -29,7 +29,7 @@ def gw():
             f"savdata-{request.args['gsid']}.sav"
         ):
             user = models.GSUser.query.filter_by(
-                gsid=request.args["gsid"]
+                id=request.args["gsid"]
             ).first()  # Find the user
             if user == None:
                 with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
@@ -55,7 +55,7 @@ def gw():
         return b"\x08"
     elif request.args["p"] == SAVEDATA_UPLOAD:
         user = models.GSUser.query.filter_by(
-            gsid=request.args["gsid"]
+            id=request.args["gsid"]
         ).first()  # Find the user
         user.poke_is_sleeping = True
         db.session.add(user)
@@ -74,10 +74,10 @@ def gw():
             try:
                 g5s = helper.Gen5Save(data)
                 u = models.GSUser(
-                    id=g5s.tid,
+                    id=request.args["gsid"],
                     name=g5s.trainer_name,
                     poke_is_sleeping=False,
-                    gsid=request.args["gsid"],
+                    tid=g5s.tid,
                     gamever=request.args["rom"]
                 )
                 db.session.add(u)
@@ -94,7 +94,7 @@ def gw():
     elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH:
         redis.publish("finishdl", request.args["gsid"])
         user = models.GSUser.query.filter_by(
-            gsid=request.args["gsid"]
+            id=request.args["gsid"]
         ).first()  # Find the user
         user.poke_is_sleeping = False
         db.session.add(user)
@@ -104,7 +104,7 @@ def gw():
         return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
     elif request.args["p"] == SAVEDATA_DOWNLOAD:
         if exists(f"savdata-{request.args['gsid']}.sav"):
-            user = models.GSUser.query.filter_by(gsid=request.args["gsid"]).first()
+            user = models.GSUser.query.filter_by(id=request.args["gsid"]).first()
             # it runs the following math function 10 times, increasing x each time:  f[x] = (x * 0x08) + 0x04, each time it runs that function, it checks the 2 bytes at that location in the response, if those are \x00\x00 then break the loop, otherwise if d <= 0x1ed where D is the data just pulled, then do something(!)
             # According to mm201, it's reading 8 bytes from that location???
             # ret = [0] * 0x5a
@@ -206,5 +206,5 @@ def island_of_dreams():
 
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
-    u = models.GSUser.query.filter_by(gsid=gsid_dec(gsid)).first()
+    u = models.GSUser.query.filter_by(id=gsid_dec(gsid)).first()
     return render_template("user.html.jinja2", title=_("User ") + u.name, user=u)
