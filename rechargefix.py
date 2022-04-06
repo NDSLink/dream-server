@@ -14,7 +14,7 @@ is_sleeping = (
 )
 tid = int(input("What is this save's TID? "))
 print("Please wait...")
-u = models.GSUser.query.filter_by(id=tid).first()
+u = models.GSUser.query.filter_by(tid=tid).first()
 if u == None:
     print("Huh? There is no user with that TID.")
     exit(5)
