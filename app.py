@@ -1,4 +1,5 @@
 # --- Imports ---
+from http import HTTPStatus
 from flask import Flask, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -42,7 +43,9 @@ else:
 def page_not_found(e):
     return render_template("404.html.jinja2", title=_("Page Not Found")), 404
 
-
+@app.before_request
+def before_request():
+    request.data # funky bug in flask
 # --- Routes ---
 import routes
 
