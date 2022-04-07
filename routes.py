@@ -171,6 +171,8 @@ def gw():
     elif request.args["p"] == WORLDBATTLE_DOWNLOAD:
         with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
             return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
+    elif request.args["p"] == WORLDBATTLE_UPLOAD:
+        return b"\x01"
     else:
         return Response("no", status=400)
 
@@ -220,11 +222,12 @@ def sake_storage_server():
 <GetMyRecordsResponse xmlns="http://gamespy.net/sake">
 <GetMyRecordsResult>Success</GetMyRecordsResult>
 <values><ArrayOfRecordValue>
-<RecordValue><binaryDataValue><value>thiswontevenworksincedls1doesntsupportregcard_ebutbesttoputitinforthesakeofdocumentationlol</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>11</value></binaryDataValue></RecordValue>
 </ArrayOfRecordValue></values>
 </GetMyRecordsResponse>
 </soap:Body>
 </soap:Envelope>'''
+
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
     u = models.GSUser.query.filter_by(id=gsid_dec(gsid)).first()
