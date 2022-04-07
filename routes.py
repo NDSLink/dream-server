@@ -87,10 +87,10 @@ def gw():
                 redis.publish("newacct", request.args["gsid"])
                 pass  # It's an alt save.
         return DREAMING_POKEMON_RESPONSE  # Success response
-    elif request.args["p"] == WORLDBATTLE_DOWNLOAD:  # Live competition
-        if exists(f"savdata-{request.args['gsid']}.sav"):
-            return Response("worldbattle is unimplemented lol", status=502)
-        return DREAMING_POKEMON_RESPONSE  # A.k.a "Please use Game Sync Settings"
+    #elif request.args["p"] == WORLDBATTLE_DOWNLOAD:  # Live competition
+    #    if exists(f"savdata-{request.args['gsid']}.sav"):
+    #        return Response("worldbattle is unimplemented lol", status=502)
+    #    return DREAMING_POKEMON_RESPONSE  # A.k.a "Please use Game Sync Settings"
     elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH:
         redis.publish("finishdl", request.args["gsid"])
         user = models.GSUser.query.filter_by(
@@ -165,6 +165,12 @@ def gw():
             print(f"Tok: {request.args['tok']}")
             print(f"GSID: {request.args['gsid']}")
             return Response("bad gsid", 400)
+    elif request.args["p"] == SAVEDATA_GETBW:
+        with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
+            return f.read()
+    elif request.args["p"] == WORLDBATTLE_DOWNLOAD:
+        with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
+            return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
     else:
         return Response("no", status=400)
 
@@ -203,7 +209,22 @@ def island_of_dreams():
 # def users():
 #    return f"Hello! To view user information, go to {url_for('users')}/<your GSID>. For instance, if your GSID is AAAAAAA2EE, go to {url_for('users')}/AAAAAAA2EE. Note: this will have a better look soon!"
 
-
+@main_routes.route("/SakeStorageServer/StorageServer.asmx", methods=["POST"])
+def sake_storage_server():
+    # basic sake server
+    return '''<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<soap:Body>
+<GetMyRecordsResponse xmlns="http://gamespy.net/sake">
+<GetMyRecordsResult>Success</GetMyRecordsResult>
+<values><ArrayOfRecordValue>
+<RecordValue><binaryDataValue><value>thiswontevenworksincedls1doesntsupportregcard_ebutbesttoputitinforthesakeofdocumentationlol</value></binaryDataValue></RecordValue>
+</ArrayOfRecordValue></values>
+</GetMyRecordsResponse>
+</soap:Body>
+</soap:Envelope>'''
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
     u = models.GSUser.query.filter_by(id=gsid_dec(gsid)).first()
