@@ -47,11 +47,13 @@ def gw():
                     redis.publish(
                         "savedesync", request.args["gsid"]
                     )  # Save was desynced. Inform any subbed clients to ensure that data is resynced.
-
+                    return b"\x08"
             if user.poke_is_sleeping:
+                print("is sleeping: yeah")
                 return WAKE_UP_AND_DOWNLOAD
             else:
-                return PUT_POKE_TO_SLEEP_RESPONSE
+                print("is not sleeping: nah")
+                return b"\x00"
         return b"\x08"
     elif request.args["p"] == SAVEDATA_UPLOAD:
         user = models.GSUser.query.filter_by(
@@ -170,7 +172,7 @@ def gw():
             # Byte 0x08 = ???
             ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
             # Byte 0xD2-0xD5 = flags or smthn idk
-            ret = ret + b"\x00\x01\x01\x01"  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
+            ret = ret + b"\x01\x01\x01\x01"  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
 
             return ret
         else:
