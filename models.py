@@ -24,45 +24,7 @@ class GSUser(db.Model):
     poke_is_sleeping = db.Column(db.Boolean())
     gender = db.Column(db.Integer, default=0) # 0 = male, 1 = female (I think? Don't know yet so it just defaults to 0)
     gamever = db.Column(db.Integer) # 20 = white, 21 = black, 22 = white 2, 23 = black 2
-    dreampoke = relationship("DreamPoke")
+    uid = db.Column(db.Integer, db.ForeignKey('users.id'))
     # TODO: What else?
     def __repr__(self):
         return "<GSUser %r>" % self.id
-
-class DreamPoke(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    index = db.Column(db.Integer)
-    special_move = db.Column(db.Integer)
-
-class Pokemon(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    dexno = db.Column(db.Integer)
-    name = db.Column(db.String(16))
-    level = db.Column(db.Integer)
-    exp = db.Column(db.Integer)
-    iv_hp = db.Column(db.Integer)
-    iv_atk = db.Column(db.Integer)
-    iv_def = db.Column(db.Integer)
-    iv_spatk = db.Column(db.Integer)
-    iv_spdef = db.Column(db.Integer)
-    iv_speed = db.Column(db.Integer)
-    ev_hp = db.Column(db.Integer)
-    ev_atk = db.Column(db.Integer)
-    ev_def = db.Column(db.Integer)
-    ev_spatk = db.Column(db.Integer)
-    ev_spdef = db.Column(db.Integer)
-    ev_speed = db.Column(db.Integer)
-    nature = db.Column(db.String())
-    ability = db.Column(db.String())
-    item = db.Column(db.String())
-    move1 = db.Column(db.String())
-    move2 = db.Column(db.String())
-    move3 = db.Column(db.String())
-    move4 = db.Column(db.String())
-    gsuser_id = db.Column(db.String(), db.ForeignKey("gsuser.id"))
-    # TODO: Convert moves into valid pokeapi.cc move names
-    # i.e., V-Create becomes v-create, Ice Burn becomes ice-burn
-    # There are likely special exceptions to that
-    # NOTE:
-    # pkapiified_str = 'whatever db.String()'.lower().replace(' ', '-')
-    # should work?

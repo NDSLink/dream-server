@@ -57,7 +57,7 @@ def gw():
                 return WAKE_UP_AND_DOWNLOAD
             else:
                 print("is not sleeping: nah")
-                return PUT_POKE_TO_SLEEP_RESPONSE
+                return b"\x01"
         return b"\x08"
     elif request.args["p"] == SAVEDATA_UPLOAD:
         user = models.GSUser.query.filter_by(
