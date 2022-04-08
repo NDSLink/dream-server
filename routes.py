@@ -172,7 +172,7 @@ def gw():
         with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
             return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
     elif request.args["p"] == WORLDBATTLE_UPLOAD:
-        return b"\x01"
+        return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
     else:
         return Response("no", status=400)
 
@@ -214,6 +214,7 @@ def island_of_dreams():
 @main_routes.route("/SakeStorageServer/StorageServer.asmx", methods=["POST"])
 def sake_storage_server():
     # basic sake server
+    print(request.data)
     return '''<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -222,18 +223,37 @@ def sake_storage_server():
 <GetMyRecordsResponse xmlns="http://gamespy.net/sake">
 <GetMyRecordsResult>Success</GetMyRecordsResult>
 <values><ArrayOfRecordValue>
-<RecordValue><binaryDataValue><value>11</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>bkflhglksfghsdfjghskldfogh</value></binaryDataValue></RecordValue>
 </ArrayOfRecordValue></values>
 </GetMyRecordsResponse>
 </soap:Body>
-</soap:Envelope>'''
+</soap:Envelope>''' if b"NUM_WIFICUP_WIN_COUNTER" not in request.data else '''<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<soap:Body>
+<GetMyRecordsResponse xmlns="http://gamespy.net/sake">
+<GetMyRecordsResult>Success</GetMyRecordsResult>
+<values><ArrayOfRecordValue>
+<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
+</ArrayOfRecordValue></values>
+</GetMyRecordsResponse>
+</soap:Body>
+'''
 
 @main_routes.route("/download", methods=["GET", "POST"])
 def download():
     # basic dls1 for DEBUGGING ONLY
-    print(request.headers)
-    print(request.form)
-    return "ratio\x00\x00\x00"
+    if request.form["action"] == "bGlzdA**":
+        if request.form['attr1'] == "UkVHQ0FSRF9F":
+            # grab regcards
+            return "4014_IC06_Master_en.bin NgAIZ6Qw8zC-MPwwyjC3MOcwyjDrMAAw8YKeig**\tREGCARD_E\t4014\t\t352"
 
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
