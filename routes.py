@@ -57,7 +57,7 @@ def gw():
                 return WAKE_UP_AND_DOWNLOAD
             else:
                 print("is not sleeping: nah")
-                return b"\x00"
+                return PUT_POKE_TO_SLEEP_RESPONSE
         return b"\x08"
     elif request.args["p"] == SAVEDATA_UPLOAD:
         user = models.GSUser.query.filter_by(
@@ -302,3 +302,4 @@ def link_gsid():
         db.session.add(u)
         db.session.commit()
         return redirect(url_for("main_routes.home"))
+    return render_template("link.html.jinja2", title=_("Link GSID"), form=form)
