@@ -10,13 +10,13 @@
             <a class="dropdown-item disabled" href="#">{{ _('Dream Land') }}</a>
             <a class="dropdown-item disabled" href="#">{{ _('Global Battle Union') }}</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ url_for('savedata') }}">{{ _("Save Data") }}</a> <!-- gs_savdownload is completely different from savedata.download. Be careful! -->
+            <a class="dropdown-item" href="{{ url_for('main_routes.savedata') }}">{{ _("Save Data") }}</a> <!-- gs_savdownload is completely different from savedata.download. Be careful! -->
         </ul>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="nbLoginDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
         <ul class="dropdown-menu" aria-labelledby="nbGsDropdown">
-            <a class="dropdown-item" href="{{ url_for('login') }}">{{ _("Sign In") }}</a>
+            <a class="dropdown-item disabled" href="#">{{ _("Sign In") }}</a>
             <a class="dropdown-item active" href="#">{{ _("Link Save Data") }}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item disabled" href="#">{{ _("Trainer Info") }}</a>

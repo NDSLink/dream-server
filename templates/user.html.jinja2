@@ -22,5 +22,8 @@
     </li>
 {% endblock %}
 {% block content %}
-    <h1>P<sub>K</sub>M<sub>N</sub> {{ _("Trainer") }} {{ user.name }}</h1>
+    <h1>P<sub>K</sub>M<sub>N</sub> {{ _("Trainer") }} {{ user.username }}</h1>
+    {% if gsuser.gamever == 20 %}
+        <p>Pokemon White</p>
+    {% endif %}
 {% endblock %}

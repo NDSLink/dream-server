@@ -20,5 +20,6 @@ class WhatPokeForm(FlaskForm):
 
 class LinkPwForm(FlaskForm):
     gsid = StringField(_l("Game Sync ID"))
+    username = StringField(_l("Trainer Name"))
     password = PasswordField("Password")
     submit = SubmitField(_l("Link!"))

@@ -174,7 +174,7 @@ def gw():
             # Byte 0x08 = ???
             ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
             # Byte 0xD2-0xD5 = flags or smthn idk
-            ret = ret + b"\x00\x00\x00\x00"  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
+            ret = ret + b"\x01\x01\x01\x01"  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
 
             return ret
         else:
@@ -283,20 +283,21 @@ def download():
     #return "4011_IC04_Master_en.bin	NAAIZ6Qw8zC-MPwwyjC3MOcwyjDrMAAw8YKeig**\tREGCARD_E\t4011\t\t352"
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
-    u = models.GSUser.query.filter_by(id=gsid_dec(gsid)).first()
-    return render_template("user.html.jinja2", title=_("User ") + u.name, user=u)
+    gu = models.GSUser.query.filter_by(id=gsid_dec(gsid)).first()
+    u = models.User.query.filter_by(id=gu.uid).first()
+    return render_template("user.html.jinja2", title=_("User ") + u.username, user=u, gsuser=gu)
 
-@main_routes.route("/link")
+@main_routes.route("/link", methods=["GET", "POST"])
 def link_gsid():
     form = LinkPwForm()
     if form.validate_on_submit():
         gu = models.GSUser.query.filter_by(id=gsid_dec(form.gsid.data)).first()
         if gu == None:
             raise ValidationError("Invalid GSID! Please use Game Sync Settings to set up Game Sync.")
-        u = models.User.query.filter_by(gsuser=gu).first()
-        if u != None:
+        if gu.uid != None:
             raise ValidationError("This GSID is already linked to a user!")
-        u = models.User(name=gu.name, gsuser=gu, password=generate_password_hash(form.password.data))
+        u = models.User(username=form.username.data, password_hash=generate_password_hash(form.password.data))
+        gu.user = u
         db.session.add(u)
         db.session.commit()
         return redirect(url_for("main_routes.home"))
