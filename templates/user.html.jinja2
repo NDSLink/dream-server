@@ -25,5 +25,13 @@
     <h1>P<sub>K</sub>M<sub>N</sub> {{ _("Trainer") }} {{ user.username }}</h1>
     {% if gsuser.gamever == 20 %}
         <p>Pokemon White</p>
+    {% elif gsuser.gamever == 21 %}
+        <p>Pokemon Black</p>
+    {% elif gsuser.gamever == 22 %}
+        <p>Pokemon White 2</p>
+    {% elif gsuser.gamever == 23 %}
+        <p>Pokemon Black 2</p>
+    {% else %}
+        <p>Legacy Account</p>
     {% endif %}
 {% endblock %}
