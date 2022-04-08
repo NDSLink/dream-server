@@ -250,11 +250,12 @@ def sake_storage_server():
 @main_routes.route("/download", methods=["GET", "POST"])
 def download():
     # basic dls1 for DEBUGGING ONLY
+    print(request.form)
     if request.form["action"] == "bGlzdA**":
         if request.form['attr1'] == "UkVHQ0FSRF9F":
             # grab regcards
-            return "4014_IC06_Master_en.bin NgAIZ6Qw8zC-MPwwyjC3MOcwyjDrMAAw8YKeig**\tREGCARD_E\t4014\t\t352"
-
+            return "4011_IC04_Master_en.bin						NAAIZ6Qw8zC-MPwwyjC3MOcwyjDrMAAw8YKeig**					REGCARD_E					4011					352\r\n"
+    #return "4011_IC04_Master_en.bin	NAAIZ6Qw8zC-MPwwyjC3MOcwyjDrMAAw8YKeig**\tREGCARD_E\t4011\t\t352"
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
     u = models.GSUser.query.filter_by(id=gsid_dec(gsid)).first()
