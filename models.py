@@ -19,7 +19,6 @@ class GSUser(db.Model):
     )  # TODO: create a frontend where you can see GS related info, and download your save, and maybe even edit it
     tid = db.Column(db.Integer)
     # NOTE: this should be pretty easy to implement
-    sleeping_pokemon = relationship("Pokemon")
     name = db.Column(db.String(14))
     poke_is_sleeping = db.Column(db.Boolean())
     gender = db.Column(db.Integer, default=0) # 0 = male, 1 = female (I think? Don't know yet so it just defaults to 0)
