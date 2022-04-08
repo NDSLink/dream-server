@@ -199,7 +199,7 @@ def get_savedata(trainerid):
     if u == None:
         if exists(f"savdata-{trainerid}.sav"):
             return send_from_directory(".", f"savdata-{trainerid}.sav")
-    return send_from_directory(".", f"savdata-{u.gsid}.sav")
+    return send_from_directory(".", f"savdata-{u.id}.sav")
 
 
 @main_routes.route("/dreamland/iod")
@@ -227,6 +227,13 @@ def sake_storage_server():
 </GetMyRecordsResponse>
 </soap:Body>
 </soap:Envelope>'''
+
+@main_routes.route("/download", methods=["GET", "POST"])
+def download():
+    # basic dls1 for DEBUGGING ONLY
+    print(request.headers)
+    print(request.form)
+    return "ratio\x00\x00\x00"
 
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
