@@ -57,7 +57,7 @@ def gw():
                 return WAKE_UP_AND_DOWNLOAD
             else:
                 print("is not sleeping: nah")
-                return b"\x01"
+                return b"\x00" # \x00 = "you changed your ds you idiot"
         return b"\x08"
     elif request.args["p"] == SAVEDATA_UPLOAD:
         user = models.GSUser.query.filter_by(
@@ -176,7 +176,7 @@ def gw():
             # Byte 0x08 = ???
             ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
             # Byte 0xD2-0xD5 = flags or smthn idk
-            ret = ret + b"\x01\x01\x01\x01"  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
+            ret = ret + b"\x00\x00\x00\x00"  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
 
             return ret
         else:
