@@ -158,10 +158,18 @@ def gw():
             # Byte 0x02 = Triggers comm error if not zero
             # Byte 0x03 = Triggers comm error if not zero
             # Byte 0x04 = Triggers comm error if not zero
-            # Byte 0x05-0x80 onward = padding(?)
-            ret = ret + b"\x00\x00\x00\x00" + (b"\x01" * 0x7C)
-            ret = ret + b"\x00\x00\x00\x00"
+            # Byte 0x05-0x80 onward = padding
+            ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
+            #ret = ret + b"\xff\xff\xff\xff"
+            # Byte 0x81-0xD1(?) = Pokemon
+            # Pokemon Structure:
+            # Byte 0x00-0x01 = Species
+            # Byte 0x02-0x03 = ???
+            # Byte 0x04-0x05 = ???
+            # Byte 0x06-0x07 = ???
+            # Byte 0x08 = ???
             ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
+            # Byte 0xD2-0xD5 = flags or smthn idk
             ret = ret + b"\x00\x01\x01\x01"  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
 
             return ret
