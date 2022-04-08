@@ -12,8 +12,11 @@ class LoginForm(FlaskForm):
 
 class LinkForm(FlaskForm):
     gsid = StringField(_l("Game Sync ID"))
-    submit = SubmitField(_l("Link!"))
+    submit = SubmitField(_l("Download Save!"))
 
+class WhatPokeForm(FlaskForm):
+    poke = StringField(_l("Who's that Pokemon?"))
+    submit = SubmitField(_l("Submit"))
 
 class LinkPwForm(FlaskForm):
     gsid = StringField(_l("Game Sync ID"))

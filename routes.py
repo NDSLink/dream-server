@@ -11,9 +11,13 @@ from flask import (
     Response,
     Blueprint,
 )
+
+from wtforms import ValidationError
+
 from pickle import dumps
 from gsid import gsid_dec, gsid_enc
 from os.path import exists
+from werkzeug.security import generate_password_hash
 
 # import redis
 from constants import *
@@ -283,3 +287,18 @@ def download():
 def user_gsid(gsid):
     u = models.GSUser.query.filter_by(id=gsid_dec(gsid)).first()
     return render_template("user.html.jinja2", title=_("User ") + u.name, user=u)
+
+@main_routes.route("/link")
+def link_gsid():
+    form = LinkPwForm()
+    if form.validate_on_submit():
+        gu = models.GSUser.query.filter_by(id=gsid_dec(form.gsid.data)).first()
+        if gu == None:
+            raise ValidationError("Invalid GSID! Please use Game Sync Settings to set up Game Sync.")
+        u = models.User.query.filter_by(gsuser=gu).first()
+        if u != None:
+            raise ValidationError("This GSID is already linked to a user!")
+        u = models.User(name=gu.name, gsuser=gu, password=generate_password_hash(form.password.data))
+        db.session.add(u)
+        db.session.commit()
+        return redirect(url_for("main_routes.home"))

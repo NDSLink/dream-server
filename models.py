@@ -1,6 +1,16 @@
 from app import db
 from sqlalchemy.orm import relationship
 
+class User(db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), unique=True)
+    email = db.Column(db.String(120), unique=True)
+    password_hash = db.Column(db.String(128))
+    gsuser = db.relationship('GSUser', backref='user', lazy='dynamic')
+
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
 
 class GSUser(db.Model):
     __tablename__ = "gsuser"
@@ -14,10 +24,15 @@ class GSUser(db.Model):
     poke_is_sleeping = db.Column(db.Boolean())
     gender = db.Column(db.Integer, default=0) # 0 = male, 1 = female (I think? Don't know yet so it just defaults to 0)
     gamever = db.Column(db.Integer) # 20 = white, 21 = black, 22 = white 2, 23 = black 2
+    dreampoke = relationship("DreamPoke")
     # TODO: What else?
     def __repr__(self):
         return "<GSUser %r>" % self.id
 
+class DreamPoke(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    index = db.Column(db.Integer)
+    special_move = db.Column(db.Integer)
 
 class Pokemon(db.Model):
     id = db.Column(db.Integer, primary_key=True)
