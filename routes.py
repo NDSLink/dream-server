@@ -154,7 +154,12 @@ def gw():
             # The first 2 bytes are a 16-bit int containing the item ID
             redis.publish("dlstart", request.args["gsid"])
             # return ret
-            ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
+            # Byte 0x01 = If not zero, triggers 1320x, where x is the number
+            # Byte 0x02 = Triggers comm error if not zero
+            # Byte 0x03 = Triggers comm error if not zero
+            # Byte 0x04 = Triggers comm error if not zero
+            # Byte 0x05-0x80 onward = padding(?)
+            ret = ret + b"\x00\x00\x00\x00" + (b"\x01" * 0x7C)
             ret = ret + b"\x00\x00\x00\x00"
             ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
             ret = ret + b"\x00\x01\x01\x01"  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
@@ -255,6 +260,14 @@ def download():
         if request.form['attr1'] == "UkVHQ0FSRF9F":
             # grab regcards
             return "4011_IC04_Master_en.bin						NAAIZ6Qw8zC-MPwwyjC3MOcwyjDrMAAw8YKeig**					REGCARD_E					4011					352\r\n"
+        #elif request.form["attr1"] == "TVVTSUNBTF9F":
+            #return "M010_munna_1_e_02.bin						8YKeit8w5TD8MLgwqzDrMAAw4DDzMMow					MUSICAL_E					10					352\r\n"
+        else:
+            return Response("", status=404)
+    elif request.form["action"] == "Y29udGVudHM*":
+        resp = send_from_directory(".", "4011_IC04_Master_en.bin")
+        resp.headers["Content-Type"] = "application/x-dsdl"
+        return resp
     #return "4011_IC04_Master_en.bin	NAAIZ6Qw8zC-MPwwyjC3MOcwyjDrMAAw8YKeig**\tREGCARD_E\t4011\t\t352"
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
