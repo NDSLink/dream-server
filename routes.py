@@ -53,10 +53,8 @@ def gw():
                     )  # Save was desynced. Inform any subbed clients to ensure that data is resynced.
                     return b"\x08"
             if user.poke_is_sleeping:
-                print("is sleeping: yeah")
-                return WAKE_UP_AND_DOWNLOAD
+                return PUT_POKE_TO_SLEEP_RESPONSE # apparently works for both??
             else:
-                print("is not sleeping: nah")
                 return PUT_POKE_TO_SLEEP_RESPONSE # \x00 = "you changed your ds you idiot", anything else = 1320x
         return b"\x08"
     elif request.args["p"] == SAVEDATA_UPLOAD:
