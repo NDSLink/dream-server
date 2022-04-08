@@ -53,7 +53,7 @@ def gw():
                     )  # Save was desynced. Inform any subbed clients to ensure that data is resynced.
                     return b"\x08"
             if user.poke_is_sleeping:
-                return PUT_POKE_TO_SLEEP_RESPONSE # apparently works for both??
+                return WAKE_UP_AND_DOWNLOAD # apparently works for both??
             else:
                 return PUT_POKE_TO_SLEEP_RESPONSE # \x00 = "you changed your ds you idiot", anything else = 1320x
         return b"\x08"
@@ -173,8 +173,16 @@ def gw():
             # Byte 0x06-0x07 = ???
             # Byte 0x08 = ???
             ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
-            # Byte 0xD2-0xD5 = flags or smthn idk
-            ret = ret + b"\x01\x01\x01\x01"  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
+            # Byte 0xD2-0xD5 = something to do with leveling/dream points
+            ret = ret + b"\xff\xff\xff\xff" 
+            # Byte 0xD6 = Padding?
+            # Byte 0xD7 = Padding?
+            # Byte 0xD8 = Padding?
+            # Byte 0xD9 = Download musicals
+            # Byte 0xDA = Download C-Gear skins
+            # Byte 0xDB = Download Pokedex skins
+            # Note: when 0xD6-0xD8 are set to 0x01, the pokemon will level up?
+            ret = ret + b"\xff\xff\x00\x00\x00\x00"
 
             return ret
         else:
@@ -252,16 +260,17 @@ def sake_storage_server():
 <GetMyRecordsResponse xmlns="http://gamespy.net/sake">
 <GetMyRecordsResult>Success</GetMyRecordsResult>
 <values><ArrayOfRecordValue>
-<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>1</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>9999</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>0</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>0</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>0</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>9999</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>0</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>6</value></binaryDataValue></RecordValue>
 </ArrayOfRecordValue></values>
 </GetMyRecordsResponse>
 </soap:Body>
+</soap:Envelope>
 '''
 
 @main_routes.route("/download", methods=["GET", "POST"])
@@ -274,11 +283,16 @@ def download():
             return "4011_IC04_Master_en.bin						NAAIZ6Qw8zC-MPwwyjC3MOcwyjDrMAAw8YKeig**					REGCARD_E					4011					352\r\n"
         #elif request.form["attr1"] == "TVVTSUNBTF9F":
             #return "M010_munna_1_e_02.bin						8YKeit8w5TD8MLgwqzDrMAAw4DDzMMow					MUSICAL_E					10					352\r\n"
+        elif request.form["attr1"] == "TVVTSUNBTF9F":
+            return "M012_pokesen_1_e_05.bin					MUSICAL_E					12					54430\r\n"
+        elif request.form["attr1"] == "Q0dFQVIyX0U*":
+            print("dl c-gear2")
+            return "4011_IC04_Master_en.bin\t\t\t\t\tCGEAR2_E\t\t\t\t\t4011\t\t\t\t\t352\t\t\t\t\t\r\n"
         else:
             return Response("", status=404)
     elif request.form["action"] == "Y29udGVudHM*":
-        resp = send_from_directory(".", "4011_IC04_Master_en.bin")
-        resp.headers["Content-Type"] = "application/x-dsdl"
+        resp = Response("y")
+        #resp.headers["Content-Type"] = "application/x-dsdl"
         return resp
     #return "4011_IC04_Master_en.bin	NAAIZ6Qw8zC-MPwwyjC3MOcwyjDrMAAw8YKeig**\tREGCARD_E\t4011\t\t352"
 @main_routes.route("/users/<gsid>")
