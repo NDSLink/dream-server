@@ -1,3 +1,7 @@
+import json
+from os import scandir
+from os.path import basename
+from random import choice
 from app import db, redis
 import models
 from forms import *
@@ -184,7 +188,7 @@ def gw():
             # Byte 0xDA = Download C-Gear skins
             # Byte 0xDB = Download Pokedex skins
             # Note: when 0xD6-0xD8 are set to 0x01, the pokemon will level up?
-            ret = ret + b"\xff\xff\x00\x00\x00\x00"
+            ret = ret + b"\xff\xff\x00\x00\x01\x00"
 
             return ret
         else:
@@ -278,11 +282,20 @@ def sake_storage_server():
 @main_routes.route("/download", methods=["GET", "POST"])
 def download():
     # basic dls1 for DEBUGGING ONLY
-    print(request.form)
+    subfolders = [f.path for f in scandir("dls1") if f.is_dir()]
     if request.form["action"] == "bGlzdA**":
-        return "G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n"
+        for folder in subfolders:
+            attr1 = request.form["attr1"].replace("*", "=")
+            if b64decode(attr1).startswith(bytes(basename(folder), "utf-8")):
+                listing = json.load(open(f"{folder}/listing.json", "r"))
+                item = choice(listing["content"])
+                ret = f"{item['filename']}\t\t{str(b64decode(attr1))[2:-1]}\t{item['index']}\t\t{item['filesize']}\r\n"
+                print(ret)
+                #print("G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n")
+                return ret
+        #return "G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n"
     else:
-        return send_from_directory(".", "C003-2_munna_1_en.bin")
+        return send_from_directory("dls1/content", str(b64decode(attr1))[2:-1])
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
     gu = models.GSUser.query.filter_by(id=gsid_dec(gsid)).first()
