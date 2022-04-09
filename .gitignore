@@ -24,5 +24,6 @@ static/scss/bootstrap/customvars.scss
 !translations/**/*
 !static/img/*
 translations/**/*.mo
+!vdls/*
 
 dls1_client.py

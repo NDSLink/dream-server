@@ -184,7 +184,7 @@ def gw():
             # Byte 0xDA = Download C-Gear skins
             # Byte 0xDB = Download Pokedex skins
             # Note: when 0xD6-0xD8 are set to 0x01, the pokemon will level up?
-            ret = ret + b"\xff\xff\x00\x01\x00\x00"
+            ret = ret + b"\xff\xff\x00\x00\x01\x00"
 
             return ret
         else:
@@ -280,7 +280,7 @@ def download():
     # basic dls1 for DEBUGGING ONLY
     print(request.form)
     if request.form["action"] == "bGlzdA**":
-        return "G0003_shelmet_en.bin\t\tMYSTERY_E\t300000\t\t720\r\n"
+        return "G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n"
     else:
         return send_from_directory(".", "C003-2_munna_1_en.bin")
 @main_routes.route("/users/<gsid>")
