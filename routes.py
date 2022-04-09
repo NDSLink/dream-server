@@ -188,7 +188,7 @@ def gw():
             # Byte 0xDA = Download C-Gear skins
             # Byte 0xDB = Download Pokedex skins
             # Note: when 0xD6-0xD8 are set to 0x01, the pokemon will level up?
-            ret = ret + b"\xff\xff\x00\x00\x01\x00"
+            ret = ret + b"\xff\xff\x00\x01\x01\x01"
 
             return ret
         else:
@@ -254,30 +254,11 @@ def sake_storage_server():
 <GetMyRecordsResponse xmlns="http://gamespy.net/sake">
 <GetMyRecordsResult>Success</GetMyRecordsResult>
 <values><ArrayOfRecordValue>
-<RecordValue><binaryDataValue><value>bkflhglksfghsdfjghskldfogh</value></binaryDataValue></RecordValue>
+<RecordValue><binaryDataValue><value>14</value></binaryDataValue></RecordValue>
 </ArrayOfRecordValue></values>
 </GetMyRecordsResponse>
 </soap:Body>
-</soap:Envelope>''' if b"NUM_WIFICUP_WIN_COUNTER" not in request.data else '''<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<soap:Body>
-<GetMyRecordsResponse xmlns="http://gamespy.net/sake">
-<GetMyRecordsResult>Success</GetMyRecordsResult>
-<values><ArrayOfRecordValue>
-<RecordValue><binaryDataValue><value>9999</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>0</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>0</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>0</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>9999</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>0</value></binaryDataValue></RecordValue>
-<RecordValue><binaryDataValue><value>6</value></binaryDataValue></RecordValue>
-</ArrayOfRecordValue></values>
-</GetMyRecordsResponse>
-</soap:Body>
-</soap:Envelope>
-'''
+</soap:Envelope>'''
 
 @main_routes.route("/download", methods=["GET", "POST"])
 def download():
@@ -290,12 +271,14 @@ def download():
                 listing = json.load(open(f"{folder}/listing.json", "r"))
                 item = choice(listing["content"])
                 ret = f"{item['filename']}\t\t{str(b64decode(attr1))[2:-1]}\t{item['index']}\t\t{item['filesize']}\r\n"
-                print(ret)
                 #print("G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n")
                 return ret
         #return "G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n"
+    elif request.form["action"] == "Y29udGVudHM*":
+        return send_from_directory("dls1/content", str(b64decode(request.form["contents"].replace("*", "=")))[2:-1])
     else:
-        return send_from_directory("dls1/content", str(b64decode(attr1))[2:-1])
+        print(request.form)
+        return Response("???", status=404)
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
     gu = models.GSUser.query.filter_by(id=gsid_dec(gsid)).first()
