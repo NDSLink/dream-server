@@ -9,6 +9,8 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_babel import Babel, _
 
+
+
 is_circ_import = False
 
 from os.path import exists
@@ -30,6 +32,10 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 
 migrate = Migrate(app, db)
+
+login = LoginManager(app)
+
+
 
 
 if app.config["USE_REDIS"]:
@@ -53,6 +59,10 @@ try:
     app.register_blueprint(routes.main_routes)
 except AttributeError:
     pass
+from models import User
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 # --- Main Block ---
 if __name__ == "__main__":

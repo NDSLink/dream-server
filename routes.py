@@ -2,6 +2,8 @@ import json
 from os import scandir
 from os.path import basename
 from random import choice
+
+from flask_login import login_user
 from app import db, redis
 import models
 from forms import *
@@ -23,7 +25,7 @@ from base64 import b64encode, b64decode
 from pickle import dumps
 from gsid import gsid_dec, gsid_enc
 from os.path import exists
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # import redis
 from constants import *
@@ -267,14 +269,17 @@ def download():
     if request.form["action"] == "bGlzdA**":
         for folder in subfolders:
             attr1 = request.form["attr1"].replace("*", "=")
+            print("dls list: ", b64decode(attr1))
             if b64decode(attr1).startswith(bytes(basename(folder), "utf-8")):
                 listing = json.load(open(f"{folder}/listing.json", "r"))
                 item = choice(listing["content"])
                 ret = f"{item['filename']}\t\t{str(b64decode(attr1))[2:-1]}\t{item['index']}\t\t{item['filesize']}\r\n"
-                #print("G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n")
+                print("G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n")
+                print(ret)
                 return ret
         #return "G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n"
     elif request.form["action"] == "Y29udGVudHM*":
+        print("dls download")
         return send_from_directory("dls1/content", str(b64decode(request.form["contents"].replace("*", "=")))[2:-1])
     else:
         print(request.form)
@@ -290,13 +295,22 @@ def link_gsid():
     form = LinkPwForm()
     if form.validate_on_submit():
         gu = models.GSUser.query.filter_by(id=gsid_dec(form.gsid.data)).first()
-        if gu == None:
-            raise ValidationError("Invalid GSID! Please use Game Sync Settings to set up Game Sync.")
-        if gu.uid != None:
-            raise ValidationError("This GSID is already linked to a user!")
         u = models.User(username=form.username.data, password_hash=generate_password_hash(form.password.data))
         gu.user = u
         db.session.add(u)
         db.session.commit()
         return redirect(url_for("main_routes.home"))
     return render_template("link.html.jinja2", title=_("Link GSID"), form=form)
+
+@main_routes.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        u = models.User.query.filter_by(username=form.username.data).first()
+        if u == None:
+            raise ValidationError("Invalid username! Your trainer name is the one you used during account link.")
+        if not check_password_hash(u.password_hash, form.password.data):
+            raise ValidationError("Invalid password!")
+        login_user(u)
+        return redirect(url_for("main_routes.home"))
+    return render_template("login.html.jinja2", title=_("Login"), form=form)
