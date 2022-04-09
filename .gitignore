@@ -24,6 +24,10 @@ static/scss/bootstrap/customvars.scss
 !translations/**/*
 !static/img/*
 translations/**/*.mo
-!dls1/*
+!dls1
+!dls1/README.md
+!dls1/CGEAR
+!dls1/CGEAR/listing.json
+!dls1/CGEAR/C003-2_munna_1_en.bin
 
 dls1_client.py
