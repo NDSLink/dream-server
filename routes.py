@@ -184,7 +184,7 @@ def gw():
             # Byte 0xDA = Download C-Gear skins
             # Byte 0xDB = Download Pokedex skins
             # Note: when 0xD6-0xD8 are set to 0x01, the pokemon will level up?
-            ret = ret + b"\xff\xff\x00\x00\x01\x00"
+            ret = ret + b"\xff\xff\x00\x00\x00\x00"
 
             return ret
         else:
