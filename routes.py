@@ -13,6 +13,8 @@ from flask import (
 )
 
 from wtforms import ValidationError
+from dls1_client import Client
+from base64 import b64encode, b64decode
 
 from pickle import dumps
 from gsid import gsid_dec, gsid_enc
@@ -182,7 +184,7 @@ def gw():
             # Byte 0xDA = Download C-Gear skins
             # Byte 0xDB = Download Pokedex skins
             # Note: when 0xD6-0xD8 are set to 0x01, the pokemon will level up?
-            ret = ret + b"\xff\xff\x00\x00\x00\x00"
+            ret = ret + b"\xff\xff\x00\x01\x00\x00"
 
             return ret
         else:
@@ -278,23 +280,9 @@ def download():
     # basic dls1 for DEBUGGING ONLY
     print(request.form)
     if request.form["action"] == "bGlzdA**":
-        if request.form['attr1'] == "UkVHQ0FSRF9F":
-            # grab regcards
-            return "4011_IC04_Master_en.bin						NAAIZ6Qw8zC-MPwwyjC3MOcwyjDrMAAw8YKeig**					REGCARD_E					4011					352\r\n"
-        #elif request.form["attr1"] == "TVVTSUNBTF9F":
-            #return "M010_munna_1_e_02.bin						8YKeit8w5TD8MLgwqzDrMAAw4DDzMMow					MUSICAL_E					10					352\r\n"
-        elif request.form["attr1"] == "TVVTSUNBTF9F":
-            return "M012_pokesen_1_e_05.bin					MUSICAL_E					12					54430\r\n"
-        elif request.form["attr1"] == "Q0dFQVIyX0U*":
-            print("dl c-gear2")
-            return "4011_IC04_Master_en.bin\t\t\t\t\tCGEAR2_E\t\t\t\t\t4011\t\t\t\t\t352\t\t\t\t\t\r\n"
-        else:
-            return Response("", status=404)
-    elif request.form["action"] == "Y29udGVudHM*":
-        resp = Response("y")
-        #resp.headers["Content-Type"] = "application/x-dsdl"
-        return resp
-    #return "4011_IC04_Master_en.bin	NAAIZ6Qw8zC-MPwwyjC3MOcwyjDrMAAw8YKeig**\tREGCARD_E\t4011\t\t352"
+        return "G0003_shelmet_en.bin\t\tMYSTERY_E\t300000\t\t720\r\n"
+    else:
+        return send_from_directory(".", "C003-2_munna_1_en.bin")
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
     gu = models.GSUser.query.filter_by(id=gsid_dec(gsid)).first()
