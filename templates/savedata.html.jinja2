@@ -17,7 +17,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="nbLoginDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ _('Account') }}</a>
         <ul class="dropdown-menu" aria-labelledby="nbGsDropdown">
             <a class="dropdown-item" href="{{ url_for('main_routes.login') }}">{{ _("Sign In") }}</a>
-            <a class="dropdown-item disabled" href="#">{{ _("Link Save Data") }}</a>
+            <a class="dropdown-item" href="{{ url_for('main_routes.link_gsid') }}">{{ _("Link Save Data") }}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item disabled" href="#">{{ _("Trainer Info") }}</a>
         </ul>
