@@ -1,4 +1,7 @@
 {% extends "base.html.jinja2" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='scss/pgl-profile.css') }}">
+{% endblock %}
 {% block navbar %}
     <li class="nav-item">
         <a class="nav-link" aria-current="page" href="{{ url_for('main_routes.home') }}">{{ _('Home') }}</a>
@@ -39,4 +42,11 @@
     {% else %}
         <p>Legacy Account</p>
     {% endif %}
+        <ul>
+            <li><a href="javascript:;" id="tab-soft" class="tab-link selected">Game Card Info</a></li>
+            <li><a href="javascript:;" id="tab-pdw" class="tab-link">Pokémon Dream World</a></li>
+            <li><a href="javascript:;" id="tab-gbu" class="tab-link">Global Battle Union
+Wi-Fi Competitions</a></li>
+            <li><a href="javascript:;" id="tab-gts" class="tab-link">GTS</a></li>
+        </ul>
 {% endblock %}
