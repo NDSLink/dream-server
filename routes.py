@@ -207,7 +207,7 @@ def gw():
             return f.read()
     elif request.args["p"] == WORLDBATTLE_DOWNLOAD:
         with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
-            return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
+            return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\x01" * 0x80)
     elif request.args["p"] == WORLDBATTLE_UPLOAD:
         return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
     else:
@@ -315,9 +315,9 @@ def sake_storage_server():
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <soap:Body>
-<UpdateRecordsResponse xmlns="http://gamespy.net/sake">
-<UpdateRecordsResult>Success</UpdateRecordsResult>
-</UpdateRecordsResponse>
+<UpdateRecordResponse xmlns="http://gamespy.net/sake">
+<UpdateRecordResult>Success</UpdateRecordResult>
+</UpdateRecordResponse>
 </soap:Body>
 </soap:Envelope>
         '''
