@@ -1,0 +1,230 @@
+
+#dialog-avatar .clearfix {
+    background: url(/web/20130405105030im_/http://en.pokemon-gl.com/profile/assets/images/dialog-avatar-bg.png) top no-repeat;
+  }
+  #dialog-avatar #dialog-avatar-selected {
+    width: 150px;
+    float: left;
+  }
+  #dialog-avatar #dialog-avatar-list {
+    margin-left: 150px;
+    padding: 25px 35px 0px 35px;
+    height: 210px;
+  }
+  #dialog-avatar #dialog-avatar-list ul {
+    overflow: hidden;
+    list-style-type: none;
+  }
+  #dialog-avatar #dialog-avatar-list li {
+    margin-left: 5px;
+    margin-bottom: 5px;
+    width: 28px;
+    height: 28px;
+    padding: 1px;
+    float: left;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  #dialog-avatar #dialog-avatar-list li.selected {
+    border: 1px solid red;
+    padding: 0;
+    cursor: default;
+  }
+  #dialog-avatar #dialog-avatar-list li img {
+    width: 28px;
+    height: 28px;
+  }
+  #dialog-avatar #dialog-avatar-pager {
+    margin-left: 150px;
+    padding-bottom: 20px;
+    text-align: center;
+  }
+  #dialog-avatar #dialog-avatar-pager li {
+    display: inline;
+    color: #999;
+    cursor: pointer;
+    font-size: 22px;
+    margin: 0 3px;
+  }
+  #dialog-avatar #dialog-avatar-pager li.selected {
+    color: #FFF;
+    cursor: default;
+  }
+  #dialog-avatar #dialog-avatar-selected-label {
+    font-size: 11px;
+    width: 100px;
+    height: 20px;
+    margin-top: 15px;
+    margin-left: 17px;
+  }
+  #dialog-avatar #dialog-avatar-selected-image {
+    margin-left: 17px;
+    width: 100px;
+    height: 100px;
+    background-color: #CCC;
+  }
+  #dialog-avatar #dialog-avatar-selected-image img {
+    width: 64px;
+    height: 64px;
+    margin: 18px;
+  }
+  #dialog-avatar #dialog-avatar-selected-name {
+    font-size: 11px;
+    width: 100px;
+    margin-top: 15px;
+    margin-left: 17px;
+    text-align: center;
+  }
+  
+  
+  #dialog-disclosure .for-trial {
+    color: #FF4000;
+    padding: 0 20px;
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+  #dialog-disclosure .disclosure {
+    background: #CCC;
+    margin: 0 20px 20px;
+    overflow: none;
+  }
+  #dialog-disclosure .disclosure-label {
+    padding: 15px;
+    width: 200px;
+    font-size: 11px;
+    float: left;
+    letter-spacing: 3px;
+    line-height: 18px;
+  }
+  #dialog-disclosure-profile .disclosure-label {
+    margin-top: 35px;
+  }
+  #dialog-disclosure-friend .disclosure-label {
+    margin-top: 18px;
+  }
+  #dialog-disclosure .disclosure ul {
+    margin-left: 230px;
+    font-size: 12px;
+    list-style-type: none;
+  }
+  #dialog-disclosure .disclosure li {
+    height: 27px;
+    padding-top: 12px;
+    color: #FFF;
+    background: #666 url(/web/20130405105030im_/http://en.pokemon-gl.com/profile/assets/images/dialog-disclosure-arrow.png) -10px -10px no-repeat;
+    text-align: center;
+    margin-bottom: 1px;
+    cursor: pointer;
+    line-height: 1.2;
+  }
+  #dialog-disclosure .disclosure li.selected {
+    color: #000;
+    background-position: 16px 15px;
+    background-color: transparent;
+    cursor: default;
+  }
+  #dialog-disclosure .disclosure li.disabled {
+    color: #999;
+    cursor: default;
+  }
+  .language-ja #dialog-disclosure #dialog-disclosure-friend.disclosure li+li {
+    height: 34px;
+    padding-top: 5px;
+  }
+  .language-ja #dialog-disclosure #dialog-disclosure-friend.disclosure li+li+li {
+    height: 27px;
+    padding-top: 12px;
+  }
+  #dialog-disclosure .dialog-help img,
+  #dialog-gsidc .dialog-help img {
+    vertical-align: top;
+  }
+  
+  #dialog-gsidc .register {
+    margin: 0 20px;
+    font-size: 12px;
+    background: #CCC;
+    padding: 10px;
+  }
+  #dialog-gsidc .register label {
+    display: inline-block;
+    width: 190px;
+  }
+  #dialog-gsidc .register input {
+    font-size: 24px;
+    border-style: none;
+    width: 220px;
+    padding: 4px 10px;
+  }
+  #dialog-gsidc .about-gsidc {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 12px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    line-height: 150%;
+  }
+  #dialog-gsidc .register .logo {
+    width: 150px;
+    height: 75px;
+    margin: 0 auto 10px;
+  }
+  
+  #dialog-rom .dialog-rom-item {
+    position: relative;
+    height: 90px;
+    margin: 0 20px;
+    background: #D9D9D9;
+  }
+  #dialog-rom .odd {
+    background: #EDEDED;
+  }
+  #dialog-rom .dialog-rom-item.registered {
+    cursor: pointer;
+  }
+  #dialog-rom .dialog-rom-item input {
+    position: absolute;
+    left: 10px;
+    top: 38px;
+  }
+  #dialog-rom .dialog-rom-item .package img {
+    position: absolute;
+    left: 33px;
+    top: 5px;
+    width: 88px;
+    height: 80px;
+    -ms-interpolation-mode: bicubic;
+  }
+  #dialog-rom .dialog-rom-item .logo img {
+    position: absolute;
+    left: 141px;
+    top: 15px;
+    width: 122px;
+    height: 61px;
+    -ms-interpolation-mode: bicubic;
+  }
+  #dialog-rom .dialog-gsidc-item-state {
+    position: absolute;
+    left: 275px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    font-size: 12px;
+    padding-top: 5px;
+    padding-left: 10px;
+    border-left: 1px dotted #FFF;
+    line-height: 100%;
+  }
+  #dialog-rom .dialog-gsidc-item-state .value {
+    display: block;
+  }
+  #dialog-rom .dialog-gsidc-item-state p+p {
+    margin-top: 10px;
+  }
+  .language-fr #dialog-rom .dialog-gsidc-item-time .label {
+    letter-spacing: -1px;
+  }
+  
+  #dialog-gsidc-input {
+    ime-mode: inactive;
+  }

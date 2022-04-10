@@ -1,0 +1,1733 @@
+
+@import "dialog.css";
+
+#container, #header {
+  width: 990px;
+}
+#header #logo {
+  width: 167px;
+  padding-right: 12px;
+}
+
+.logged-in-black #container {
+  border-left: 13px solid #646464;
+}
+.logged-in-white #container {
+  border-left: 13px solid #b4b4b4;
+}
+.logged-in-black2 #container {
+  border-left: 13px solid #0fe6ff;
+}
+.logged-in-white2 #container {
+  border-left: 13px solid #ff8a00;
+}
+.trial #container {
+  border-left: 13px solid #bebe6e;
+}
+
+#header {
+  background-position: -13px 0;
+}
+
+
+
+/* ---------------------------------------------------- */
+#profile {
+  /*width: 1200px;*/
+  font-size: 14px;
+}
+
+#profile h3 {
+  height: 40px;
+  font-size: 22px;
+  padding-left: 10px;
+}
+#profile h4 {
+  height: 32px;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+#profile #side {
+  float: left;
+  width: 205px;
+  margin: 8px 0 30px 30px;
+}
+
+#profile #side h4 {
+  font-weight: normal;
+  font-size: 11px;
+  height: 20px;
+  padding-left: 14px;
+  padding-top: 9px;
+  color: #000;
+  background-color: #dcdcbe;
+}
+.logged-in-black #profile #side h4 {
+  color: #fff;
+  background-color: #000;
+}
+.logged-in-white #profile #side h4 {
+  background-color: #dcdcdc;
+}
+.logged-in-black2 #profile #side h4 {
+  color: #fff;
+  background-color: #006ed2;
+}
+.logged-in-white2 #profile #side h4 {
+  color: #fff;
+  background-color: #d7000f;
+}
+
+#profile #side #login-user {
+  position: relative;
+  background: #000 url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/login-user-bg.png);
+  color: #fff;
+  width: 205px;
+  height: 280px;
+}
+.logged-in-black #profile #side #login-user {
+  background-color: #373737;
+}
+
+#profile #side #login-user #avatar-change-button {
+  position: absolute;
+  left: 58px;
+  top: 119px;
+  display: block;
+  width: 90px;
+  height: 20px;
+  text-indent: -9000px;
+  cursor: pointer;
+}
+
+#profile #side #login-user #avatar-change-button:hover {
+  background-position: left bottom;
+}
+
+#profile #side #login-user #avatar {
+  position: absolute;
+  left: 55px;
+  top: 20px;
+  width: 64px;
+  height: 64px;
+  padding: 15px;
+  text-align: center;
+}
+
+#profile #side #login-user dl {
+  position: absolute;
+  left: 24px;
+  top: 161px;
+  width: 160px;
+  margin: 0;
+  padding: 0;
+  line-height: 15px;
+}
+
+#profile #side #login-user dt {
+  font-size: 11px;
+}
+
+#profile #side #login-user dd {
+  margin: 0;
+  margin-top: 7px;
+  margin-bottom: 15px;
+  color: #1A324C;
+  text-align: center;
+}
+
+
+#profile #side .change-buttons {
+  background-color: #fff;
+  padding: 10px 0;
+}
+
+#profile #side .side-button {
+  display: block;
+  cursor: pointer;
+  width: 181px;
+  height: 30px;
+  margin: 3px auto;
+  text-indent: -9000px;
+}
+
+#profile #side .side-button:hover {
+  background-position: left bottom;
+}
+#profile #side .about-updating-profile {
+  font-size: 12px;
+  line-height: 150%;
+  
+  margin-top: 20px;
+  padding: 8px 10px;
+  border: 1px solid #FFF;
+  width: 183px;
+  color: #FFF;
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/about-updating-profile-bg.png);
+}
+#profile #side .about-updating-profile img {
+  vertical-align: middle;
+}
+
+
+#profile #tabs {
+  float: left;
+  width: 695px;
+  background-color: white;
+  position: relative;
+  margin: 8px 0 30px 20px;
+}
+
+#sub-menu {
+  width: 696px;
+  height: 90px;
+}
+
+#sub-menu li {
+  float: left;
+  list-style: none;
+
+}
+
+#sub-menu li a {
+  display: block;
+  text-indent: -9000px;
+  height: 85px;
+  width: 174px;
+  background-color: #78786e;
+  background-repeat: no-repeat;
+  outline: none;
+}
+#sub-menu li a:active {
+  outline: none;
+}
+
+.logged-in-black #sub-menu li a {
+  background-color: #b4b4aa;
+}
+
+#sub-menu li a#tab-soft {
+  width: 173px;
+  background-position: 0 0;
+}
+#sub-menu li a#tab-soft:hover {
+  background-position: 0 -85px;
+}
+#sub-menu li a#tab-soft.selected {
+  background-position: 0 -170px;
+}
+
+#sub-menu li a#tab-pdw {
+  background-position: -173px 0;
+}
+#sub-menu li a#tab-pdw:hover {
+  background-position: -173px -85px;
+}
+#sub-menu li a#tab-pdw.selected {
+  background-position: -173px -170px;
+}
+
+#sub-menu li a#tab-gbu {
+  background-position: -347px 0;
+}
+#sub-menu li a#tab-gbu:hover {
+  background-position: -347px -85px;
+}
+#sub-menu li a#tab-gbu.selected {
+  background-position: -347px -170px;
+}
+
+#sub-menu li a#tab-gts {
+  background-position: -521px 0;
+}
+#sub-menu li a#tab-gts:hover {
+  background-position: -521px -85px;
+}
+#sub-menu li a#tab-gts.selected {
+  background-position: -521px -170px;
+}
+
+#profile .tab {
+  padding-top: 10px;
+}
+
+#profile .pgl-description {
+  font-size: 12px;
+  padding: 20px;
+}
+#profile .pgl-description dt {
+  color: #F00;
+  margin-bottom: 2px;
+}
+#profile .pgl-description dd {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+#profile .pgl-info {
+  font-size: 12px;
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+}
+
+#soft-info {
+  position: relative;
+  width: 673px;
+  height: 138px;
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/game-bg.png);
+  margin: 0 auto 40px;
+}
+
+#soft-package {
+  float: left;
+  width: 126px;
+  height: 114px;
+  padding-left: 16px;
+  padding-right: 15px;
+  padding-top: 14px;
+}
+
+#soft-package img {
+  width: 126px;
+  height: 114px;
+}
+
+#soft-info p {
+  padding-bottom: 10px;
+  font-size: 12px;
+}
+
+#soft-romname {
+  position: absolute;
+  left: 160px;
+  top: 11px;
+  width: 200px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: italic;
+}
+#soft-synctime {
+  position: absolute;
+  right: 10px;
+  top: 11px;
+  width: 300px;
+  font-size: 13px;
+  text-align: right;
+}
+#soft-synctime .label,
+#soft-synctime .value {
+  white-space: nowrap;
+}
+
+
+#soft-gsidc, #soft-trainername, #soft-playtime {
+  font-size: 14px;
+  position: absolute;
+  left: 166px;
+}
+#soft-desc .label {
+  font-size: 11px;
+}
+#soft-gsidc .value, #soft-trainername .value, #soft-playtime .value {
+  position: absolute;
+  right: 0;
+}
+#soft-gsidc .value, #soft-trainername .value, #soft-playtime .value, #soft-badges .value {
+  color: #FFC600;
+}
+#soft-gsidc {
+  top: 42px;
+  width: 490px;
+}
+#soft-trainername {
+  top: 74px;
+  width: 174px;
+}
+.language-it #soft-trainername .label {
+  position: absolute;
+  left: 0;
+  width: 70px;
+  top: -4px;
+}
+#soft-playtime {
+  top: 105px;
+  width: 174px;
+}
+#soft-badges .label {
+  display: block;
+  width: 67px;
+}
+
+
+h4.medals {
+  margin-top: 40px;
+}
+
+#medals-container {
+  height: 210px;
+}
+
+#recommended-medal {
+  width: 181px;
+  height: 210px;
+  background: #d9d9d9 url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/border-bg.png) repeat-y right 0;
+  float: left;
+}
+
+#recommended-medal-image {
+  margin: 12px auto 5px;
+  width: 141px;
+  height: 124px;
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/recommended-medal.png) no-repeat 0 0;
+}
+#recommended-medal-image img {
+  margin-top: 13px;
+  margin-left: 21px;
+}
+#recommended-medal-name {
+  text-align: center;
+}
+
+#recommended-medal p {
+  background: #4c4c4c url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/border-bg.png) repeat-y right 0;
+  color: #ffffff;
+  text-align: center;
+  padding-top: 10px;
+  height: 28px;
+}
+
+.medals-pager {
+  width: 27px;
+  height: 210px;
+  float: left;
+  background: #787878;
+  cursor: default;
+}
+
+#medals-pager-l.enabled {
+  cursor: pointer;
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/medals-pager-l.png) no-repeat 0 0;
+}
+#medals-pager-r.enabled {
+  cursor: pointer;
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/medals-pager-r.png) no-repeat 0 0;
+}
+
+#medals {
+  background-color: #d6d6d6;
+  float: left;
+  width: 460px;
+  height: 210px;
+  overflow: hidden;
+  position: relative;
+}
+#medals-pages {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.medals-page {
+  position: absolute;
+  width: 460px;
+  height: 188px;
+  padding-top: 22px;
+  top: 0;
+}
+
+#medals-page1 {
+  left: 0;
+}
+#medals-page2 {
+  left: 460px;
+}
+#medals-page3 {
+  left: 920px;
+}
+#medals-page4 {
+  left: 1380px;
+}
+#medals-page5 {
+  left: 1840px;
+}
+#medals-page6 {
+  left: 2300px;
+}
+#medals-page7 {
+  left: 2760px;
+}
+#medals-page8 {
+  left: 3220px;
+}
+#medals-page9 {
+  left: 3680px;
+}
+#medals-page10 {
+  left: 4140px;
+}
+#medals-page11 {
+  left: 4600px;
+}
+#medals-page12 {
+  left: 5060px;
+}
+#medals-page13 {
+  left: 5520px;
+}
+
+
+.medals-page ul {
+  height: 68px;
+  width: 390px;
+  margin: 10px 0 0 35px;
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/medals-bg.png) no-repeat 0 0;
+  position: relative;
+}
+.medals-page ul#medals-column26 {
+  background-position: 0 bottom;
+}
+
+.medals-column li {
+  list-style: none;
+  float: left;
+  width: 38px;
+  height: 20px;
+  color: #fff;
+  font-size: 10px;
+  font-family: Arial, sans-serif;
+  line-height: 1;
+}
+
+.medals-column li .medal-no, .medals-column li .medal-image {
+  position: absolute;
+}
+
+.medals-column li .medal-no {
+  width: 30px;
+  text-align: center;
+}
+
+.medals-column li.odd .medal-no {
+  top: 49px;
+}
+.medals-column li.even .medal-no {
+  top: 71px;
+}
+
+.medals-column li.odd .medal-image {
+  top: 7px;
+}
+.medals-column li.even .medal-image {
+  top: 29px;
+}
+
+.medal1 .medal-no {
+  left: 12px;
+}
+.medal2 .medal-no {
+  left: 49px;
+}
+.medal3 .medal-no {
+  left: 86px;
+}
+.medal4 .medal-no {
+  left: 124px;
+}
+.medal5 .medal-no {
+  left: 161px;
+}
+.medal6 .medal-no {
+  left: 199px;
+}
+.medal7 .medal-no {
+  left: 236px;
+}
+.medal8 .medal-no {
+  left: 274px;
+}
+.medal9 .medal-no {
+  left: 312px;
+}
+.medal10 .medal-no {
+  left: 349px;
+}
+
+.medal1 .medal-image {
+  left: 10px;
+}
+.medal2 .medal-image {
+  left: 47px;
+}
+.medal3 .medal-image {
+  left: 85px;
+}
+.medal4 .medal-image {
+  left: 122px;
+}
+.medal5 .medal-image {
+  left: 160px;
+}
+.medal6 .medal-image {
+  left: 198px;
+}
+.medal7 .medal-image {
+  left: 235px;
+}
+.medal8 .medal-image {
+  left: 273px;
+}
+.medal9 .medal-image {
+  left: 310px;
+}
+.medal10 .medal-image {
+  left: 348px;
+}
+
+
+
+table.pgl-data {
+  border-collapse: collapse;
+  width: 100%;
+}
+table.pgl-data th, table.pgl-data td {
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/border-bg.png) repeat-y 0 0;
+  font-size: 12px;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: normal;
+}
+table.pgl-data tr.even {
+  background-color: #ededed;
+}
+table.pgl-data tr.odd {
+  background-color: #d9d9d9;
+}
+table.pgl-data .no-border {
+  background-image: none;
+}
+table.pgl-data .win,
+table.pgl-data .lose {
+  display: block;
+}
+
+
+
+.friendlist-update-notes {
+  font-size: 11px;
+  text-align: right;
+  margin-top: -23px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+}
+
+table.friendlist {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table.friendlist th {
+  background: #ededed url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/border-bg.png) repeat-y 0 0;
+  font-weight: normal;
+  height: 65px;
+  padding-bottom: 10px;
+  font-size: 10px;
+  vertical-align: bottom;
+}
+table.friendlist td {
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/border-bg.png) repeat-y 0 0;
+  height: 60px;
+  text-align: center;
+}
+table.friendlist tr.even {
+  background-color: #d9d9d9;
+}
+table.friendlist tr.odd {
+  background-color: #ededed;
+}
+table.friendlist .no-border {
+  background-image: none;
+}
+table.friendlist td.avatar {
+  padding: 0 10px;
+  width: 32px;
+}
+table.friendlist td.pglname {
+  text-align: left;
+  padding: 0 10px;
+}
+table.friendlist td.area {
+  padding: 0 10px;
+  width: 50px;
+}
+table.friendlist td.relation {
+  width: 120px;
+  padding: 0 10px;
+}
+table.friendlist td.action {
+  width: 190px;
+  padding: 0 10px;
+}
+table.friendlist td.action .mailer-link,
+table.friendlist td.action .block-icon {
+  display: block;
+  width: 190px;
+  height: 25px;
+  margin: 2px auto;
+  text-indent: -9000px;
+}
+
+table.friendlist td.action .mailer-link:hover {
+  background-position: 0 -25px;
+}
+table.friendlist td.action .mailer-link.disabled {
+  background-position: 0 -50px;
+}
+
+table.friendlist td.action .block-icon {
+  background-position: 0 bottom;
+}
+
+table.friendlist td .friend-block {
+  display: block;
+  font-size: 9px;
+  width: 100px;
+  margin: 0 0 0 auto;
+  text-decoration: none;
+}
+.friendlist-pager {
+  text-align: center;
+  padding: 8px;
+}
+.friendlist-pager a {
+  cursor: pointer;
+  margin-left: 3px;
+}
+.friendlist-pager a.selected {
+  cursor: default;
+  text-decoration: underline;
+}
+
+.friendlist-description {
+  padding: 20px 20px 10px;
+  background-color: #ededed;
+}
+.friendlist-description dl {
+  margin: 0;
+}
+.friendlist-description dt {
+  float: left;
+}
+.friendlist-description dd {
+  margin-left: 135px;
+  margin-bottom: 18px;
+  font-size: 12px;
+}
+
+.friend-icon {
+  float: left;
+  border-radius: 6px;
+  color: white;
+  font-size: 11px;
+  font-weight: normal;
+  padding: 5px 0;
+  width: 120px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+.friend-icon-friend {
+  background: #F83079;
+}
+.friend-icon-tradepal {
+  background: #009043;
+}
+.friend-icon-dreampal {
+  background: #5757B6;
+}
+.friend-disabled-2 .friend-icon-friend {
+  background: #DA99B1;
+}
+.friend-disabled-2 .friend-icon-tradepal {
+  background: #89B89F;
+}
+.friend-disabled-2 .friend-icon-dreampal {
+  background: #A5A5C5;
+}
+
+
+
+#soft-friendlist-select {
+  height: 50px;
+}
+
+.soft-friendlist-select {
+  display: block;
+  float: left;
+  width: 232px;
+  height: 80px;
+  cursor: pointer;
+  text-indent: -9000px;
+  margin-bottom: -50px;
+}
+
+#soft-friendlist-select- {
+  width: 231px;
+  background-position: 0 0;
+}
+#soft-friendlist-select-:hover {
+  background-position: 0 -80px;
+}
+#soft-friendlist-select-.selected {
+  background-position: 0 -160px;
+}
+#soft-friendlist-select-3 {
+  background-position: -231px 0;
+}
+#soft-friendlist-select-3:hover {
+  background-position: -231px -80px;
+}
+#soft-friendlist-select-3.selected {
+  background-position: -231px -160px;
+}
+#soft-friendlist-select-2 {
+  background-position: -463px 0;
+}
+#soft-friendlist-select-2:hover {
+  background-position: -463px -80px;
+}
+#soft-friendlist-select-2.selected {
+  background-position: -463px -160px;
+}
+
+#pdw-info {
+  width: 642px;
+  height: 295px;
+  margin: 0 auto 40px;
+  position: relative;
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/pdw-bg.png);
+}
+#pdw-info-general {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 225px;
+  height: 100%;
+}
+#pdw-info-pokemon {
+  position: absolute;
+  left: 231px;
+  top: 0;
+  width: 225px;
+  height: 100%;
+}
+#pdw-info-befriend {
+  position: absolute;
+  left: 462px;
+  top: 0;
+  width: 180px;
+  height: 100%;
+}
+#pdw-info h5 {
+  color: #FFF;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  right: 10px;
+}
+.language-it #pdw-info-befriend h5,
+.language-es #pdw-info-befriend h5 {
+  top: 8px;
+  font-size: 11px;
+  line-height: 100%;
+}
+#pdw-game-status,
+#pdw-pokemon-status {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 35px;
+  font-size: 14px;
+  color: #FE8300;
+}
+#pdw-game-status {
+  top: 34px;
+  height: 29px;
+  font-size: 12px;
+  text-align: center;
+  padding: 0 2px;
+  line-height: 110%;
+}
+#pdw-game-status .vertical-middle-body {
+  width: 202px;
+}
+#pdw-game-status .vertical-middle-hint {
+  height: 29px;
+}
+#pdw-home-thumbnail {
+  position: absolute;
+  left: 10px;
+  top: 65px;
+}
+#pdw-point {
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  top: 264px;
+}
+#pdw-point .label,
+#pdw-slept-parent .label,
+#pdw-slept-types .label,
+#pdw-slept-nature .label {
+  color: #CCC;
+  font-size: 11px;
+}
+#pdw-point .label {
+  width: 130px;
+  height: 19px;
+  line-height: 90%;
+}
+#pdw-point .vertical-middle-hint {
+  height: 19px;
+}
+#pdw-point .value {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60px;
+  text-align: right;
+  font-size: 14px;
+}
+#pdw-slept-parent .value,
+#pdw-slept-types .value,
+#pdw-slept-nature .value {
+  position: absolute;
+  right: 0;
+  top: 2px;
+  font-size: 12px;
+}
+
+#pdw-pokemon-status .level .label {
+  font-size: 10px;
+}
+
+#pdw-pokemon-status .nickname {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 125px;
+}
+#pdw-pokemon-status .level {
+  position: absolute;
+  right: 34px;
+  top: 0;
+}
+
+#pdw-slept-parent {
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  top: 224px;
+}
+#pdw-slept-types {
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  top: 245px;
+}
+
+#pdw-slept-nature {
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  top: 267px;
+}
+
+.pdw-column .pdw-status p {
+  float: left;
+  text-align: right;
+  width: 90px;
+}
+.pdw-column .pdw-status p#pdw-slept-nickname {
+  width: 110px !important;
+  text-align: left;
+}
+
+.pdw-column.no-border {
+  background-image: none;
+  width: 203px;
+}
+
+
+
+#pdw-recent-mate {
+  position: absolute;
+  left: 9px;
+  top: 46px;
+}
+
+#pdw-recent-mate li {
+  float: left;
+  height: 78px;
+  width: 78px;
+  list-style: none;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+#pdw-recent-mate li img {
+  margin: 9px;
+  height: 60px;
+  width: 60px;
+}
+
+
+#pdw-slept-name {
+  position: absolute;
+  left: 11px;
+  right: 118px;
+  top: 197px;
+  text-align: center;
+  font-size: 13px;
+}
+#pdw-wakeup {
+  position: absolute;
+  left: 110px;
+  top: 196px;
+}
+#pdw-wakeup a {
+  display: block;
+  width: 106px;
+  height: 20px;
+  text-indent: -9000px;
+  cursor: pointer;
+}
+#pdw-wakeup a:hover {
+  background-position: 0 -20px;
+}
+#pdw-wakeup a.show-wakeup-disabled {
+  background-position: 0 -40px;
+  cursor: default;
+}
+
+.pdw-status2 {
+  height: 35px;
+}
+
+#pdw-slept-image {
+  position: absolute;
+  left: 55px;
+  top: 70px;
+}
+#pdw-slept-image img {
+  width: 120px;
+  height: 120px;
+}
+#pdw-recent-mate-empty {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 46px;
+  bottom: 7px;
+  background: #ADA9A9;
+  padding-top: 80px;
+  text-align: center;
+}
+
+
+
+#pdw-friendlist-select {
+  height: 50px;
+}
+
+.pdw-friendlist-select {
+  display: block;
+  float: left;
+  width: 232px;
+  height: 80px;
+  cursor: pointer;
+  text-indent: -9000px;
+  margin-bottom: -50px;
+}
+
+#pdw-friendlist-select-friends {
+  width: 231px;
+  background-position: 0 0;
+}
+#pdw-friendlist-select-friends:hover {
+  background-position: 0 -80px;
+}
+#pdw-friendlist-select-friends.selected {
+  background-position: 0 -160px;
+}
+#pdw-friendlist-select-friends.disabled, #pdw-friendlist-select-friends.disabled:hover {
+  background-position: 0 bottom;
+  cursor: default;
+}
+#pdw-friendlist-select-requesting {
+  background-position: -231px 0;
+}
+#pdw-friendlist-select-requesting:hover {
+  background-position: -231px -80px;
+}
+#pdw-friendlist-select-requesting.selected {
+  background-position: -231px -160px;
+}
+#pdw-friendlist-select-requesting.disabled, #pdw-friendlist-select-requesting.disabled:hover {
+  background-position: -231px bottom;
+  cursor: default;
+}
+#pdw-friendlist-select-requested {
+  background-position: -463px 0;
+}
+#pdw-friendlist-select-requested:hover {
+  background-position: -463px -80px;
+}
+#pdw-friendlist-select-requested.selected {
+  background-position: -463px -160px;
+}
+#pdw-friendlist-select-requested.disabled, #pdw-friendlist-select-requested.disabled:hover {
+  background-position: -463px bottom;
+  cursor: default;
+}
+
+.gbu-record-column {
+  width: 100px;
+}
+
+#gbu-record-rating th, #gbu-record-ranking th, #gbu-record-battles th {
+  text-align: left;
+  padding-left: 10px;
+}
+
+#gbu .updated-at,
+#gts .updated-at {
+  text-align: right;
+}
+#gbu .updated-at {
+  display: none;
+  background: #EDEDED;
+  padding: 3px 10px;
+  font-size: 12px;
+}
+#gts .updated-at {
+  margin-top: -26px;
+  margin-right: 10px;
+}
+
+#gbu h4.gbu-history {
+  margin-top: 40px;
+}
+
+#gbu-season-select-box {
+  text-align: right;
+  padding: 15px 10px;
+}
+
+#tournament-history {
+  margin-bottom: 40px;
+}
+.tournament-history-template {
+  display: none;
+}
+#tournament-history-table td.name {
+  width: 306px;
+}
+
+#gbu-status {
+  min-height: 18px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #000;
+  margin-bottom: 40px;
+}
+#gbu-status a {
+  color: #FFF;
+  text-decoration: none;
+}
+
+#gbu-favorite-video {
+  background-color: #ededed;
+}
+
+#gbu-favorite-video-code {
+  ime-mode: inactive;
+  line-height: 1;
+  font-size: 18px;
+  border: 1px solid #000;
+  height: 30px;
+  height: 23px\9;
+  padding: 7px 0 0 3px\9;
+}
+#gbu-favorite-video-code:not(:target) {
+  font-size: 25px\9;
+}
+
+#gbu-favorite-video .form  {
+  height: 30px;
+  padding: 20px;
+}
+
+#gbu-favorite-video-submit {
+  display: block;
+  float: left;
+  width: 90px;
+  height: 31px;
+  text-indent: -9000px;
+  cursor: pointer;
+}
+
+#gbu-favorite-video-submit:hover {
+  background-position: 0 -31px;
+}
+
+
+#gbu-favorite-video .form div {
+  float: left;
+  margin-right: 10px;
+}
+
+#gbu-favorite-video li {
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/border-bg.png) repeat-y 0 0;
+  border-collapse: collapse;
+  float: left;
+  width: 211px;
+  height: 18px;
+  padding: 10px;
+  list-style: none;
+}
+
+#gbu-favorite-video li.none {
+  background: none;
+  background-color: #646464;
+  width: 675px;
+  border: 10px solid #cccccc;
+  text-align: center;
+  color: #fff;
+  padding: 20px 0;
+}
+
+#gbu-favorite-video li.odd {
+  background-color: #cccccc;
+}
+
+#gbu-favorite-video li.no-border {
+  background-image: none;
+  width: 212px;
+}
+
+
+#gbu-favorite-video li span {
+  display: block;
+  float:left;
+  width: 130px;
+}
+
+#gbu-favorite-video li a.delete {
+  display: block;
+  float:left;
+  width: 70px;
+  height: 21px;
+  text-indent: -9000px;
+  outline: none;
+}
+#gbu-favorite-video li a.delete:hover {
+  background-position: 0 -21px;
+  outline: none;
+}
+
+#battle-history {
+  margin-bottom: 40px;
+}
+#battle-history-table .empty {
+  height: 47px;
+}
+
+#gts-trade-history-table {
+  margin-bottom: 40px;
+}
+
+#gts-trade-history-header {
+  background-color: #ededed;
+}
+
+#gts-trade-history-table td {
+  padding: 0 0 0 1px !important;
+}
+
+#gts-trade-history-table td.date {
+  width: 89px;
+}
+
+.gts-pokemon-column1, .gts-pokemon-column2,
+.trade-pokemon-column1, .trade-pokemon-column2,
+.want-pokemon-column1, .want-pokemon-column2,
+.trade-avatar, .trade-info {
+  float: left;
+  height: 145px;
+  margin: 0;
+}
+
+.gts-pokemon-column2,
+.trade-pokemon-column2,
+.want-pokemon-column2 {
+  width: 100px;
+}
+.gts-pokemon-waza1, .trade-pokemon-waza1,
+.gts-pokemon-waza3, .trade-pokemon-waza3,
+.gts-pokemon-pokeitem, .trade-pokemon-pokeitem {
+  height: 20px;
+  padding-top: 4px;
+  background-color: #e8e8e8;
+}
+.gts-pokemon-pokeitem, .trade-pokemon-pokeitem {
+  height: 19px;
+  background-color: #CCC;
+  border-top: dotted 1px #999;
+}
+.gts-pokemon-waza2, .trade-pokemon-waza2,
+.gts-pokemon-waza4, .trade-pokemon-waza4 {
+  height: 20px;
+  padding-top: 4px;
+  background-color: #ffffff;
+}
+
+.gts-pokemon-name, .want-pokemon-name, .trade-pokemon-name {
+  height: 22px;
+  font-size: 14px;
+  padding-top: 3px;
+  background-color: #e8e8e8;
+}
+
+.gts-pokemon-image, .want-pokemon-image, .trade-pokemon-image {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  background-color: #999999;
+}
+.gts-pokemon-image img, .want-pokemon-image img, .trade-pokemon-image img {
+  width: 100px;
+  height: 100px;
+}
+
+.gts-pokemon-lvg, .trade-pokemon-lvg {
+  height: 25px;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.gts-pokemon-lv, .trade-pokemon-lv {
+  display: block;
+  float: left;
+  font-size: 10px;
+  width: 75px;
+  padding-top: 3px;
+}
+
+.gts-pokemon-level, .trade-pokemon-level {
+  font-size: 14px;
+}
+
+.gts-pokemon-gender, .trade-pokemon-gender {
+  display: none;
+  float: left;
+  margin-left: 3px;
+  margin-top: 3px;
+}
+.gts-pokemon-gender.gender0, .trade-pokemon-gender.gender0 {
+  display: block;
+  width: 18px;
+  height: 18px;
+  background-image: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/sex-icon.png);
+  text-indent: -9000px;
+  background-position: left top;
+}
+.gts-pokemon-gender.gender1, .trade-pokemon-gender.gender1 {
+  display: block;
+  width: 18px;
+  height: 18px;
+  background-image: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/sex-icon.png);
+  text-indent: -9000px;
+  background-position: right top;
+}
+
+.want-pokemon-column2 {
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/want-pokemon-none2.png) no-repeat 0 0;
+  text-align: left;
+  font-size: 10px;
+}
+.want-pokemon-g {
+  margin-top: 64px;
+  padding: 3px 0 0 5px;
+  height: 37px;
+  background-color: #e8e8e8;
+}
+.want-pokemon-gender {
+  font-size: 14px;
+}
+.want-pokemon-gender.gender1 {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  background-image: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/sex-icon.png);
+  text-indent: -9000px;
+  background-position: left top;
+}
+.want-pokemon-gender.gender2 {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  background-image: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/sex-icon.png);
+  text-indent: -9000px;
+  background-position: right top;
+}
+
+.want-pokemon-lv {
+  padding: 3px 0 0 5px;
+  height: 37px;
+  background-color: #000000;
+  color: #ffffff;
+}
+.want-pokemon-level {
+  font-size: 14px;
+}
+
+.trade {
+  width: 162px;
+}
+.trade.untrade {
+  color: #808080;
+}
+
+.trade-avatar {
+  height: 50px;
+  width: 50px;
+  margin: 10px;
+  background-color: #cccccc;
+  border: 1px solid #808080;
+}
+
+.untrade .trade-avatar {
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/want-pokemon-none.png) no-repeat 0 0;
+  border: none;
+}
+
+.trade-info {
+  position: relative;
+}
+.trade-info dl {
+  width: 90px;
+  margin: 5px 0;
+  text-align: left;
+}
+
+.trade-info dt, .trade-info dd {
+  padding: 0;
+  margin: 0;
+}
+
+.trade-info dt {
+  font-size: 10px;
+  padding-top: 3px;
+}
+
+.trade-info dd {
+  font-size: 14px;
+  min-height: 16px;
+}
+.trade-info dt.trade-country {
+  position: absolute;
+  left: -63px;
+  top: 64px;
+  width: 153px;
+}
+.trade-info dd.trade-country {
+  position: absolute;
+  left: -63px;
+  top: 80px;
+  width: 153px;
+}
+.trade-info dt.trade-pgl-name {
+  position: absolute;
+  left: -63px;
+  top: 100px;
+  width: 153px;
+}
+.trade-info dd.trade-pgl-name {
+  position: absolute;
+  left: -63px;
+  top: 116px;
+  width: 153px;
+}
+
+#gts-bookmark {
+  background-color: #d9d9d9;
+  height: 140px;
+}
+
+.gts-bookmark-pager {
+  width: 27px;
+  height: 140px;
+  background: #787878;
+  float: left;
+}
+#gts-bookmark-pager-l.enabled {
+  cursor: pointer;
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/gts-bookmark-pager-l.png) no-repeat 0 0;
+}
+#gts-bookmark-pager-r.enabled {
+  cursor: pointer;
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/gts-bookmark-pager-r.png) no-repeat 0 0;
+}
+
+#gts-bookmark-list {
+  height: 140px;
+  width: 641px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+}
+
+#gts-bookmark-list ul {
+  position: absolute;
+  left: 14px;
+  top: 25px;
+}
+#gts-bookmark-list li {
+  position: relative;
+  list-style: none;
+  float: left;
+  background-color: #4D4D4D;
+  width: 90px;
+  height: 90px;
+  margin-right: 15px;
+}
+#gts-bookmark-list li .link {
+  display: block;
+  width: 70px;
+  height: 70px;
+  padding: 10px;
+  cursor: pointer;
+}
+#gts-bookmark-list li .link img {
+  width: 70px;
+  height: 70px;
+}
+#gts-bookmark-list li .remove {
+  display: none;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  width: 13px;
+  height: 13px;
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/assets/global/images/dialog-close.png) -2px -2px no-repeat;
+  border: 2px solid #4D4D4D;
+  cursor: pointer;
+  opacity: 0.3;
+}
+#gts-bookmark-list li:hover .remove {
+  display: block;
+}
+#gts-bookmark-list li:hover .remove:hover {
+  opacity: 1;
+}
+
+#gts-bookmark-list li.none {
+  width: 611px;
+  height: 60px;
+  padding: 0;
+  margin-top: -10px;
+  background-color: #646464;
+  text-align: center;
+  color: #fff;
+  padding-top: 50px;
+}
+
+.accent-color-positive {
+  color: #EEE;
+}
+.logged-in-black2 #profile .accent-color-positive {
+  color: #0082D8;
+}
+
+.logged-in-white2 #profile .accent-color-positive {
+  color: #E52414;
+}
+
+.logged-in-black2 #profile .accent-color-negative {
+  color: #FFF;
+  background-color: #0082D8;
+}
+
+.logged-in-white2 #profile .accent-color-negative {
+  color: #FFF;
+  background-color: #E52414;
+}
+
+#soft-badges {
+  position: absolute;
+  left: 358px;
+  top: 72px;
+}
+
+
+#soft-badges.badge-count-num {
+  font-size: 20px;
+}
+#soft-badges.badge-rom-20 .value,
+#soft-badges.badge-rom-21 .value,
+#soft-badges.badge-rom-22 .value,
+#soft-badges.badge-rom-23 .value {
+  position: absolute;
+  left: 68px;
+  top: 0px;
+  text-indent: -9000px;
+  display: inline-block;
+  width: 233px;
+  height: 53px;
+}
+#soft-badges.badge-rom-20 .value,
+#soft-badges.badge-rom-21 .value {
+  background-image: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/badges.png);
+}
+#soft-badges.badge-rom-22 .value,
+#soft-badges.badge-rom-23 .value {
+  background-image: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/images/badges2.png);
+}
+#soft-badges.badge-count-0 .value {
+  background-position: 0 -0px;
+}
+#soft-badges.badge-count-1 .value {
+  background-position: 0 -53px;
+}
+#soft-badges.badge-count-2 .value {
+  background-position: 0 -106px;
+}
+#soft-badges.badge-count-3 .value {
+  background-position: 0 -159px;
+}
+#soft-badges.badge-count-4 .value {
+  background-position: 0 -212px;
+}
+#soft-badges.badge-count-5 .value {
+  background-position: 0 -265px;
+}
+#soft-badges.badge-count-6 .value {
+  background-position: 0 -318px;
+}
+#soft-badges.badge-count-7 .value {
+  background-position: 0 -371px;
+}
+#soft-badges.badge-count-8 .value {
+  background-position: 0 -424px;
+}
+
+
+
+.pokemon-type {
+  display: block;
+  position: absolute;
+  top: 1px;
+  width: 66px;
+  height: 17px;
+  background-position: 0 -289px;
+}
+.pokemon-type1 {
+  right: 68px;
+}
+.pokemon-type2 {
+  right: 0px;
+}
+
+.pokemon-type.pokemon-type-normal {
+  background-position: 0 0;
+}
+.pokemon-type.pokemon-type-fire {
+  background-position: 0 -17px;
+}
+.pokemon-type.pokemon-type-water {
+  background-position: 0 -34px;
+}
+.pokemon-type.pokemon-type-electric {
+  background-position: 0 -51px;
+}
+.pokemon-type.pokemon-type-grass {
+  background-position: 0 -68px;
+}
+.pokemon-type.pokemon-type-ice {
+  background-position: 0 -85px;
+}
+.pokemon-type.pokemon-type-fighting {
+  background-position: 0 -102px;
+}
+.pokemon-type.pokemon-type-poison {
+  background-position: 0 -119px;
+}
+.pokemon-type.pokemon-type-ground {
+  background-position: 0 -136px;
+}
+.pokemon-type.pokemon-type-flying {
+  background-position: 0 -153px;
+}
+.pokemon-type.pokemon-type-psychic {
+  background-position: 0 -170px;
+}
+.pokemon-type.pokemon-type-bug {
+  background-position: 0 -187px;
+}
+.pokemon-type.pokemon-type-rock {
+  background-position: 0 -204px;
+}
+.pokemon-type.pokemon-type-ghost {
+  background-position: 0 -221px;
+}
+.pokemon-type.pokemon-type-dragon {
+  background-position: 0 -238px;
+}
+.pokemon-type.pokemon-type-dark {
+  background-position: 0 -255px;
+}
+.pokemon-type.pokemon-type-steel {
+  background-position: 0 -272px;
+}
+.pokemon-type.pokemon-type-none {
+  background-position: 0 -289px;
+}
+
+
+#back-to-mypage {
+  display: none;
+}
+#back-to-mypage a {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  margin-left: 770px;
+  width: 181px;
+  height: 30px;
+  text-indent: -9000px;
+  background: url(/web/20130405105018im_/http://en.pokemon-gl.com/profile/assets/ja/images/back-to-mypage.png);
+  background-position: top;
+}
+#back-to-mypage a:hover {
+  background-position: bottom;
+}
+
+
+
+.vertical-middle-body,
+.vertical-middle-hint {
+  display: table-cell;
+  vertical-align: middle;
+}
+.vertical-middle-body {
+  width: 100%;
+}
+*:first-child+html .vertical-middle-hint { /* IE 7 */
+  display: inline;
+  zoom: 1;
+}
