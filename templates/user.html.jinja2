@@ -13,10 +13,17 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="nbLoginDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ _('Account') }}</a>
         <ul class="dropdown-menu" aria-labelledby="nbGsDropdown">
+            {% if current_user.is_anonymous %}
             <a class="dropdown-item" href="{{ url_for('main_routes.login') }}">{{ _("Sign In") }}</a>
             <a class="dropdown-item" href="{{ url_for('main_routes.link_gsid') }}">{{ _("Link Save Data") }}</a>
+            {% else %}
+            <a class="dropdown-item" href="{{ url_for('main_routes.logout') }}">{{ _("Sign Out") }}</a>
+            {% endif %}
+            {% if not current_user.is_anonymous %}
             <div class="dropdown-divider"></div>
             <a class="dropdown-item disabled" href="#">{{ _("Trainer Info") }}</a>
+            {% endif %}
+        </ul>
     </li>
 {% endblock %}
 {% block content %}
