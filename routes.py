@@ -30,6 +30,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 # import redis
 from constants import *
 from flask_babel import _
+from requests import post
 
 main_routes = Blueprint("main_routes", __name__)
 
@@ -251,7 +252,50 @@ def island_of_dreams():
 def sake_storage_server():
     # basic sake server
     print(request.data)
-    return '''<?xml version="1.0" encoding="utf-8"?>
+    print(request.headers)
+    if b"RECORD_SAVE_IDX" in request.data:
+        print("j")
+        return '''<?xml version="1.0" encoding="utf-8"?>
+    <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+    <GetMyRecordsResponse xmlns="http://gamespy.net/sake">
+    <GetMyRecordsResult>Success</GetMyRecordsResult>
+    <values><ArrayOfRecordValue>
+    <RecordValue><intValue><value>1500</value></intValue></RecordValue>
+    <RecordValue><intValue><value>1500</value></intValue></RecordValue>
+    <RecordValue><intValue><value>1500</value></intValue></RecordValue>
+    <RecordValue><intValue><value>1500</value></intValue></RecordValue>
+    <RecordValue><intValue><value>1500</value></intValue></RecordValue>
+    <RecordValue><intValue><value>1500</value></intValue></RecordValue>
+
+
+    <RecordValue><intValue><value>1500</value></intValue></RecordValue>
+    <RecordValue><intValue><value>1500</value></intValue></RecordValue>
+    <RecordValue><intValue><value>1500</value></intValue></RecordValue>
+
+
+    <RecordValue><intValue><value>0</value></intValue></RecordValue>
+    <RecordValue><intValue><value>0</value></intValue></RecordValue>
+    <RecordValue><intValue><value>0</value></intValue></RecordValue>
+    <RecordValue><intValue><value>0</value></intValue></RecordValue>
+    <RecordValue><intValue><value>0</value></intValue></RecordValue>
+    <RecordValue><intValue><value>0</value></intValue></RecordValue>
+    <RecordValue><intValue><value>0</value></intValue></RecordValue>
+    <RecordValue><intValue><value>0</value></intValue></RecordValue>
+    <RecordValue><intValue><value>0</value></intValue></RecordValue>
+    <RecordValue><intValue><value>0</value></intValue></RecordValue>
+    <RecordValue><intValue><value>0</value></intValue></RecordValue>
+
+    <RecordValue><intValue><value>601664669</value></intValue></RecordValue>
+    </ArrayOfRecordValue></values>
+    </GetMyRecordsResponse>
+    </soap:Body>
+    </soap:Envelope>'''
+    elif b"UpdateRecord" not in request.data:
+        # 25 values
+        return '''<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
@@ -259,11 +303,25 @@ def sake_storage_server():
 <GetMyRecordsResponse xmlns="http://gamespy.net/sake">
 <GetMyRecordsResult>Success</GetMyRecordsResult>
 <values><ArrayOfRecordValue>
-<RecordValue><binaryDataValue><value>14</value></binaryDataValue></RecordValue>
+<RecordValue><intValue><value>601664669</value></intValue></RecordValue>
 </ArrayOfRecordValue></values>
 </GetMyRecordsResponse>
 </soap:Body>
 </soap:Envelope>'''
+    else:
+        return '''
+        <?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<soap:Body>
+<UpdateRecordsResponse xmlns="http://gamespy.net/sake">
+<UpdateRecordsResult>Success</UpdateRecordsResult>
+</UpdateRecordsResponse>
+</soap:Body>
+</soap:Envelope>
+        '''
+
 
 @main_routes.route("/download", methods=["GET", "POST"])
 def download():
@@ -329,3 +387,7 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("main_routes.home"))
+
+@main_routes.route("/pokemon/validate", methods=["GET", "POST"])
+def validate_pokemon():
+    return "\x00"
