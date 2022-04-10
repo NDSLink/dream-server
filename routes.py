@@ -108,6 +108,9 @@ def gw():
         user = models.GSUser.query.filter_by(
             id=request.args["gsid"]
         ).first()  # Find the user
+        if user is None:
+            # account from old gamesync, hopefully should issue GSID and stuff
+            return "\x08"
         user.poke_is_sleeping = False
         db.session.add(user)
         db.session.commit()
