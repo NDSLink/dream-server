@@ -30,6 +30,17 @@
         </ul>
     </li>
 {% endblock %}
+{% block precontainer %}
+    <div id="sub-menu">
+        <ul>
+            <li><a href="javascript:;" id="tab-soft" class="tab-link selected">Game Card Info</a></li>
+            <li><a href="javascript:;" id="tab-pdw" class="tab-link">Pokémon Dream World</a></li>
+            <li><a href="javascript:;" id="tab-gbu" class="tab-link">Global Battle Union
+Wi-Fi Competitions</a></li>
+            <li><a href="javascript:;" id="tab-gts" class="tab-link">GTS</a></li>
+        </ul>
+    </div>
+{% endblock %}
 {% block content %}
     <h1>P<sub>K</sub>M<sub>N</sub> {{ _("Trainer") }} {{ user.username }}</h1>
     {% if gsuser.gamever == 20 %}
@@ -43,13 +54,4 @@
     {% else %}
         <p>Legacy Account</p>
     {% endif %}
-        <div id="sub-menu">
-            <ul>
-                <li><a href="javascript:;" id="tab-soft" class="tab-link selected">Game Card Info</a></li>
-                <li><a href="javascript:;" id="tab-pdw" class="tab-link">Pokémon Dream World</a></li>
-                <li><a href="javascript:;" id="tab-gbu" class="tab-link">Global Battle Union
-    Wi-Fi Competitions</a></li>
-                <li><a href="javascript:;" id="tab-gts" class="tab-link">GTS</a></li>
-            </ul>
-        </div>
 {% endblock %}
