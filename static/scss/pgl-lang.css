@@ -1,0 +1,151 @@
+
+.pokemon-type {
+    background-image: url(/static/img/types.png);
+  }
+  
+  #profile #side #login-user #avatar-change-button {
+    background: url(/static/img/profile-avatar-change-bw.png) no-repeat left top;
+  }
+  .logged-in-black2 #profile #side #login-user #avatar-change-button {
+    background-image: url(/static/img/profile-avatar-change-b2.png);
+  }
+  .logged-in-white2 #profile #side #login-user #avatar-change-button {
+    background-image: url(/static/img/profile-avatar-change-w2.png);
+  }
+  
+  #disclosure-change-button {
+    background: url(/static/img/profile-disclosure-change-bw.png) no-repeat left top;
+  }
+  .logged-in-black2 #disclosure-change-button {
+    background-image: url(/static/img/profile-disclosure-change-b2.png);
+  }
+  .logged-in-white2 #disclosure-change-button {
+    background-image: url(/static/img/profile-disclosure-change-w2.png);
+  }
+  
+  #gsid-change-button {
+    background: url(/static/img/profile-gsid-change-bw.png) no-repeat left top;
+  }
+  .trial #gsid-change-button {
+    background-image: url(/static/img/profile-gsid-change-trial.png);
+  }
+  .logged-in-black2 #gsid-change-button {
+    background-image: url(/static/img/profile-gsid-change-b2.png);
+  }
+  .logged-in-white2 #gsid-change-button {
+    background-image: url(/static/img/profile-gsid-change-w2.png);
+  }
+  
+  #rom-change-button {
+    background: url(/static/img/profile-rom-change-bw.png) no-repeat left top;
+  }
+  .logged-in-black2 #rom-change-button {
+    background-image: url(/static/img/profile-rom-change-b2.png);
+  }
+  .logged-in-white2 #rom-change-button {
+    background-image: url(/static/img/profile-rom-change-w2.png);
+  }
+  
+  #sub-menu li a {
+    background-image: url(/static/img/smenu-b.png);
+  }
+  .trial #sub-menu li a {
+    background-image: url(/static/img/smenu-t.png);
+  }
+  .logged-in-black #sub-menu li a {
+    background-image: url(/static/img/smenu-b.png);
+  }
+  .logged-in-white #sub-menu li a {
+    background-image: url(/static/img/smenu-w.png);
+  }
+  .logged-in-black2 #sub-menu li a {
+    background-image: url(/static/img/smenu-b2.png);
+  }
+  .logged-in-white2 #sub-menu li a {
+    background-image: url(/static/img/smenu-w2.png);
+  }
+  
+  table.friendlist td.action .mailer-link, table.friendlist td.action .block-icon {
+    background-image: url(/static/img/mailer-button.png);
+  }
+  /*
+  .logged-in-black2 table.friendlist td.action .mailer-link, .logged-in-black2 table.friendlist td.action .block-icon {
+    background-image: url(/static/img/mailer-button-b2.png);
+  }
+  .logged-in-white2 table.friendlist td.action .mailer-link, .logged-in-white2 table.friendlist td.action .block-icon {
+    background-image: url(/static/img/mailer-button-w2.png);
+  }
+  */
+  
+  .soft-friendlist-select {
+    background-image: url(/static/img/soft-friendlist-filter-t.png);
+  }
+  .logged-in-black .soft-friendlist-select {
+    background-image: url(/static/img/soft-friendlist-filter-b.png);
+  }
+  .logged-in-white .soft-friendlist-select {
+    background-image: url(/static/img/soft-friendlist-filter-w.png);
+  }
+  .logged-in-black2 .soft-friendlist-select {
+    background-image: url(/static/img/soft-friendlist-filter-b2.png);
+  }
+  .logged-in-white2 .soft-friendlist-select {
+    background-image: url(/static/img/soft-friendlist-filter-w2.png);
+  }
+  
+  #pdw-wakeup a {
+    background: url(/static/img/wakeup.png) no-repeat 0 0;
+  }
+  .logged-in-black2 #pdw-wakeup a {
+    background-image: url(/static/img/wakeup-b2.png);
+  }
+  .logged-in-white2 #pdw-wakeup a {
+    background-image: url(/static/img/wakeup-w2.png);
+  }
+  
+  .pdw-friendlist-select {
+    background-image: url(/static/img/pdw-friendlist-filter-t.png);
+  }
+  .logged-in-black .pdw-friendlist-select {
+    background-image: url(/static/img/pdw-friendlist-filter-b.png);
+  }
+  .logged-in-white .pdw-friendlist-select {
+    background-image: url(/static/img/pdw-friendlist-filter-w.png);
+  }
+  .logged-in-black2 .pdw-friendlist-select {
+    background-image: url(/static/img/pdw-friendlist-filter-b2.png);
+  }
+  .logged-in-white2 .pdw-friendlist-select {
+    background-image: url(/static/img/pdw-friendlist-filter-w2.png);
+  }
+  
+  #gbu-favorite-video-submit {
+    background: url(/static/img/battle-video-register.png) no-repeat 0 0;
+  }
+  .logged-in-black2 #gbu-favorite-video-submit {
+    background-image: url(/static/img/battle-video-register-b2.png);
+  }
+  .logged-in-white2 #gbu-favorite-video-submit {
+    background-image: url(/static/img/battle-video-register-w2.png);
+  }
+  
+  #gbu-favorite-video li a.delete {
+    background: url(/static/img/battle-video-delete.png) no-repeat 0 0;
+  }
+  .logged-in-black2 #gbu-favorite-video li a.delete {
+    background-image: url(/static/img/battle-video-delete-b2.png);
+  }
+  .logged-in-white2 #gbu-favorite-video li a.delete {
+    background-image: url(/static/img/battle-video-delete-w2.png);
+  }
+  
+  #back-to-mypage a {
+    background-image: url(/static/img/back-to-mypage.png);
+  }
+  .logged-in-black2 #back-to-mypage a {
+    background-image: url(/static/img/back-to-mypage-b2.png);
+  }
+  .logged-in-white2 #back-to-mypage a {
+    background-image: url(/static/img/back-to-mypage-w2.png);
+  }
+  

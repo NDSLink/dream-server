@@ -195,7 +195,6 @@
   text-indent: -9000px;
   height: 85px;
   width: 174px;
-  background-color: #78786e;
   background-repeat: no-repeat;
   outline: none;
 }
@@ -212,40 +211,40 @@
   background-position: 0 0;
 }
 #sub-menu li a#tab-soft:hover {
-  background-position: 0 -85px;
+  background-position: 0 -86px;
 }
 #sub-menu li a#tab-soft.selected {
-  background-position: 0 -170px;
+  background-position: 0 -171px;
 }
 
 #sub-menu li a#tab-pdw {
   background-position: -173px 0;
 }
 #sub-menu li a#tab-pdw:hover {
-  background-position: -173px -85px;
+  background-position: -173px -86px;
 }
 #sub-menu li a#tab-pdw.selected {
-  background-position: -173px -170px;
+  background-position: -173px -171px;
 }
 
 #sub-menu li a#tab-gbu {
   background-position: -347px 0;
 }
 #sub-menu li a#tab-gbu:hover {
-  background-position: -347px -85px;
+  background-position: -347px -86px;
 }
 #sub-menu li a#tab-gbu.selected {
-  background-position: -347px -170px;
+  background-position: -347px -171px;
 }
 
 #sub-menu li a#tab-gts {
   background-position: -521px 0;
 }
 #sub-menu li a#tab-gts:hover {
-  background-position: -521px -85px;
+  background-position: -521px -86px;
 }
 #sub-menu li a#tab-gts.selected {
-  background-position: -521px -170px;
+  background-position: -521px -171px;
 }
 
 #profile .tab {
