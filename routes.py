@@ -209,7 +209,7 @@ def gw():
         with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
             return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\x01" * 0x80)
     elif request.args["p"] == WORLDBATTLE_UPLOAD:
-        return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
+        return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\x01" * 0x80)
     else:
         return Response("no", status=400)
 
