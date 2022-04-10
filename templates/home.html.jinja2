@@ -21,7 +21,7 @@
             {% endif %}
             {% if not current_user.is_anonymous %}
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item disabled" href="#">{{ _("Trainer Info") }}</a>
+            <a class="dropdown-item" href="{{ url_for('main_routes.user_me') }}">{{ _("Trainer Info") }}</a>
             {% endif %}
         </ul>
     </li>

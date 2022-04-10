@@ -3,7 +3,7 @@ from os import scandir
 from os.path import basename
 from random import choice
 
-from flask_login import login_user
+from flask_login import current_user, login_required, login_user, logout_user
 from app import db, redis
 import models
 from forms import *
@@ -286,8 +286,14 @@ def download():
         return Response("???", status=404)
 @main_routes.route("/users/<gsid>")
 def user_gsid(gsid):
-    gu = models.GSUser.query.filter_by(id=gsid_dec(gsid)).first()
+    gu = models.GSUser.query.filter_by(id=gsid).first()
     u = models.User.query.filter_by(id=gu.uid).first()
+    return render_template("user.html.jinja2", title=_("User ") + u.username, user=u, gsuser=gu)
+
+@main_routes.route("/users/me")
+def user_me():
+    u = models.User.query.filter_by(id=current_user.id).first()
+    gu = models.GSUser.query.filter_by(uid=current_user.id).first()#
     return render_template("user.html.jinja2", title=_("User ") + u.username, user=u, gsuser=gu)
 
 @main_routes.route("/link", methods=["GET", "POST"])
@@ -314,3 +320,9 @@ def login():
         login_user(u)
         return redirect(url_for("main_routes.home"))
     return render_template("login.html.jinja2", title=_("Login"), form=form)
+
+@main_routes.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("main_routes.home"))
