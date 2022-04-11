@@ -42,6 +42,22 @@ Wi-Fi Competitions</a></li>
     </div>
 {% endblock %}
 {% block content %}
+<div id="profile">
+    <div id="side">
+        <h4>Account Information</h4>
+        <div id="login-user">
+          <div id="avatar"></div>
+          <p class="logged-in"><a id="avatar-change-button">Change</a></p>
+          <dl>
+            <dt>PGL Nickname</dt>
+            <dd>{{ current_user.username }}</dd>
+          </dl>
+        </div>
+        <div class="change-buttons">
+          <a class="side-button btn btn-primary">Register Game Card</a>
+          <a class="side-button btn btn-primary">Switch Game Cards</a>
+        </div>
+      </div>
     <h1>P<sub>K</sub>M<sub>N</sub> {{ _("Trainer") }} {{ user.username }}</h1>
     {% if gsuser.gamever == 20 %}
         <img src="{{ url_for('static', filename='img/bw_zekrom.png') }}" alt="Zekrom" class="img-fluid"/>
@@ -54,4 +70,5 @@ Wi-Fi Competitions</a></li>
     {% else %}
         <p>Legacy Account</p>
     {% endif %}
+</div>
 {% endblock %}

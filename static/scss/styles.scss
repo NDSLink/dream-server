@@ -1,3 +1,4 @@
+@import "palette.scss";
 @import "bootstrap/functions.scss";
 @import "bootstrap/bootstrap";
 
@@ -12,6 +13,6 @@ input#submit.btn.btn-default {
     margin-top: 10px
 }
 
-div#sub-menu {
+div#sub-menu>ul {
     padding-left: 0px !important;
 }

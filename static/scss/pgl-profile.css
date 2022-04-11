@@ -51,7 +51,7 @@
 #profile #side {
   float: left;
   width: 205px;
-  margin: 8px 0 30px 30px;
+  margin: 8px 0 0 0;
 }
 
 #profile #side h4 {
@@ -147,9 +147,7 @@
   display: block;
   cursor: pointer;
   width: 181px;
-  height: 30px;
   margin: 3px auto;
-  text-indent: -9000px;
 }
 
 #profile #side .side-button:hover {
