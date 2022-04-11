@@ -354,8 +354,10 @@ def user_gsid(gsid):
 @main_routes.route("/users/me")
 def user_me():
     u = models.User.query.filter_by(id=current_user.id).first()
-    gu = models.GSUser.query.filter_by(uid=current_user.id).first()#
-    return render_template("user.html.jinja2", title=_("User ") + u.username, user=u, gsuser=gu)
+    gu = models.GSUser.query.filter_by(uid=current_user.id).first()
+    with open(f"savdata-{gu.id}.sav", "rb") as f:
+        save = helper.Gen5Save(f)
+    return render_template("user.html.jinja2", title=_("User ") + u.username, user=u, gsuser=gu, gsid=gsid_enc(int(gu.id)), name=save.trainer_name)
 
 @main_routes.route("/link", methods=["GET", "POST"])
 def link_gsid():
