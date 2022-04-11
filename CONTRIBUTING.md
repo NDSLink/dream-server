@@ -1,0 +1,6 @@
+Woah? You wanna contribute? Awesome, submit a PR! But first...
+
+# Contribution Rules
+- Format your code with Black!
+- Don't submit copyrighted code! If you do... well, frankly I don't want to find out
+- Comment your code! I made the mistake of not doing that and... I regret it...
