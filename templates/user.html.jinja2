@@ -30,36 +30,11 @@
         </ul>
     </li>
 {% endblock %}
-{% block precontainer %}
-    <div id="sub-menu">
-        <ul>
-            <li><a href="javascript:;" id="tab-soft" class="tab-link selected">Game Card Info</a></li>
-            <li><a href="javascript:;" id="tab-pdw" class="tab-link">Pokémon Dream World</a></li>
-            <li><a href="javascript:;" id="tab-gbu" class="tab-link">Global Battle Union
-Wi-Fi Competitions</a></li>
-            <li><a href="javascript:;" id="tab-gts" class="tab-link">GTS</a></li>
-        </ul>
-    </div>
-{% endblock %}
 {% block content %}
 <div id="profile">
     <div id="side">
-        <h4>Account Information</h4>
         <div id="login-user">
-          <div id="avatar"></div>
-          <p class="logged-in"><a id="avatar-change-button">Change</a></p>
-          <dl>
-            <dt>PGL Nickname</dt>
-            <dd>{{ current_user.username }}</dd>
-          </dl>
-        </div>
-        <div class="change-buttons">
-          <a class="side-button btn btn-primary">Register Game Card</a>
-          <a class="side-button btn btn-primary">Switch Game Cards</a>
-        </div>
-      </div>
-    <h1>P<sub>K</sub>M<sub>N</sub> {{ _("Trainer") }} {{ user.username }}</h1>
-    {% if gsuser.gamever == 20 %}
+          <div id="avatar">{% if gsuser.gamever == 20 %}
         <img src="{{ url_for('static', filename='img/bw_zekrom.png') }}" alt="Zekrom" class="img-fluid"/>
     {% elif gsuser.gamever == 21 %}
         <img src="{{ url_for('static', filename='img/bw_reshiram.png') }}" alt="Reshiram" class="img-fluid"/>
@@ -67,8 +42,28 @@ Wi-Fi Competitions</a></li>
         <img src="{{ url_for('static', filename='img/b2w2_wk.png') }}" alt="White Kyurem" class="img-fluid"/>
     {% elif gsuser.gamever == 23 %}
         <img src="{{ url_for('static', filename='img/b2w2_bk.png') }}" alt="Black Kyurem" class="img-fluid"/>
-    {% else %}
-        <p>Legacy Account</p>
     {% endif %}
+        </div>
+          <dl>
+            <dt>PGL Nickname</dt>
+            <dd>{{ current_user.username }}</dd>
+          </dl>
+        </div>
+        <div class="change-buttons">
+          <a class="side-button btn btn-primary disabled">Register Game Card</a>
+          <a class="side-button btn btn-primary disabled">Switch Game Cards</a>
+        </div>
+      </div>
+      <div id="soft-info">
+          <div id="soft-package"></div>
+          <div id="soft-desc">
+            <h5 id="soft-romname"></h5>
+            <div id="soft-synctime"><span class="label">Last tucked-in: </span> <span class="value"></span></div>
+            <div id="soft-gsidc"><span class="label">The Game Sync ID registered with this Game Card: </span><span class="value"></span></div>
+            <div id="soft-trainername"><span class="label">Trainer Name: </span><span class="value"></span></div>
+            <div id="soft-playtime"><span class="label">Time: </span><span class="value"></span></div>
+            <div id="soft-badges"><span class="label">Badges: </span><span class="value"></span></div>
+          </div>
+        </div>
 </div>
 {% endblock %}
