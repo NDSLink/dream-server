@@ -54,8 +54,10 @@ def before_request():
     request.data # funky bug in flask
 # --- Routes ---
 import routes
+import cosmetics
 
 try:
+    app.register_blueprint(cosmetics.cosmetics)
     app.register_blueprint(routes.main_routes)
 except AttributeError:
     pass

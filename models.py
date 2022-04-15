@@ -25,6 +25,9 @@ class GSUser(db.Model):
     gender = db.Column(db.Integer, default=0) # 0 = male, 1 = female (I think? Don't know yet so it just defaults to 0)
     gamever = db.Column(db.Integer) # 20 = white, 21 = black, 22 = white 2, 23 = black 2
     uid = db.Column(db.Integer, db.ForeignKey('users.id'))
+    selected_cgear_skin = db.Column(db.String)
+    selected_dex_skin = db.Column(db.String)
+    selected_musical = db.Column(db.String)
     # TODO: What else?
     def __repr__(self):
         return "<GSUser %r>" % self.id
