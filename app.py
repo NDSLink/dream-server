@@ -9,12 +9,6 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_babel import Babel, _
 
-
-
-is_circ_import = False
-
-from os.path import exists
-
 # --- Key Definitions ---
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -36,13 +30,10 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 
 
-
-
 if app.config["USE_REDIS"]:
     redis = Redis(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"], db=0)
 else:
     from redismock import DummyRedis
-
     redis = DummyRedis()
 
 @app.errorhandler(404)
@@ -52,20 +43,22 @@ def page_not_found(e):
 @app.before_request
 def before_request():
     request.data # funky bug in flask
-# --- Routes ---
-import routes
-import cosmetics
 
+# --- Routes ---
 try:
-    app.register_blueprint(cosmetics.cosmetics)
-    app.register_blueprint(routes.main_routes)
-except AttributeError:
-    pass
+    from routes import main_routes
+    from cosmetics import cosmetics
+    from dsio import backend
+    app.register_blueprint(cosmetics)
+    app.register_blueprint(main_routes)
+    app.register_blueprint(backend)
+except ImportError:
+    pass # prevent circular import error
+
 from models import User
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
-
 # --- Main Block ---
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)
