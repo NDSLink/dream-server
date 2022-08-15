@@ -146,6 +146,7 @@ def gw():
             # The first 2 bytes are a 16-bit int containing the item ID
             redis.publish("dlstart", request.args["gsid"])
             # return ret
+            # TODO: Remember how items work
             # Byte 0x01 = If not zero, triggers 1320x, where x is the number
             # Byte 0x02 = Triggers comm error if not zero
             # Byte 0x03 = Triggers comm error if not zero
