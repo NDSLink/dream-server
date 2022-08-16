@@ -59,11 +59,11 @@ def get_savedata(trainerid):
             return send_from_directory(".", f"savdata-{trainerid}.sav")
     return send_from_directory(".", f"savdata-{u.id}.sav")
 
-
-@main_routes.route("/dreamland/iod")
-def island_of_dreams():
-    return render_template("island_of_dreams.html.jinja2", title=_("Island of Dreams"))
-
+@main_routes.route("/radar")
+@login_required
+def use_radar():
+    # Basic functionality for catching Pokemon
+    return render_template("radar.html.jinja2")
 
 # @app.route("/users")
 # def users():
@@ -112,6 +112,7 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("main_routes.home"))
+
 
 @main_routes.route("/pokemon/validate", methods=["GET", "POST"])
 def validate_pokemon():
