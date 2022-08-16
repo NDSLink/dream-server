@@ -1,0 +1,46 @@
+<!-- PokeRadar functionality -->
+
+{% extends "base.html.jinja2" %}
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">{{ _('Home') }}</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="nbGsDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ _('Game Sync') }}</a>
+        <ul class="dropdown-menu" aria-labelledby="nbGsDropdown">
+            <a class="dropdown-item disabled" href="#">{{ _('Dream Land') }}</a>
+            <a class="dropdown-item disabled" href="#">{{ _('Global Battle Union') }}</a>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="nbLoginDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ _('Account') }}</a>
+        <ul class="dropdown-menu" aria-labelledby="nbGsDropdown">
+            {% if current_user.is_anonymous %}
+            <a class="dropdown-item" href="{{ url_for('main_routes.login') }}">{{ _("Sign In") }}</a>
+            <a class="dropdown-item" href="{{ url_for('main_routes.link_gsid') }}">{{ _("Link Save Data") }}</a>
+            {% else %}
+            <a class="dropdown-item" href="{{ url_for('main_routes.logout') }}">{{ _("Sign Out") }}</a>
+            {% endif %}
+            {% if not current_user.is_anonymous %}
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ url_for('main_routes.user_me') }}">{{ _("Trainer Info") }}</a>
+            {% endif %}
+        </ul>
+    </li>
+{% endblock %}
+{% block content %}
+    <h1>{{ _("Pick a patch") }}</h1>
+    {% for row in rows %}
+        {% for patch in row %}
+            <a href="/patch/{{ patch }}">
+            {% if "sparkle" in patch %}
+                *
+            {% elif "no" in patch %}
+                x
+            {% elif "standard" in patch %}
+                !
+            {% endif %}
+            </a>
+        {% endfor %}
+        <br>
+{% endblock %}
