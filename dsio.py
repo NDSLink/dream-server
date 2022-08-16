@@ -169,7 +169,23 @@ def gw():
             if user.pokemon1:
                 pokemon[1] = b64decode(user.pokemon1)
             if user.pokemon2:
-                pokemon[2] = b64decode(user.pokemon1)
+                pokemon[2] = b64decode(user.pokemon2)
+            if user.pokemon3:
+                pokemon[3] = b64decode(user.pokemon3)
+            if user.pokemon4:
+                pokemon[4] = b64decode(user.pokemon4)
+            if user.pokemon5:
+                pokemon[5] = b64decode(user.pokemon5)
+            if user.pokemon6:
+                pokemon[6] = b64decode(user.pokemon6)
+            if user.pokemon7:
+                pokemon[0] = b64decode(user.pokemon7)
+            if user.pokemon8:
+                pokemon[0] = b64decode(user.pokemon8)
+            if user.pokemon9:
+                pokemon[0] = b64decode(user.pokemon9)
+            for pokemon in pokemon:
+                ret = ret + pokemon
             # Byte 0xD2-0xD5 = something to do with leveling/dream points
             ret = ret + b"\xff\xff\xff\xff" 
             # Byte 0xD6 = Padding?
