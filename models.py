@@ -51,6 +51,7 @@ class GSUser(db.Model):
     selected_cgear_skin = db.Column(db.String)
     selected_dex_skin = db.Column(db.String)
     selected_musical = db.Column(db.String)
+    dl_data = db.Column(db.String) # i am wayyyy to lazy to make a whole class thing for this lol
     # TODO: What else?
     def __repr__(self):
         return "<GSUser %r>" % self.id

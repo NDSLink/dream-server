@@ -74,6 +74,7 @@ def use_radar():
         ]
     ])
 
+
 # @app.route("/users")
 # def users():
 #    return f"Hello! To view user information, go to {url_for('users')}/<your GSID>. For instance, if your GSID is AAAAAAA2EE, go to {url_for('users')}/AAAAAAA2EE. Note: this will have a better look soon!"
