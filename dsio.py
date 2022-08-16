@@ -8,6 +8,7 @@ import models
 import helper
 from constants import *
 from app import db, redis
+from base64 import b64decode as decode
 
 backend = Blueprint("dsio", __name__)
 
@@ -161,7 +162,14 @@ def gw():
             # Byte 0x04-0x05 = ???
             # Byte 0x06-0x07 = ???
             # Byte 0x08 = ???
-            ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
+            #ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
+            pokemon = [b"\x01\x01\x01\x01\x01\x01\x01\x01"] * 10
+            if user.pokemon0:
+                pokemon[0] = b64decode(user.pokemon0)
+            if user.pokemon1:
+                pokemon[1] = b64decode(user.pokemon1)
+            if user.pokemon2:
+                pokemon[2] = b64decode(user.pokemon1)
             # Byte 0xD2-0xD5 = something to do with leveling/dream points
             ret = ret + b"\xff\xff\xff\xff" 
             # Byte 0xD6 = Padding?
