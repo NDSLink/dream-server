@@ -63,7 +63,17 @@ def get_savedata(trainerid):
 @login_required
 def use_radar():
     # Basic functionality for catching Pokemon
-    return render_template("radar.html.jinja2")
+    return render_template("radar.html.jinja2", rows=[
+        [
+            "sparkle1", "sparkle2", "sparkle3"
+        ],
+        [
+            "no1", "no2", "no3"
+        ],
+        [
+            "standard1", "standard2", "standard3"
+        ]
+    ])
 
 # @app.route("/users")
 # def users():
