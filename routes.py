@@ -60,7 +60,6 @@ def get_savedata(trainerid):
     return send_from_directory(".", f"savdata-{u.id}.sav")
 
 @main_routes.route("/radar")
-@login_required
 def use_radar():
     # Basic functionality for catching Pokemon
     return render_template("radar.html.jinja2", rows=[
