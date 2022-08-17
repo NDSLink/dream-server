@@ -75,6 +75,26 @@ def use_radar():
     ])
 
 
+@main_routes.route("/patch/<patch>")
+@login_required
+def catch_from_patchno(patch):
+    pool = {
+        "sparkle1": b"\x02\x83",
+        "sparkle2": b"\x02\x83",
+        "sparkle3": b"\x02\x83"
+    }
+    index = {
+        "sparkle1": "Zekrom",
+        "sparkle2": "Reshiram",
+        "sparkle3": "Kyurem"
+    }
+    pokename = index[patch]
+    pokeid = index[patch]
+    gu = models.GSUser.query.filter_by(uid=current_user.id).first()
+    gu.pokemon1 = pokeid + b"\x01\x01\x01\x01\x01\x01"
+    db.session.add(gu)
+    db.session.commit()
+    return f"You got a {pokename}!"
 # @app.route("/users")
 # def users():
 #    return f"Hello! To view user information, go to {url_for('users')}/<your GSID>. For instance, if your GSID is AAAAAAA2EE, go to {url_for('users')}/AAAAAAA2EE. Note: this will have a better look soon!"
