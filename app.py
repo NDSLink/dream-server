@@ -1,4 +1,4 @@
-'''
+"""
 MIT License
 
 Copyright (c) 2022 DSLink Contributors
@@ -20,7 +20,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-'''
+"""
 # --- Imports ---
 from http import HTTPStatus
 from flask import Flask, render_template, request, url_for
@@ -36,6 +36,7 @@ from flask_babel import Babel, _
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 babel = Babel(app)
+
 
 @babel.localeselector
 def get_locale():
@@ -57,31 +58,40 @@ if app.config["USE_REDIS"]:
     redis = Redis(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"], db=0)
 else:
     from redismock import DummyRedis
+
     redis = DummyRedis()
+
 
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html.jinja2", title=_("Page Not Found")), 404
 
+
 @app.before_request
 def before_request():
-    request.data # funky bug in flask
+    request.data  # funky bug in flask
+
 
 # --- Routes ---
 try:
     from routes import main_routes
     from cosmetics import cosmetics
     from dsio import backend
+
     app.register_blueprint(cosmetics)
     app.register_blueprint(main_routes)
     app.register_blueprint(backend)
 except ImportError:
-    pass # prevent circular import error
+    pass  # prevent circular import error
 
 from models import User
+
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+
 # --- Main Block ---
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)

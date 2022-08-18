@@ -45,7 +45,9 @@ def home():
 def savedata():
     form = LinkForm()
     if form.validate_on_submit():
-        return redirect(url_for("main_routes.get_savedata", trainerid=gsid_dec(form.gsid.data)))
+        return redirect(
+            url_for("main_routes.get_savedata", trainerid=gsid_dec(form.gsid.data))
+        )
     return render_template(
         "savedata.html.jinja2", form=form, title=_("Manage Save Data")
     )
@@ -59,35 +61,25 @@ def get_savedata(trainerid):
             return send_from_directory(".", f"savdata-{trainerid}.sav")
     return send_from_directory(".", f"savdata-{u.id}.sav")
 
+
 @main_routes.route("/radar")
 def use_radar():
     # Basic functionality for catching Pokemon
-    return render_template("radar.html.jinja2", rows=[
-        [
-            "sparkle1", "sparkle2", "sparkle3"
+    return render_template(
+        "radar.html.jinja2",
+        rows=[
+            ["sparkle1", "sparkle2", "sparkle3"],
+            ["no1", "no2", "no3"],
+            ["standard1", "standard2", "standard3"],
         ],
-        [
-            "no1", "no2", "no3"
-        ],
-        [
-            "standard1", "standard2", "standard3"
-        ]
-    ])
+    )
 
 
 @main_routes.route("/patch/<patch>")
 @login_required
 def catch_from_patchno(patch):
-    pool = {
-        "sparkle1": b"\x02\x83",
-        "sparkle2": b"\x02\x83",
-        "sparkle3": b"\x02\x83"
-    }
-    index = {
-        "sparkle1": "Zekrom",
-        "sparkle2": "Reshiram",
-        "sparkle3": "Kyurem"
-    }
+    pool = {"sparkle1": b"\x02\x83", "sparkle2": b"\x02\x83", "sparkle3": b"\x02\x83"}
+    index = {"sparkle1": "Zekrom", "sparkle2": "Reshiram", "sparkle3": "Kyurem"}
     pokename = index[patch]
     pokeid = index[patch]
     gu = models.GSUser.query.filter_by(uid=current_user.id).first()
@@ -95,6 +87,8 @@ def catch_from_patchno(patch):
     db.session.add(gu)
     db.session.commit()
     return f"You got a {pokename}!"
+
+
 # @app.route("/users")
 # def users():
 #    return f"Hello! To view user information, go to {url_for('users')}/<your GSID>. For instance, if your GSID is AAAAAAA2EE, go to {url_for('users')}/AAAAAAA2EE. Note: this will have a better look soon!"
@@ -104,25 +98,35 @@ def catch_from_patchno(patch):
 def user_gsid(gsid):
     gu = models.GSUser.query.filter_by(id=gsid).first()
     u = models.User.query.filter_by(id=gu.uid).first()
-    return render_template("user.html.jinja2", title=_("User ") + u.username, user=u, gsuser=gu)
+    return render_template(
+        "user.html.jinja2", title=_("User ") + u.username, user=u, gsuser=gu
+    )
+
 
 @main_routes.route("/users/me")
 def user_me():
     u = models.User.query.filter_by(id=current_user.id).first()
-    gu = models.GSUser.query.filter_by(uid=current_user.id).first()#
-    return render_template("user.html.jinja2", title=_("User ") + u.username, user=u, gsuser=gu)
+    gu = models.GSUser.query.filter_by(uid=current_user.id).first()  #
+    return render_template(
+        "user.html.jinja2", title=_("User ") + u.username, user=u, gsuser=gu
+    )
+
 
 @main_routes.route("/link", methods=["GET", "POST"])
 def link_gsid():
     form = LinkPwForm()
     if form.validate_on_submit():
         gu = models.GSUser.query.filter_by(id=gsid_dec(form.gsid.data)).first()
-        u = models.User(username=form.username.data, password_hash=generate_password_hash(form.password.data))
+        u = models.User(
+            username=form.username.data,
+            password_hash=generate_password_hash(form.password.data),
+        )
         gu.user = u
         db.session.add(u)
         db.session.commit()
         return redirect(url_for("main_routes.home"))
     return render_template("link.html.jinja2", title=_("Link GSID"), form=form)
+
 
 @main_routes.route("/login", methods=["GET", "POST"])
 def login():
@@ -130,12 +134,15 @@ def login():
     if form.validate_on_submit():
         u = models.User.query.filter_by(username=form.username.data).first()
         if u == None:
-            raise ValidationError("Invalid username! Your trainer name is the one you used during account link.")
+            raise ValidationError(
+                "Invalid username! Your trainer name is the one you used during account link."
+            )
         if not check_password_hash(u.password_hash, form.password.data):
             raise ValidationError("Invalid password!")
         login_user(u)
         return redirect(url_for("main_routes.home"))
     return render_template("login.html.jinja2", title=_("Login"), form=form)
+
 
 @main_routes.route("/logout")
 @login_required

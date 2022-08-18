@@ -12,12 +12,11 @@ from base64 import b64decode as decode
 
 backend = Blueprint("dsio", __name__)
 
+
 @backend.route("/dsio/gw", methods=["GET", "POST"])
 def gw():
     if request.args["p"] == PLAYSTATUS:
-        if exists(
-            f"savdata-{request.args['gsid']}.sav"
-        ):
+        if exists(f"savdata-{request.args['gsid']}.sav"):
             user = models.GSUser.query.filter_by(
                 id=request.args["gsid"]
             ).first()  # Find the user
@@ -30,7 +29,7 @@ def gw():
                             tid=g5s.tid,
                             name=g5s.trainer_name,
                             poke_is_sleeping=False,
-                            gamever=request.args["rom"]
+                            gamever=request.args["rom"],
                         )
                         db.session.add(user)
                         db.session.commit()
@@ -39,9 +38,9 @@ def gw():
                     )  # Save was desynced. Inform any subbed clients to ensure that data is resynced.
                     return b"\x08"
             if user.poke_is_sleeping:
-                return WAKE_UP_AND_DOWNLOAD # apparently works for both??
+                return WAKE_UP_AND_DOWNLOAD  # apparently works for both??
             else:
-                return PUT_POKE_TO_SLEEP_RESPONSE # \x00 = "you changed your ds you idiot", anything else = 1320x
+                return PUT_POKE_TO_SLEEP_RESPONSE  # \x00 = "you changed your ds you idiot", anything else = 1320x
         return b"\x08"
     elif request.args["p"] == SAVEDATA_UPLOAD:
         user = models.GSUser.query.filter_by(
@@ -68,7 +67,7 @@ def gw():
                     name=g5s.trainer_name,
                     poke_is_sleeping=False,
                     tid=g5s.tid,
-                    gamever=request.args["rom"]
+                    gamever=request.args["rom"],
                 )
                 db.session.add(u)
                 db.session.commit()
@@ -77,7 +76,7 @@ def gw():
                 redis.publish("newacct", request.args["gsid"])
                 pass  # It's an alt save.
         return DREAMING_POKEMON_RESPONSE  # Success response
-    #elif request.args["p"] == WORLDBATTLE_DOWNLOAD:  # Live competition
+    # elif request.args["p"] == WORLDBATTLE_DOWNLOAD:  # Live competition
     #    if exists(f"savdata-{request.args['gsid']}.sav"):
     #        return Response("worldbattle is unimplemented lol", status=502)
     #    return DREAMING_POKEMON_RESPONSE  # A.k.a "Please use Game Sync Settings"
@@ -154,7 +153,7 @@ def gw():
             # Byte 0x04 = Triggers comm error if not zero
             # Byte 0x05-0x80 onward = padding
             ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
-            #ret = ret + b"\xff\xff\xff\xff"
+            # ret = ret + b"\xff\xff\xff\xff"
             # Byte 0x81-0xD1(?) = Pokemon
             # Pokemon Structure:
             # Byte 0x00-0x01 = Species
@@ -162,7 +161,7 @@ def gw():
             # Byte 0x04-0x05 = ???
             # Byte 0x06-0x07 = ???
             # Byte 0x08 = ???
-            #ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
+            # ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
             pokemon = [b"\x01\x01\x01\x01\x01\x01\x01\x01"] * 10
             if user.pokemon0:
                 pokemon[0] = b64decode(user.pokemon0)
@@ -187,7 +186,7 @@ def gw():
             for pokemon in pokemon:
                 ret = ret + pokemon
             # Byte 0xD2-0xD5 = something to do with leveling/dream points
-            ret = ret + b"\xff\xff\xff\xff" 
+            ret = ret + b"\xff\xff\xff\xff"
             # Byte 0xD6 = Padding?
             # Byte 0xD7 = Padding?
             # Byte 0xD8 = Padding?
@@ -214,6 +213,7 @@ def gw():
     else:
         return Response("no", status=400)
 
+
 @backend.route("/SakeStorageServer/StorageServer.asmx", methods=["POST"])
 def sake_storage_server():
     # basic sake server
@@ -221,7 +221,7 @@ def sake_storage_server():
     print(request.headers)
     if b"RECORD_SAVE_IDX" in request.data:
         print("j")
-        return '''<?xml version="1.0" encoding="utf-8"?>
+        return """<?xml version="1.0" encoding="utf-8"?>
     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
@@ -258,10 +258,10 @@ def sake_storage_server():
     </ArrayOfRecordValue></values>
     </GetMyRecordsResponse>
     </soap:Body>
-    </soap:Envelope>'''
+    </soap:Envelope>"""
     elif b"UpdateRecord" not in request.data:
         # 25 values
-        return '''<?xml version="1.0" encoding="utf-8"?>
+        return """<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
@@ -273,9 +273,9 @@ def sake_storage_server():
 </ArrayOfRecordValue></values>
 </GetMyRecordsResponse>
 </soap:Body>
-</soap:Envelope>'''
+</soap:Envelope>"""
     else:
-        return '''
+        return """
         <?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -286,7 +286,7 @@ def sake_storage_server():
 </UpdateRecordResponse>
 </soap:Body>
 </soap:Envelope>
-        '''
+        """
 
 
 @backend.route("/download", methods=["GET", "POST"])
@@ -304,10 +304,13 @@ def download():
                 print("G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n")
                 print(ret)
                 return ret
-        #return "G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n"
+        # return "G0003_shelmet_en.bin\t\tCGEAR2_E\t3\t\t9730\r\n"
     elif request.form["action"] == "Y29udGVudHM*":
         print("dls download")
-        return send_from_directory("dls1/content", str(b64decode(request.form["contents"].replace("*", "=")))[2:-1])
+        return send_from_directory(
+            "dls1/content",
+            str(b64decode(request.form["contents"].replace("*", "=")))[2:-1],
+        )
     else:
         print(request.form)
         return Response("???", status=404)

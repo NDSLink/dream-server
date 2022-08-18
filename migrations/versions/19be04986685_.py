@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '19be04986685'
+revision = "19be04986685"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -58,9 +58,9 @@ def upgrade():
     op.add_column("gsuser", sa.Column("name", sa.String(length=7), nullable=True))
     op.add_column("gsuser", sa.Column("poke_is_sleeping", sa.Boolean(), nullable=True))
     op.add_column("gsuser", sa.Column("tid", sa.Integer(), nullable=True))
-    op.add_column('gsuser', sa.Column('gender', sa.Integer(), nullable=True))
-    op.add_column('gsuser', sa.Column('gamever', sa.Integer(), nullable=True))
-    op.add_column('gsuser', sa.Column('gsid', sa.INTEGER(), nullable=True))
+    op.add_column("gsuser", sa.Column("gender", sa.Integer(), nullable=True))
+    op.add_column("gsuser", sa.Column("gamever", sa.Integer(), nullable=True))
+    op.add_column("gsuser", sa.Column("gsid", sa.INTEGER(), nullable=True))
 
 
 def downgrade():
@@ -71,6 +71,6 @@ def downgrade():
     op.drop_column("gsuser", "poke_is_sleeping")
     op.drop_column("gsuser", "name")
     op.drop_column("gsuser", "gsid")
-    op.drop_constraint(None, 'gsuser', type_='unique')
-    op.drop_column('gsuser', 'gamever')
-    op.drop_column('gsuser', 'gender')
+    op.drop_constraint(None, "gsuser", type_="unique")
+    op.drop_column("gsuser", "gamever")
+    op.drop_column("gsuser", "gender")
