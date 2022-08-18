@@ -1,5 +1,5 @@
-import models
 from app import db
+import models
 
 print("---Recharge Fixer---")
 print(
