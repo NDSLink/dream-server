@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 from io import BufferedReader
+from typing import Union
+from base64 import b64encode
 
 
 class Gen5Save:
@@ -77,3 +79,70 @@ class Gen5Save:
             if tname == b"":
                 tname = self._parse_tname(data, True)  # Obtain data from mirror
             self.trainer_name = tname
+
+
+class Pokemon:
+    '''
+    Helper class for Pokemon
+
+    Use `Pokemon.from_b64` to get Pokemon encoded in the database.
+
+    Use `Pokemon.to_b64` to encode Pokemon for the db.
+    '''
+    def __init__(self, dexno: Union[int, bytes], 
+                 moveid: Union[int, bytes], 
+                 unk1: bytes, unk2: bytes, 
+                 animationid: Union[int, bytes],
+                 unk3: bytes):
+        '''
+        Creates a Pokemon from given parameters.
+
+        `dexno`: Pokedex number. Must be from 1-649 (B/W) or 1-684 (B2/W2). 650 and 651 are eggs and should not be used.
+
+        `moveid`: Move number. A list can be found somewhere probably(TM)
+
+        `unk1-3`: TODO: What do these do?
+
+        `animationid`: Changes Pokemon animation. TODO: Document these
+        '''
+        self.dexno = dexno
+        self.moveid = moveid
+        self.unk1 = unk1
+        self.unk2 = unk2
+        self.unk3 = unk3
+        self.animationid = animationid
+
+        # Convert ints to bytes
+        if type(self.dexno) == int:
+            self.dexno = int.to_bytes(self.dexno, 2, "little")
+        if type(self.moveid) == int:
+            self.moveid = int.to_bytes(self.moveid, 2, "little")
+        if type(self.animationid) == int:
+            self.animationid = int.to_bytes(self.animationid, 1, "little")
+    @classmethod
+    def from_b64(base64: bytes):
+        raise NotImplementedError
+    
+    def _to_bytes(self) -> bytearray:
+        '''
+        INTERNAL: DO NOT USE
+        
+        Outputs the Pokemon to bytes.
+        '''
+        response = bytearray(self.dexno, self.moveid, self.unk1, self.unk2, self.animationid, self.unk3)
+        return response
+    def to_b64(self) -> bytes:
+        '''
+        Outputs the Pokemon to b64
+
+        Just a wrapper around `Pokemon._to_bytes`
+        '''
+
+        return b64encode(self._to_bytes())
+        
+
+        
+
+
+
+    

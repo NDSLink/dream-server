@@ -60,7 +60,8 @@ class LinkForm(FlaskForm):
 
 
 class WhatPokeForm(FlaskForm):
-    poke = StringField(_l("Who's that Pokemon?"))
+    poke = StringField(_l("Who's that Pokemon?")) # since i forgor what this is for
+    # i **THINK** this is a pokemon catching minigame
     submit = SubmitField(_l("Submit"))
 
 

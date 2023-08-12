@@ -81,9 +81,11 @@ def catch_from_patchno(patch):
     pool = {"sparkle1": b"\x02\x83", "sparkle2": b"\x02\x83", "sparkle3": b"\x02\x83"}
     index = {"sparkle1": "Zekrom", "sparkle2": "Reshiram", "sparkle3": "Kyurem"}
     pokename = index[patch]
-    pokeid = index[patch]
+    pokeid = pool[patch]
     gu = models.GSUser.query.filter_by(uid=current_user.id).first()
-    gu.pokemon1 = pokeid + b"\x01\x01\x01\x01\x01\x01"
+    gu.pokemon0 = helper.Pokemon(b"\x02\x83", 1, b"\x00", b"\x00", 0, b"\x00").to_b64
+    # hope this works
+
     db.session.add(gu)
     db.session.commit()
     return f"You got a {pokename}!"

@@ -162,7 +162,8 @@ def gw():
             # Byte 0x06-0x07 = ???
             # Byte 0x08 = ???
             # ret = ret + b"\x01\x01\x01\x01\x01\x01\x01\x01" * 10  # 10 8-byte pokemon
-            pokemon = [b"\x01\x01\x01\x01\x01\x01\x01\x01"] * 10
+            
+            pokemon = [b"\x00\x00\x00\x00\x00\x00\x00\x00"] * 10
             if user.pokemon0:
                 pokemon[0] = b64decode(user.pokemon0)
             if user.pokemon1:
@@ -178,13 +179,19 @@ def gw():
             if user.pokemon6:
                 pokemon[6] = b64decode(user.pokemon6)
             if user.pokemon7:
-                pokemon[0] = b64decode(user.pokemon7)
+                pokemon[7] = b64decode(user.pokemon7)
             if user.pokemon8:
-                pokemon[0] = b64decode(user.pokemon8)
+                pokemon[8] = b64decode(user.pokemon8)
             if user.pokemon9:
-                pokemon[0] = b64decode(user.pokemon9)
-            for pokemon in pokemon:
-                ret = ret + pokemon
+                pokemon[9] = b64decode(user.pokemon9)
+            for _ in range(9 - len(pokemon)):
+                pokemon.append(b"\x00\x00\x00\x00\x00\x00\x00\x00")
+            print(pokemon)
+            for pokeman in pokemon:
+
+                ret = ret + pokeman
+            ret = ret + b"\x02\x40\x01\x01" * 20  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
+
             # Byte 0xD2-0xD5 = something to do with leveling/dream points
             ret = ret + b"\xff\xff\xff\xff"
             # Byte 0xD6 = Padding?
@@ -195,7 +202,7 @@ def gw():
             # Byte 0xDB = Download Pokedex skins
             # Note: when 0xD6-0xD8 are set to 0x01, the pokemon will level up?
             ret = ret + b"\xff\xff\x00\x00\x00\x00"
-
+            print(ret)
             return ret
         else:
             print("Bad GSID! Response dump:")
