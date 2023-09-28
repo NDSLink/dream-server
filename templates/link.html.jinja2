@@ -9,6 +9,9 @@
         <ul class="dropdown-menu" aria-labelledby="nbGsDropdown">
             <a class="dropdown-item disabled" href="#">{{ _('Dream Land') }}</a>
             <a class="dropdown-item disabled" href="#">{{ _('Global Battle Union') }}</a>
+            {% if not current_user.is_anonymous %}
+            <a class="dropdown-item" href="{{ url_for('main_routes.radar') }}">{{ _('[EXPERIMENTAL]')}}{{ _('Poke Radar') }}</a>
+            {% endif %}
         </ul>
     </li>
     <li class="nav-item dropdown">

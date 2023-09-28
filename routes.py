@@ -63,6 +63,7 @@ def get_savedata(trainerid):
 
 
 @main_routes.route("/radar")
+@login_required
 def use_radar():
     # Basic functionality for catching Pokemon
     return render_template(
@@ -79,11 +80,11 @@ def use_radar():
 @login_required
 def catch_from_patchno(patch):
     pool = {"sparkle1": b"\x02\x83", "sparkle2": b"\x02\x83", "sparkle3": b"\x02\x83"}
-    index = {"sparkle1": "Zekrom", "sparkle2": "Reshiram", "sparkle3": "Kyurem"}
+    index = {"sparkle1": "Zekrom", "sparkle2": "Zekrom", "sparkle3": "Zekrom"}
     pokename = index[patch]
     pokeid = pool[patch]
     gu = models.GSUser.query.filter_by(uid=current_user.id).first()
-    gu.pokemon0 = helper.Pokemon(b"\x02\x83", 1, b"\x00", b"\x00", 0, b"\x00").to_b64
+    gu.pokemon0 = helper.Pokemon(pokeid, 1, b"\x00", b"\x00", 0, b"\x00").to_b64()
     # hope this works
 
     db.session.add(gu)

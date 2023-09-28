@@ -34,11 +34,11 @@
         {% for patch in row %}
             <a href="/patch/{{ patch }}">
             {% if "sparkle" in patch %}
-                *
+                <img src="{{ url_for('static', filename='img/radar_grass_rarepkmn.png') }}">
             {% elif "no" in patch %}
-                x
+                <img src="{{ url_for('static', filename='img/radar_grass_nopkmn.png') }}">
             {% elif "standard" in patch %}
-                !
+                <img src="{{ url_for('static', filename='img/radar_grass_pkmn.png') }}">
             {% endif %}
             </a>
         {% endfor %}
