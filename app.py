@@ -72,16 +72,13 @@ def before_request():
 
 
 # --- Routes ---
-try:
-    from routes import main_routes
-    from cosmetics import cosmetics
-    from dsio import backend
+from routes import main_routes
+from cosmetics import cosmetics
+from dsio import backend
 
-    app.register_blueprint(cosmetics)
-    app.register_blueprint(main_routes)
-    app.register_blueprint(backend)
-except ImportError:
-    pass  # prevent circular import error
+app.register_blueprint(cosmetics)
+app.register_blueprint(main_routes)
+app.register_blueprint(backend)
 
 from models import User
 

@@ -14,6 +14,7 @@ flask-bootstrap = "*"
 flask-babel = "*"
 flask-login = "*"
 waitress = "*"
+requests = "*"
 
 [dev-packages]
 
