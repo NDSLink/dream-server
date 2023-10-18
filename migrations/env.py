@@ -48,8 +48,7 @@ def run_migrations_offline():
     context.configure(
         url=url,
         target_metadata=target_metadata,
-        literal_binds=True,
-        render_as_batch=True,
+        literal_binds=True
     )
 
     with context.begin_transaction():
@@ -81,8 +80,7 @@ def run_migrations_online():
             connection=connection,
             target_metadata=target_metadata,
             process_revision_directives=process_revision_directives,
-            **current_app.extensions["migrate"].configure_args,
-            render_as_batch=True
+            **current_app.extensions["migrate"].configure_args
         )
 
         with context.begin_transaction():
