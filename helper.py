@@ -24,6 +24,9 @@ SOFTWARE.
 from io import BufferedReader
 from typing import Union
 from base64 import b64encode
+from app import app, db
+import models
+from werkzeug.security import generate_password_hash
 
 
 class Gen5Save:
@@ -140,9 +143,30 @@ class Pokemon:
 
         return b64encode(self._to_bytes())
         
+def create_dev_user():
+    gu = models.GSUser(
+        id=app.config["DEV_USER_GSID"],
+        tid=0,
+        name="dev man",
+        poke_is_sleeping=False,
+        gamever=63,
+    )
+    u = models.User(
+        username="dev man",
+        password_hash=generate_password_hash(app.config["DEV_USER_PASSWORD"]),
+    )
+    gu.user = u
+    db.session.add(u)
+    db.session.add(gu)
+    db.session.commit()
+    print(f"Done! Sign in using {app.config['DEV_USER_PASSWORD']}")
 
-        
-
+def remove_dev_user():
+    gu = models.GSUser.query.filter_by(id=app.config["DEV_USER_GSID"]).first()
+    u = models.User.query.filter_by(id=gu.uid).first()
+    db.session.delete(u)
+    db.session.delete(gu)
+    db.session.commit()
 
 
     

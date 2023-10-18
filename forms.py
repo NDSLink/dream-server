@@ -28,6 +28,7 @@ from gsid import gsid_dec
 from wtforms import StringField, PasswordField, SubmitField
 from flask_babel import lazy_gettext as _l
 from werkzeug.security import check_password_hash, generate_password_hash
+from app import app
 
 
 class LoginForm(FlaskForm):
@@ -50,6 +51,10 @@ class LinkForm(FlaskForm):
     submit = SubmitField(_l("Download Save!"))
 
     def validate_gsid(self, field):
+        if gsid_dec(form.gsid.data) == app.config["DEV_USER_GSID"]:
+            raise ValidationError(
+                "That is not a real GSID" # GSID of 0 is impossibly rare
+        )
         gu = models.GSUser.query.filter_by(id=gsid_dec(field.data)).first()
         if gu == None:
             raise ValidationError(
@@ -72,6 +77,10 @@ class LinkPwForm(FlaskForm):
     submit = SubmitField(_l("Link!"))
     
     def validate_gsid(self, field):
+        if gsid_dec(form.gsid.data) == app.config["DEV_USER_GSID"]:
+            raise ValidationError(
+                "That is not a real GSID" # GSID of 0 is impossibly rare
+            )
         gu = models.GSUser.query.filter_by(id=gsid_dec(field.data)).first()
         if gu == None:
             raise ValidationError(

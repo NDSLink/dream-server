@@ -37,11 +37,14 @@ from uuid import uuid1
 main_routes = Blueprint("main_routes", __name__)
 
 def get_flags():
+    traits={"playtime": 0, "logged_in": 1}
     if current_user.is_anonymous:
         identity = f"anon_user_{str(uuid1())}"
+        traits["logged_in"] = 0
+        
     else:
         identity = str(current_user.id)
-    return flagsmith.get_identity_flags(identifier=identity, traits={"playtime": 0})
+    return flagsmith.get_identity_flags(identifier=identity, traits=traits)
 
 @main_routes.route("/")
 def home():
