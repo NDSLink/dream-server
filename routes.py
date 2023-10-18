@@ -19,7 +19,7 @@ from flask import (
 )
 
 from wtforms import ValidationError
-from dls1_client import Client
+#from dls1_client import Client
 from base64 import b64encode, b64decode
 
 from pickle import dumps
