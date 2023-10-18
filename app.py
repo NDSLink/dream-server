@@ -27,6 +27,7 @@ from flask import Flask, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from redis import Redis
+from flagsmith import Flagsmith
 from config import Config
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
@@ -60,6 +61,9 @@ else:
 
     redis = DummyRedis()
 
+flagsmith = Flagsmith(
+    environment_key=app.config["FLAGSMITH_KEY"]
+)
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html.jinja2", title=_("Page Not Found")), 404

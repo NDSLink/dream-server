@@ -4,7 +4,7 @@ from os.path import basename
 from random import choice
 
 from flask_login import current_user, login_required, login_user, logout_user
-from app import db, redis
+from app import db, redis, flagsmith
 import models
 from forms import *
 import helper
@@ -66,30 +66,37 @@ def get_savedata(trainerid):
 @login_required
 def use_radar():
     # Basic functionality for catching Pokemon
-    return render_template(
-        "radar.html.jinja2",
-        rows=[
-            ["sparkle1", "sparkle2", "sparkle3"],
-            ["no1", "no2", "no3"],
-            ["standard1", "standard2", "standard3"],
-        ],
-    )
+    if bool(int(userflags.get_feature_value("enable_poke_radar"))):
+        return render_template(
+            "radar.html.jinja2",
+            rows=[
+                ["sparkle1", "sparkle2", "sparkle3"],
+                ["no1", "no2", "no3"],
+                ["standard1", "standard2", "standard3"],
+            ],
+        )
+    else:
+        return "Your account does not have this feature enabled."
 
 
 @main_routes.route("/patch/<patch>")
 @login_required
 def catch_from_patchno(patch):
-    pool = {"sparkle1": b"\x02\x83", "sparkle2": b"\x02\x83", "sparkle3": b"\x02\x83"}
-    index = {"sparkle1": "Zekrom", "sparkle2": "Zekrom", "sparkle3": "Zekrom"}
-    pokename = index[patch]
-    pokeid = pool[patch]
-    gu = models.GSUser.query.filter_by(uid=current_user.id).first()
-    gu.pokemon0 = helper.Pokemon(pokeid, 1, b"\x00", b"\x00", 0, b"\x00").to_b64()
-    # hope this works
+    userflags = flagsmith.get_identity_flags(identifier=current_user.id, traits={"playtime": 0})
+    if bool(int(userflags.get_feature_value("enable_poke_radar"))):
+        pool = {"sparkle1": b"\x02\x83", "sparkle2": b"\x02\x83", "sparkle3": b"\x02\x83"}
+        index = {"sparkle1": "Zekrom", "sparkle2": "Zekrom", "sparkle3": "Zekrom"}
+        pokename = index[patch]
+        pokeid = pool[patch]
+        gu = models.GSUser.query.filter_by(uid=current_user.id).first()
+        gu.pokemon0 = helper.Pokemon(pokeid, 1, b"\x00", b"\x00", 0, b"\x00").to_b64()
+        # hope this works
 
-    db.session.add(gu)
-    db.session.commit()
-    return f"You got a {pokename}!"
+        db.session.add(gu)
+        db.session.commit()
+        return f"You got a {pokename}!"
+    else:
+        return "Your account does not have this feature enabled."
 
 
 # @app.route("/users")

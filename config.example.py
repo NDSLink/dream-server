@@ -1,6 +1,7 @@
 class Config:
     DEBUG = True
     USE_REDIS = True
+    FLAGSMITH_KEY = ":)"
     SQLALCHEMY_DATABASE_URI = "sqlite:///victini.db"
     REDIS_HOST = "localhost"
     REDIS_PORT = 6379
