@@ -51,7 +51,7 @@ class LinkForm(FlaskForm):
 
     def validate_gsid(self, field):
         gu = models.GSUser.query.filter_by(id=gsid_dec(field.data)).first()
-        if gu == None:
+        if gu.user == None:
             raise ValidationError(
                 "Invalid GSID! Please use Game Sync Settings to set up Game Sync."
             )
