@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 flask = "==2.0.1"
+Werkzeug = "==2.2.2"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
 redis = "*"
