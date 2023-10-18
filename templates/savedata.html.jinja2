@@ -11,7 +11,7 @@
             <a class="dropdown-item disabled" href="#">{{ _('Global Battle Union') }}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item active" href="#">{{ _("Download Save Data") }}</a> <!-- gs_savdownload is completely different from savedata.download. Be careful! -->
-            {% if userflags.get_feature_value("enable_poke_radar") == "1" and not current_user.is_anonymous %}
+            {% if userflags.get_feature_value("enable_poke_radar") == 1 and not current_user.is_anonymous %}
             <a class="dropdown-item" href="{{ url_for('main_routes.use_radar') }}">{{ _('Poke Radar') }}</a>
             {% endif %}
         </ul>

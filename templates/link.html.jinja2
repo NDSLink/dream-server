@@ -9,7 +9,7 @@
         <ul class="dropdown-menu" aria-labelledby="nbGsDropdown">
             <a class="dropdown-item disabled" href="#">{{ _('Dream Land') }}</a>
             <a class="dropdown-item disabled" href="#">{{ _('Global Battle Union') }}</a>
-            {% if userflags.get_feature_value("enable_poke_radar") == "1" and not current_user.is_anonymous %}
+            {% if userflags.get_feature_value("enable_poke_radar") == 1 and not current_user.is_anonymous %}
             <a class="dropdown-item" href="{{ url_for('main_routes.use_radar') }}">{{ _('Poke Radar') }}</a>
             {% endif %}
         </ul>
