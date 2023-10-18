@@ -37,13 +37,12 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 babel = Babel(app)
 
-
-@babel.localeselector
 def get_locale():
     if request.args.get("lang", None):
         return request.args["lang"]
     return request.accept_languages.best_match(["en", "ja"])
 
+babel.init_app(app, locale_selector=get_locale)
 
 app.config.from_object(Config)
 
