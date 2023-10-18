@@ -12,8 +12,9 @@ flask-wtf = "*"
 flask-bootstrap = "*"
 flask-babel = "*"
 flask-login = "*"
+waitress = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.11.*"
+python_version = "3.11"
