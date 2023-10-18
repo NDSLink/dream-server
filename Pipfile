@@ -15,6 +15,7 @@ flask-babel = "*"
 flask-login = "*"
 waitress = "*"
 requests = "*"
+flagsmith = "*"
 
 [dev-packages]
 
