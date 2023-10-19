@@ -1,4 +1,4 @@
-FROM python/python:3.11-bullseye
+FROM python:latest
 
 RUN apt-get update -y && \
     apt-get install -y python3-pip python3 python3-dev
