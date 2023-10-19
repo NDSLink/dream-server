@@ -8,4 +8,5 @@ COPY . .
 RUN pip3 install pipenv && \
     pip3 install gunicorn psycopg2-binary
 RUN python3 -m pipenv install --system
+RUN chmod +x docker-start.sh
 ENTRYPOINT "./docker-start.sh"
