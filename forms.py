@@ -77,7 +77,7 @@ class LinkPwForm(FlaskForm):
     submit = SubmitField(_l("Link!"))
     
     def validate_gsid(self, field):
-        if gsid_dec(form.gsid.data) == app.config["DEV_USER_GSID"]:
+        if gsid_dec(field.data) == app.config["DEV_USER_GSID"]:
             raise ValidationError(
                 "That is not a real GSID" # GSID of 0 is impossibly rare
             )
