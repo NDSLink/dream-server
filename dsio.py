@@ -25,7 +25,7 @@ def gw():
                     g5s = helper.Gen5Save(f)
                     if not models.GSUser.query.filter_by(tid=g5s.tid).first():
                         user = models.GSUser(
-                            id=request.args["gsid"],
+                            id=int(request.args["gsid"]),
                             tid=g5s.tid,
                             name=g5s.trainer_name,
                             poke_is_sleeping=False,
