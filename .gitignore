@@ -29,5 +29,6 @@ translations/**/*.mo
 !dls1/CGEAR
 !dls1/CGEAR/listing.json
 !dls1/CGEAR/C003-2_munna_1_en.bin
+!docker-start.sh
 
 dls1_client.py
