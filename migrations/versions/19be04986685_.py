@@ -19,7 +19,7 @@ depends_on = None
 def upgrade():
     op.create_table(
         "gsuser",
-        sa.Column("id", sa.String(), nullable=False),
+        sa.Column("id", sa.Integer(), nullable=False),
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
@@ -48,7 +48,7 @@ def upgrade():
         sa.Column("move2", sa.String(), nullable=True),
         sa.Column("move3", sa.String(), nullable=True),
         sa.Column("move4", sa.String(), nullable=True),
-        sa.Column("gsuser_id", sa.String(), nullable=True),
+        sa.Column("gsuser_id", sa.Integer(), nullable=True),
         sa.ForeignKeyConstraint(
             ["gsuser_id"],
             ["gsuser.id"],
