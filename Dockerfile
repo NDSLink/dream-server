@@ -8,5 +8,4 @@ COPY . .
 RUN pip3 install pipenv && \
     pip3 install gunicorn psycopg2-binary
 RUN python3 -m pipenv install --system
-RUN flask db upgrade
-CMD ["python3", "-m", "gunicorn", "-w", "4", "app:app", "-b", "0.0.0.0:80"]
+CMD ["flask", "db", "upgrade", "&&", "python3", "-m", "gunicorn", "-w", "4", "app:app", "-b", "0.0.0.0:80"]
