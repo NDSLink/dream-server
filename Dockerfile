@@ -1,7 +1,7 @@
 FROM python:latest
 
 RUN apt-get update -y && \
-    apt-get install -y python3-pip python3 python3-dev redis
+    apt-get install -y python3-pip python3 python3-dev redis python-psycopg2
 
 COPY . .
 
