@@ -81,7 +81,7 @@ class LinkPwForm(FlaskForm):
             raise ValidationError(
                 "That is not a real GSID" # GSID of 0 is impossibly rare
             )
-        gu = models.GSUser.query.filter_by(id=str(gsid_dec(field.data))).first()
+        gu = models.GSUser.query.filter_by(id=int(gsid_dec(field.data))).first()
         if gu == None:
             raise ValidationError(
                 "Invalid GSID! Please use Game Sync Settings to set up Game Sync."
