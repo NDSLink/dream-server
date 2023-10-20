@@ -100,7 +100,6 @@ def use_radar():
             if mode == 4:
                 row_list.append("no")
         rows.append(row_list)
-    print(rows)
     userflags = get_flags()
     if bool(int(userflags.get_feature_value("enable_poke_radar"))):
         return render_template(
