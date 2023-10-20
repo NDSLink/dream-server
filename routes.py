@@ -34,7 +34,15 @@ from requests import post
 
 from uuid import uuid1
 
+from json import load
+
+from random import randint, choice
+
+from operator import itemgetter
+
 main_routes = Blueprint("main_routes", __name__)
+
+pkmn_pool = load(open("pkm_pool.json"))
 
 def get_flags():
     traits={"playtime": 0, "logged_in": 1}
@@ -80,15 +88,24 @@ def get_savedata(trainerid):
 @login_required
 def use_radar():
     # Basic functionality for catching Pokemon
+    rows = []
+    for row in range(5):
+        row_list = []
+        for column in range(5):
+            mode = randint(0, 4)
+            if 0 <= mode <= 2:
+                row_list.append("standard" + str(randint(0, len(pkmn_pool["standard"]) - 1)))
+            if mode == 3:
+                row_list.append("sparkle" + str(randint(0, len(pkmn_pool["sparkle"]) - 1)))
+            if mode == 4:
+                row_list.append("no")
+        rows.append(row_list)
+    print(rows)
     userflags = get_flags()
     if bool(int(userflags.get_feature_value("enable_poke_radar"))):
         return render_template(
             "radar.html.jinja2",
-            rows=[
-                ["sparkle1", "sparkle2", "sparkle3"],
-                ["no1", "no2", "no3"],
-                ["standard1", "standard2", "standard3"],
-            ],
+            rows=rows,
             userflags=userflags
         )
     else:
@@ -100,17 +117,19 @@ def use_radar():
 def catch_from_patchno(patch):
     userflags = get_flags()
     if bool(int(userflags.get_feature_value("enable_poke_radar"))):
-        pool = {"sparkle1": b"\x02\x83", "sparkle2": b"\x02\x83", "sparkle3": b"\x02\x83"}
-        index = {"sparkle1": "Zekrom", "sparkle2": "Zekrom", "sparkle3": "Zekrom"}
-        pokename = index[patch]
-        pokeid = pool[patch]
-        gu = models.GSUser.query.filter_by(uid=current_user.id).first()
-        gu.pokemon0 = helper.Pokemon(pokeid, 1, b"\x00", b"\x00", 0, b"\x00").to_b64()
-        # hope this works
+        if not patch == "no":
+            index = int(patch[-1])
+            pokemon = pkmn_pool[patch[:-1]][index]
+            pokename, pokeid, form, gender, animation = itemgetter("name", "species", "form", "gender", "animation")(pokemon)
+            gu = models.GSUser.query.filter_by(uid=current_user.id).first()
+            gu.pokemon0 = helper.Pokemon(pokeid, 1, b"\x00", b"\x00", 0, b"\x00").to_b64()
+            # hope this works
 
-        db.session.add(gu)
-        db.session.commit()
-        return f"You got a {pokename}!"
+            db.session.add(gu)
+            db.session.commit()
+            return f"You got a {pokename}!"
+        else:
+            return "There was no Pokemon in that patch :("
     else:
         return "Your account does not have this feature enabled."
 

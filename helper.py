@@ -132,7 +132,7 @@ class Pokemon:
         
         Outputs the Pokemon to bytes.
         '''
-        response = bytearray(self.dexno, self.moveid, self.unk1, self.unk2, self.animationid, self.unk3)
+        response = bytearray(self.dexno + self.moveid + self.unk1 + self.unk2 + self.animationid + self.unk3)
         return response
     def to_b64(self) -> bytes:
         '''
