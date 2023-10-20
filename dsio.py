@@ -201,7 +201,7 @@ def gw():
             #ret = ret + b"\x02\x40\x01\x01" * 20  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
             # beyond this is the dream decor stuff
             # TODO: add the catalogues from PGL
-            decor = [b"%s\x01" % "what".encode("utf16-le"), 
+            decor = [b"%s\x01" % "what".encode("utf16"), 
             b"%s\x02" % "do".encode("utf16-le"), 
             b"%s\x03" % "you".encode("utf16-le"),
             b"%s\x04" % "want?".encode("utf16-le"),
