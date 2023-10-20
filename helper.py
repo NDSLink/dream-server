@@ -142,7 +142,10 @@ class Pokemon:
         '''
 
         return b64encode(self._to_bytes())
-        
+class Item:
+    def __init__(self, idx, quantity):
+        self.idx = idx
+        self.quantity = quantity
 def create_dev_user():
     gu = models.GSUser(
         id=app.config["DEV_USER_GSID"],

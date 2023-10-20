@@ -186,12 +186,28 @@ def gw():
                 pokemon[9] = b64decode(user.pokemon9)
             for _ in range(9 - len(pokemon)):
                 pokemon.append(b"\x00\x00\x00\x00\x00\x00\x00\x00")
-            print(pokemon)
             for pokeman in pokemon:
 
                 ret = ret + pokeman
-            ret = ret + b"\x02\x40\x01\x01" * 20  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
-
+            # todo: get this from the db
+            items = [helper.Item(100, 20), helper.Item(101, 20)]
+            for _ in range(20 - len(items)):
+                items.append(helper.Item(0, 0)) # pad
+            for item in items:
+                ret = ret + int.to_bytes(item.index, 2, "little")
+            for item in items:
+                ret = ret + int.to_bytes(item.quantity, 1, "little")
+            #ret = ret + b"\x02\x40\x01\x01" * 20  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
+            # beyond this is the dream decor stuff
+            # TODO: add the catalogues from PGL
+            decor = [b"%s\x01" % "what".decode("utf16-le"), 
+            b"%s\x02" % "do".decode("utf16-le"), 
+            b"%s\x03" % "you".decode("utf16-le"),
+            b"%s\x04" % "want?".decode("utf16-le"),
+            b"%s\x05" % "Pokemon, duh!".decode("utf16-le")] # name must be max 12 chars, index can be anything (will just be stored in save)
+            for entry in decor:
+                ret = ret + decor
+            # byte numbers past this point may be innacurate
             # Byte 0xD2-0xD5 = something to do with leveling/dream points
             ret = ret + b"\xff\xff\xff\xff"
             # Byte 0xD6 = Padding?
@@ -202,7 +218,6 @@ def gw():
             # Byte 0xDB = Download Pokedex skins
             # Note: when 0xD6-0xD8 are set to 0x01, the pokemon will level up?
             ret = ret + b"\xff\xff\x00\x00\x00\x00"
-            print(ret)
             return ret
         else:
             print("Bad GSID! Response dump:")
