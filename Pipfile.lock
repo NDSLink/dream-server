@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "73515d377909e2e4b849c1350b18c511dead2099d8606d04658b121db91ffd7c"
+            "sha256": "8646ea56c3de639555ea983ac863aa17dc1be8d2e445e39d10a782fe848cc63a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -157,7 +157,7 @@
                 "sha256:247ed4a225a5017bf805f137496dd5760361582c338b689db59e6c112e6e9281"
             ],
             "index": "pypi",
-            "markers": "python_full_version >= '3.7.0' and python_version < '4'",
+            "markers": "python_version < '4' and python_full_version >= '3.7.0'",
             "version": "==3.4.0"
         },
         "flagsmith-flag-engine": {
@@ -318,13 +318,6 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==3.1.2"
-        },
-        "lock": {
-            "hashes": [
-                "sha256:cc5ac770930493eed7a8cfd0cf2568a125faf112eb8aa6b6149b3e581523d0c7"
-            ],
-            "index": "pypi",
-            "version": "==2018.3.25.2110"
         },
         "mako": {
             "hashes": [
