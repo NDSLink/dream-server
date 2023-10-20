@@ -58,16 +58,16 @@ class GSUser(db.Model):
     selected_dex_skin = db.Column(db.String)
     selected_musical = db.Column(db.String)
     # this has got to be the jankiest thing i have done in my life
-    pokemon0 = db.Column(db.String)
-    pokemon1 = db.Column(db.String)
-    pokemon2 = db.Column(db.String)
-    pokemon3 = db.Column(db.String)
-    pokemon4 = db.Column(db.String)
-    pokemon5 = db.Column(db.String)
-    pokemon6 = db.Column(db.String)
-    pokemon7 = db.Column(db.String)
-    pokemon8 = db.Column(db.String)
-    pokemon9 = db.Column(db.String)
+    pokemon0 = db.Column(db.LargeBinary)
+    pokemon1 = db.Column(db.LargeBinary)
+    pokemon2 = db.Column(db.LargeBinary)
+    pokemon3 = db.Column(db.LargeBinary)
+    pokemon4 = db.Column(db.LargeBinary)
+    pokemon5 = db.Column(db.LargeBinary)
+    pokemon6 = db.Column(db.LargeBinary)
+    pokemon7 = db.Column(db.LargeBinary)
+    pokemon8 = db.Column(db.LargeBinary)
+    pokemon9 = db.Column(db.LargeBinary)
     # TODO: What else?
     def __repr__(self):
         return "<GSUser %r>" % self.id
