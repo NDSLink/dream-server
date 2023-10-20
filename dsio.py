@@ -201,11 +201,11 @@ def gw():
             #ret = ret + b"\x02\x40\x01\x01" * 20  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
             # beyond this is the dream decor stuff
             # TODO: add the catalogues from PGL
-            decor = [b"%s\x01" % "what".decode("utf16-le"), 
-            b"%s\x02" % "do".decode("utf16-le"), 
-            b"%s\x03" % "you".decode("utf16-le"),
-            b"%s\x04" % "want?".decode("utf16-le"),
-            b"%s\x05" % "Pokemon, duh!".decode("utf16-le")] # name must be max 12 chars, index can be anything (will just be stored in save)
+            decor = [b"%s\x01" % "what".encode("utf16-le"), 
+            b"%s\x02" % "do".encode("utf16-le"), 
+            b"%s\x03" % "you".encode("utf16-le"),
+            b"%s\x04" % "want?".encode("utf16-le"),
+            b"%s\x05" % "Pokemon, duh!".encode("utf16-le")] # name must be max 12 chars, index can be anything (will just be stored in save)
             for entry in decor:
                 ret = ret + decor
             # byte numbers past this point may be innacurate
