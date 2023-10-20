@@ -185,7 +185,7 @@ def gw():
                 pokemon[8] = b64decode(user.pokemon8)
             if user.pokemon9:
                 pokemon[9] = b64decode(user.pokemon9)
-            for _ in range(9 - len(pokemon)):
+            for _ in range(10 - len(pokemon)):
                 pokemon.append(b"\x00\x00\x00\x00\x00\x00\x00\x00")
             for pokeman in pokemon:
 
