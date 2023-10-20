@@ -76,7 +76,7 @@ def gw():
             except:
                 redis.publish("newacct", request.args["gsid"])
                 pass  # It's an alt save.
-        return DREAMING_POKEMON_RESPONSE  # Success response
+        return DREAMING_POKEMON_RESPONSE  # Success response    
     # elif request.args["p"] == WORLDBATTLE_DOWNLOAD:  # Live competition
     #    if exists(f"savdata-{request.args['gsid']}.sav"):
     #        return Response("worldbattle is unimplemented lol", status=502)
@@ -195,7 +195,7 @@ def gw():
             for _ in range(20 - len(items)):
                 items.append(helper.Item(0, 0)) # pad
             for item in items:
-                ret = ret + int.to_bytes(item.index, 2, "little")
+                ret = ret + int.to_bytes(item.idx, 2, "little")
             for item in items:
                 ret = ret + int.to_bytes(item.quantity, 1, "little")
             #ret = ret + b"\x02\x40\x01\x01" * 20  # Up to 20 4-byte items (2-bytes index, 2-bytes count)
