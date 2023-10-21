@@ -208,7 +208,7 @@ def gw():
             b"%s\x04" % "want?".encode("utf16"),
             b"%s\x05" % "Pokemon, duh!".encode("utf16")] # name must be max 12 chars, index can be anything (will just be stored in save)
             for entry in decor:
-                ret = ret + decor
+                ret = ret + entry
             # byte numbers past this point may be innacurate
             # Byte 0xD2-0xD5 = something to do with leveling/dream points
             ret = ret + b"\xff\xff\xff\xff"
