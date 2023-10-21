@@ -16,6 +16,7 @@ backend = Blueprint("dsio", __name__)
 
 @backend.route("/dsio/gw", methods=["GET", "POST"])
 def gw():
+    print(">:(")
     if request.args["p"] == PLAYSTATUS:
         if exists(f"savdata-{request.args['gsid']}.sav"):
             user = models.GSUser.query.filter_by(
