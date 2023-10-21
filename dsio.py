@@ -192,7 +192,7 @@ def gw():
 
                 ret = ret + pokeman
             # todo: get this from the db
-            items = [helper.Item(100, 20), helper.Item(101, 20)]
+            items = [helper.Item(100, 20), helper.Item(100, 20)]
             for _ in range(20 - len(items)):
                 items.append(helper.Item(0, 0)) # pad
             for item in items:
