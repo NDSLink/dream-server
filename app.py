@@ -32,7 +32,7 @@ from config import Config
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_babel import Babel, _
-
+from os import mkdir, isdir
 # --- Key Definitions ---
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -53,6 +53,8 @@ migrate = Migrate(app, db)
 
 login = LoginManager(app)
 
+if not isdir("saves"):
+    mkdir("saves")
 
 if app.config["USE_REDIS"]:
     redis = Redis(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"], db=0)

@@ -79,9 +79,9 @@ def savedata():
 def get_savedata(trainerid):
     u = models.GSUser.query.filter_by(id=trainerid).first()
     if u == None:
-        if exists(f"savdata-{trainerid}.sav"):
-            return send_from_directory(".", f"savdata-{trainerid}.sav")
-    return send_from_directory(".", f"savdata-{u.id}.sav")
+        if exists(f"saves/savdata-{trainerid}.sav"):
+            return send_from_directory("saves", f"savdata-{trainerid}.sav")
+    return send_from_directory("saves", f"savdata-{u.id}.sav")
 
 
 @main_routes.route("/radar")

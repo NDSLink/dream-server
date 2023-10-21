@@ -18,12 +18,12 @@ backend = Blueprint("dsio", __name__)
 def gw():
     print(">:(")
     if request.args["p"] == PLAYSTATUS:
-        if exists(f"savdata-{request.args['gsid']}.sav"):
+        if exists(f"saves/savdata-{request.args['gsid']}.sav"):
             user = models.GSUser.query.filter_by(
                 id=request.args["gsid"]
             ).first()  # Find the user
             if user == None:
-                with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
+                with open(f"saves/savdata-{request.args['gsid']}.sav", "rb") as f:
                     g5s = helper.Gen5Save(f)
                     if not models.GSUser.query.filter_by(tid=g5s.tid).first():
                         user = models.GSUser(
@@ -55,11 +55,11 @@ def gw():
             "pokemonhotel",
             dumps({"gsid": request.args["gsid"], "name": user.name}),
         )
-        with open(f"savdata-{request.args['gsid']}.sav", "wb") as f:
+        with open(f"saves/savdata-{request.args['gsid']}.sav", "wb") as f:
             f.write(request.get_data())
         return DREAMING_POKEMON_RESPONSE
     elif request.args["p"] == ACCOUNT_CREATE_UPLOAD:
-        with open(f"savdata-{request.args['gsid']}.sav", "wb") as f:
+        with open(f"saves/savdata-{request.args['gsid']}.sav", "wb") as f:
             data = request.get_data()
             f.write(data)
             try:
@@ -79,7 +79,7 @@ def gw():
                 pass  # It's an alt save.
         return DREAMING_POKEMON_RESPONSE  # Success response    
     # elif request.args["p"] == WORLDBATTLE_DOWNLOAD:  # Live competition
-    #    if exists(f"savdata-{request.args['gsid']}.sav"):
+    #    if exists(f"saves/savdata-{request.args['gsid']}.sav"):
     #        return Response("worldbattle is unimplemented lol", status=502)
     #    return DREAMING_POKEMON_RESPONSE  # A.k.a "Please use Game Sync Settings"
     elif request.args["p"] == SAVEDATA_DOWNLOAD_FINISH:
@@ -97,7 +97,7 @@ def gw():
     elif request.args["p"] == SLEEPILY_BITLIST:
         return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\xff" * 0x80)
     elif request.args["p"] == SAVEDATA_DOWNLOAD:
-        if exists(f"savdata-{request.args['gsid']}.sav"):
+        if exists(f"saves/savdata-{request.args['gsid']}.sav"):
             user = models.GSUser.query.filter_by(id=request.args["gsid"]).first()
             # it runs the following math function 10 times, increasing x each time:  f[x] = (x * 0x08) + 0x04, each time it runs that function, it checks the 2 bytes at that location in the response, if those are \x00\x00 then break the loop, otherwise if d <= 0x1ed where D is the data just pulled, then do something(!)
             # According to mm201, it's reading 8 bytes from that location???
@@ -229,10 +229,10 @@ def gw():
             print(f"GSID: {request.args['gsid']}")
             return Response("bad gsid", 400)
     elif request.args["p"] == SAVEDATA_GETBW:
-        with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
+        with open(f"saves/savdata-{request.args['gsid']}.sav", "rb") as f:
             return f.read()
     elif request.args["p"] == WORLDBATTLE_DOWNLOAD:
-        with open(f"savdata-{request.args['gsid']}.sav", "rb") as f:
+        with open(f"saves/savdata-{request.args['gsid']}.sav", "rb") as f:
             return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\x01" * 0x80)
     elif request.args["p"] == WORLDBATTLE_UPLOAD:
         return b"\x00\x00\x00\x00" + (b"\x00" * 0x7C) + (b"\x01" * 0x80)
