@@ -32,7 +32,8 @@ from config import Config
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_babel import Babel, _
-from os import mkdir, isdir
+from os import mkdir
+from os.path import isdir
 # --- Key Definitions ---
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
