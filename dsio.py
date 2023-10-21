@@ -220,7 +220,9 @@ def gw():
             # Byte 0xDB = Download Pokedex skins
             # Note: when 0xD6-0xD8 are set to 0x01, the pokemon will level up?
             ret = ret + b"\xff\xff\x00\x00\x00\x00"
+            ret = bytearray(ret)
             ret[0x7D:0x80] = int.to_bytes(crc32(ret), 4, "little")
+            ret = bytes(ret)
             #print("savedata.download")
             return ret
         else:
