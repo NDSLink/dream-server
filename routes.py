@@ -121,7 +121,7 @@ def catch_from_patchno(patch):
             pokemon = pkmn_pool[patch[:-1]][index]
             pokename, pokeid, form, gender, animation = itemgetter("name", "species", "form", "gender", "animation")(pokemon)
             gu = models.GSUser.query.filter_by(uid=current_user.id).first()
-            gu.pokemon0 = helper.Pokemon(pokeid, 1, b"\x00", b"\x02", 1, b"\x00").to_b64()
+            gu.pokemon0 = helper.Pokemon(1, pokeid, b"\x00", b"\x02", 1, b"\x00").to_b64()
             # hope this works
 
             db.session.add(gu)
