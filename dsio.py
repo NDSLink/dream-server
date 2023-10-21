@@ -154,7 +154,7 @@ def gw():
             # Byte 0x03 = Triggers comm error if not zero
             # Byte 0x04 = Triggers comm error if not zero
             # Byte 0x05-0x80 onward = padding
-            ret = ret + b"\x00\x00\x00\x00" + (b"\x00" * 0x7C)
+            ret = ret + b"\x00\x00\x00\x00"
             ret = ret + b"\x00\x00\x00\x00" # 80-84 = CRC32
             # Byte 0x81-0xD1(?) = Pokemon
             # Pokemon Structure:
@@ -211,7 +211,7 @@ def gw():
                 ret = ret + entry
             # byte numbers past this point may be innacurate
             # Byte 0xD2-0xD5 = something to do with leveling/dream points
-            ret = ret + b"\xff\xff\xff\xff"
+            ret = ret + b"\x00\x00\x00\x00"
             # Byte 0xD6 = Padding?
             # Byte 0xD7 = Padding?
             # Byte 0xD8 = Padding?
@@ -223,6 +223,7 @@ def gw():
             ret = bytearray(ret)
             ret[0x80:0x84] = int.to_bytes(crc32(ret), 4, "little")
             ret = bytes(ret)
+            print(ret)
             #print("savedata.download")
             return ret
         else:
